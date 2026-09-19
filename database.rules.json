@@ -1,0 +1,29 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "rsvpResponses": {
+      ".read": true,
+      ".write": true
+    },
+    "songRequests": {
+      ".read": true,
+      ".write": true
+    },
+    "images": {
+      ".read": true,
+      "$day": {
+        "meta": {
+          ".write": true
+        },
+        "items": {
+          ".indexOn": ["index"],
+          "$imageId": {
+            ".write": true,
+            ".validate": "newData.hasChildren(['id', 'path', 'url', 'day', 'index', 'createdAt', 'contentType']) && newData.child('id').isString() && newData.child('id').val().length == 16"
+          }
+        }
+      }
+    }
+  }
+}

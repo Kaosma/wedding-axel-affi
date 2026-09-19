@@ -1,0 +1,11 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{day}/{fileName} {
+      allow read: if day in ['friday', 'saturday', 'sunday'];
+      allow write: if day in ['friday', 'saturday', 'sunday']
+        && request.resource.size < 20 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
