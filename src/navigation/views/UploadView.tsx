@@ -15,9 +15,9 @@ const PageContainer = styled.div`
   align-items: center;
 `;
 const Card = styled.div`
-  background: ${({ theme }) => theme.colors.background.light};
+  background: ${({ theme }) => theme.colors.red.secondary};
   border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.peach.light};
+  border: 1px solid ${({ theme }) => theme.colors.red.secondary};
   box-shadow: 0 8px 32px rgba(181, 82, 57, 0.15);
   padding: 1.75rem 1.5rem 2rem;
   max-width: 480px;
@@ -26,7 +26,7 @@ const Card = styled.div`
 `;
 const Title = styled.h1`
   font-family: "Linnea-bold", ${({ theme }) => theme.fonts.serif};
-  color: ${({ theme }) => theme.colors.terracotta.tertiary};
+  color: ${({ theme }) => theme.colors.red.primary};
   font-size: 1.5rem;
   margin: 0 0 0.5rem;
   text-transform: uppercase;

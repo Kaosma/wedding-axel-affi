@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Clock, MapPin } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { useTheme } from '../../app/AppStyling';
 
 const Card = styled.div`
   display: flex;
@@ -63,7 +62,7 @@ const TimeRow = styled.div`
 const Title = styled.h3`
   font-size: 1.125rem;
   font-weight: 600;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin: 0.5rem 0 0.25rem;
   display: flex;
   justify-content: flex-start;
@@ -74,7 +73,7 @@ const Title = styled.h3`
 `;
 const Subtitle = styled.div`
   font-size: 1rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin: 0;
   text-align: left;
   max-width: 30rem;

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { FormEvent, useState } from 'react';
 import { useTheme } from '../../app/AppStyling';
 import { Music } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { serverTimestamp } from 'firebase/database';
 import { db, push, ref } from '../../firebase/firebase';
 import TextInputField from '../../components/input/TextInputField';
@@ -69,7 +68,7 @@ const MIN_SONG_LENGTH = 3;
 
 function MusicRequestView() {
   const theme = useTheme();
-  const { t } = useTranslation();
+
   const [song, setSong] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -82,7 +81,7 @@ function MusicRequestView() {
     e.preventDefault();
     const trimmed = song.trim();
     if (trimmed.length < MIN_SONG_LENGTH) {
-      setError(t('musicRequestTooShort'));
+      setError('Please enter at least 3 characters.');
       return;
     }
     setError('');
@@ -97,7 +96,7 @@ function MusicRequestView() {
       setSong('');
       setSuccess(true);
     } catch {
-      setError(t('musicRequestError'));
+      setError('Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -109,15 +108,15 @@ function MusicRequestView() {
         <TitleWrapper>
           <TitleRow>
             <Music size={24} color={theme.colors.olive.primary} />
-            <Title>{t('musicRequestTitle')}</Title>
+            <Title>Request a song</Title>
             <Music size={24} color={theme.colors.olive.primary} />
           </TitleRow>
-          <Subtitle>{t('musicRequestSubtitle')}</Subtitle>
+          <Subtitle>Tell us what you would love to hear on the dance floor. One song at a time!</Subtitle>
         </TitleWrapper>
 
         <Form onSubmit={handleSubmit}>
           <TextInputField
-            label={t('musicRequestLabel')}
+            label="Song or artist"
             filled
             value={song}
             width={22}
@@ -129,10 +128,10 @@ function MusicRequestView() {
             disabled={submitting}
           />
           <PrimaryButton type="submit" disabled={!canSubmit}>
-            {submitting ? t('musicRequestSending') : t('musicRequestSubmit')}
+            {submitting ? "Sending…" : "Send request"}
           </PrimaryButton>
           {error ? <ErrorText>{error}</ErrorText> : null}
-          {success && !error ? <StatusText>{t('musicRequestThanks')}</StatusText> : null}
+          {success && !error ? <StatusText>Thank you! Your request was saved.</StatusText> : null}
         </Form>
       </Content>
     </LocaleCreamShell>

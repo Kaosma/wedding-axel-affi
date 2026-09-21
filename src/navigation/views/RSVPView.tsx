@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
 import MainContentCard from "../../components/cards/MainContentCard";
-import { useTheme } from "../../app/AppStyling";
 import FamilyRSVPForm from "../../components/forms/FamilyRSVPForm";
 import DualRSVPForm from "../../components/forms/DualRSVPForm";
 import { invitationImg } from "../../helpers/constants";
@@ -10,8 +9,6 @@ import { scrollToTop } from "../../helpers/functions";
 import { RSVP } from "../../helpers/classes";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { Heart } from "lucide-react";
-import { useTranslation } from "react-i18next";
-
 
 const RootContainer = styled.div`
   color: black;
@@ -39,7 +36,7 @@ const TopContainer = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-size: 2rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin-bottom: 0;
   font-family: 'Georgia', serif;
   margin-top: 0em;
@@ -50,7 +47,7 @@ const Title = styled.h2`
 const IntroText = styled.p`
   text-align: center;
   font-size: 1.1rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin-bottom: 2rem;
   font-family: 'Georgia', serif;
   line-height: 1.6;
@@ -103,7 +100,7 @@ const BackButton = styled.div`
 const ThankYouContainer = styled.div`
   text-align: center;
   padding: 3rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
 `;
 const ThankYouTitle = styled.h2`
   font-size: 2rem;
@@ -132,8 +129,6 @@ function RSVPView({ viewRole }: { viewRole: string | null }) {
   const [showRSVP, setShowRSVP] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submittedRSVP, setSubmittedRSVP] = useState<RSVP | null>(null);
-  const theme = useTheme();
-  const { t } = useTranslation();
 
   const handleProceedToRSVP = () => {
     setShowRSVP(true);
@@ -177,29 +172,19 @@ function RSVPView({ viewRole }: { viewRole: string | null }) {
       <MainContentCard backgroundColor="rgba(255, 230, 204, 0.416)" elevated={true}>
         {!showRSVP && !submitted && (
           <>
-            <Title>{t("rsvp")}</Title>
+            <Title>RSVP</Title>
             <IntroText>
-              {viewRole && viewRole.startsWith('hotel') ? (
-                <>
-                  {t("ExcitedToCelebrate")}
-                  <br /><br />
-                  {t("PleaseTakeMoment")}
-                  <br /><br />
-                  {t("CantWaitToCelebrate")}
-                </>
-              ) : (
-                <>
-                  {t("ExcitedToCelebrate")}
-                  <br /><br />
-                  {t("ExclusiveOpportunity")}
-                  <br /><br />
-                  {t("Alternatively")}
-                </>
-              )}
+              <>
+                We're so excited to celebrate our special day with you!
+                <br /><br />
+                Please take a moment to let us know if you'll be joining us for our wedding celebration. RSVP before April 28th 2026 helps us plan the perfect weekend and ensures we have everything ready for your arrival.
+                <br /><br />
+                We can't wait to celebrate with you!
+              </>
             </IntroText>
             <ButtonContainer>
               <ArrowButton onClick={handleProceedToRSVP}>
-                {t("ProceedToRSVP")}
+                Proceed to RSVP →
               </ArrowButton>
             </ButtonContainer>
           </>
@@ -209,9 +194,9 @@ function RSVPView({ viewRole }: { viewRole: string | null }) {
           <>
             <TopContainer>
               <TitleContainer>
-                <BackButton style={{ marginLeft: '1.5rem' }} onClick={handleBackToIntro}>← {t("BackButton")}</BackButton>
+                <BackButton style={{ marginLeft: '1.5rem' }} onClick={handleBackToIntro}>← Back</BackButton>
               </TitleContainer>
-              <Title style={{ marginRight: '1.5rem' }}>{t("rsvp")}</Title>
+              <Title style={{ marginRight: '1.5rem' }}>RSVP</Title>
             </TopContainer>
             {viewRole === 'family' || viewRole === 'hotelfamily'
               ? <FamilyRSVPForm submitCallback={handleConfirmation} role={viewRole || ''} />
@@ -223,19 +208,19 @@ function RSVPView({ viewRole }: { viewRole: string | null }) {
 
         {submitted && (
           <ThankYouContainer>
-            <ThankYouTitle>{t("ThankYouForYourRSVP")}</ThankYouTitle>
+            <ThankYouTitle>Thank You for Your RSVP!</ThankYouTitle>
             <ThankYouMessage>
-              {t("YourRSVPHasBeenReceived", { email: submittedRSVP?.email })}
+              Your RSVP has been received and we can't wait to see you on our big day. An email has been sent to {submittedRSVP?.email} with your RSVP details.
               {((submittedRSVP?.accommodation === 'hotel') ||
                 (viewRole && (viewRole === 'hotelsingle' || viewRole === 'hotelcouple' || viewRole === 'hotelfamily'))) &&
-                t("DontForgetToBookYourAccommodation")}
+                "Don't forget to book your accommodation!"}
               <br /><br />
               <SignatureWrapper>
-                {t("ElviraAndErik")} <Heart size={24} color={theme.colors.terracotta.dark} />
+                Afsoon and Axel <Heart size={24} color="#000" />
               </SignatureWrapper>
             </ThankYouMessage>
             <BackContainer>
-              <BackButton onClick={handleBackToIntro}>← {t("BackToIntro")}</BackButton>
+              <BackButton onClick={handleBackToIntro}>← Back to Intro</BackButton>
             </BackContainer>
           </ThankYouContainer>
         )}

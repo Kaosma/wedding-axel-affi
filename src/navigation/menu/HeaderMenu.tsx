@@ -3,28 +3,40 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTheme } from '../../app/AppStyling';
 import { LogOut } from "lucide-react";
-import { useTranslation } from 'react-i18next';
 
 const Container = styled.div`
   height: 100%;
   display: flex;
 `;
-const MenuLinkItem = styled(Link) <{ color: string }>`
+const MenuLinkItem = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 1em;
-  text-decoration: none;
-  color: ${({ color }) => color};
-  margin: 0em 1.9em;
+  margin: 0 1.9em;
+
   font-family: "linnea-variable", "PP Cirka", sans-serif;
   font-size: 1rem;
-  :hover {
-    color: ${() => useTheme().colors.peach.tertiary};
+
+  color: ${({ theme }) => theme.colors.red.primary};
+  text-decoration: none;
+
+  &:link,
+  &:visited {
+    color: ${({ theme }) => theme.colors.red.primary};
   }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: ${({ theme }) => theme.colors.red.primary};
+    text-decoration: underline;
+  }
+
   @media (min-width: 1250px) {
     font-size: 1.1rem;
   }
+
   @media (min-width: 1350px) {
     font-size: 1.2rem;
   }
@@ -33,10 +45,10 @@ const LogoutItem = styled.div`
   display: flex;
   gap: 1em;
   text-decoration: none;
-  color: white;
+  color: ${() => useTheme().colors.red.primary};
   margin: 0em 2.5em;
   :hover {
-    color: ${() => useTheme().colors.peach.tertiary};
+    color: ${() => useTheme().colors.red.secondary};
   }
 `;
 const MenuItemText = styled.div`
@@ -57,7 +69,7 @@ const MenuItemText = styled.div`
 
 function HeaderMenu({ userLogoutCallback }: { userLogoutCallback: () => void }) {
   const location = useLocation();
-  const { t } = useTranslation();
+
   const [toggledItem, setToggledItem] = useState('instruments');
   useEffect(() => {
     setToggledItem(location.pathname.replace('/', ''));
@@ -69,7 +81,7 @@ function HeaderMenu({ userLogoutCallback }: { userLogoutCallback: () => void }) 
         to={'home'}
         color={toggledItem === 'home' ? 'black' : 'white'}
       >
-        <MenuItemText>{t('home')}</MenuItemText>
+        <MenuItemText>Home</MenuItemText>
       </MenuLinkItem>
       <MenuLinkItem
         to="about-us"
@@ -81,7 +93,7 @@ function HeaderMenu({ userLogoutCallback }: { userLogoutCallback: () => void }) 
         to="your-stay"
         color={toggledItem === 'your-stay' ? 'black' : 'white'}
       >
-        <MenuItemText>{t('yourStay')}</MenuItemText>
+        <MenuItemText>Your Stay</MenuItemText>
       </MenuLinkItem>
       <MenuLinkItem
         to="upload"
@@ -93,19 +105,19 @@ function HeaderMenu({ userLogoutCallback }: { userLogoutCallback: () => void }) 
         to="schedule"
         color={toggledItem === 'schedule' ? 'black' : 'white'}
       >
-        <MenuItemText>{t('schedule')}</MenuItemText>
+        <MenuItemText>Schedule</MenuItemText>
       </MenuLinkItem>
       <MenuLinkItem
         to="travel"
         color={toggledItem === 'travel' ? 'black' : 'white'}
       >
-        <MenuItemText>{t('travel')}</MenuItemText>
+        <MenuItemText>Travel</MenuItemText>
       </MenuLinkItem>
       <MenuLinkItem
         to="qa"
         color={toggledItem === 'qa' ? 'black' : 'white'}
       >
-        <MenuItemText>{t('qa')}</MenuItemText>
+        <MenuItemText>Q/A</MenuItemText>
       </MenuLinkItem>
       <LogoutItem onClick={() => userLogoutCallback()}>
         <MenuItemText>

@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import HeaderMenu from '../menu/HeaderMenu';
 import { useTheme } from '../../app/AppStyling';
 import { rgba } from 'polished';
-import { logoUrl } from '../../helpers/constants';
 import { IsLargeScreen, scrollToTop } from '../../helpers/functions';
 import MenuDropdown from '../menu/MenuDropdown';
 
 const Container = styled.div`
-  background-color: ${() => rgba(useTheme().colors.terracotta.secondary, 0.95)};
+  background-color: ${() => rgba(useTheme().colors.red.secondary, 0.95)};
   padding: 1em;
   display: flex;
   justify-content: space-between;
@@ -18,6 +17,7 @@ const Container = styled.div`
   top: 0;
   z-index: 1001;
   backdrop-filter: blur(10px);
+  border-bottom: 2px solid ${() => useTheme().colors.red.primary};
 `;
 const IconContainer = styled(Link)`
   cursor: pointer;
@@ -39,7 +39,7 @@ function HeaderWrapper({ logoutCallback }: { logoutCallback: () => void }) {
   return (
     <Container>
       <IconContainer to="/home" onClick={() => scrollToTop()}>
-        <AppLogo src={logoUrl} alt="Logo" />
+        <AppLogo src="/images/afsoonaxellogo.png" alt="Logo" />
       </IconContainer>
       {isLargeScreen ? <HeaderMenu userLogoutCallback={() => logoutCallback()} /> : <MenuDropdown userLogoutCallback={() => logoutCallback()} />}
     </Container>

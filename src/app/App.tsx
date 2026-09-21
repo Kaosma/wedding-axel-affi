@@ -8,8 +8,6 @@ import GlobalStyles from '../styles/GlobalStyles';
 import LoginPage from './LoginPage';
 import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
 import YourInvitationView from '../navigation/views/YourInvitationView';
-import SpanishInvitationView from '../navigation/views/SpanishInvitationView';
-import SwedishInvitationView from '../navigation/views/SwedishInvitationView';
 import DashboardView from '../navigation/views/DashboardView';
 import UploadView from '../navigation/views/UploadView';
 import ImagesView from '../navigation/views/ImagesView';
@@ -23,10 +21,11 @@ const AppContainer = styled.div`
   overflow-x: hidden;
 `;
 const ContentContainer = styled.div`
-  background-color: ${() => useTheme().colors.terracotta.secondary};
+  background-color: ${() => useTheme().colors.red.secondary};
   min-height: 90vh;
   display: flow-root;
 `;
+
 function App() {
   const applicationRef = useRef<HTMLDivElement | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -35,6 +34,7 @@ function App() {
 
   const handleLogin = (role: string) => {
     setUserRole(role);
+    console.log(role);
     setLoggedIn(true);
   };
 
@@ -62,13 +62,10 @@ function App() {
   }, []);
 
   const isInvitationPage = location.pathname.startsWith('/your-invitation');
-  const isSpanishInvitationPage = location.pathname.startsWith('/tu-invitacion');
-  const isSwedishInvitationPage = location.pathname.startsWith('/din-inbjudan');
   const isDashboardPage = location.pathname === '/dashboard';
   const isUploadPage = location.pathname.startsWith('/upload');
   const isImagesPage = location.pathname === '/images';
-  const isMusicRequestPage =
-    location.pathname === '/music' || location.pathname === '/musica';
+  const isMusicRequestPage = location.pathname === '/music';
   const isSongRequestsPage =
     location.pathname === '/new-requests' || location.pathname === '/new-reqests';
 
@@ -76,8 +73,6 @@ function App() {
     <>
       <GlobalStyles />
       {(isInvitationPage ||
-        isSpanishInvitationPage ||
-        isSwedishInvitationPage ||
         isDashboardPage ||
         isUploadPage ||
         isImagesPage ||
@@ -85,14 +80,11 @@ function App() {
         isSongRequestsPage) ? (
         <Routes>
           <Route path="/your-invitation/:code" element={<YourInvitationView />} />
-          <Route path="/tu-invitacion/:code" element={<SpanishInvitationView />} />
-          <Route path="/din-inbjudan/:code" element={<SwedishInvitationView />} />
           <Route path="/dashboard" element={<DashboardView />} />
           <Route path="/upload" element={<UploadView />} />
           <Route path="/upload/:eventId" element={<Navigate replace to="/upload" />} />
           <Route path="/images" element={<ImagesView />} />
           <Route path="/music" element={<MusicRequestView />} />
-          <Route path="/musica" element={<MusicRequestView />} />
           <Route path="/new-reqests" element={<Navigate replace to="/new-requests" />} />
           <Route path="/new-requests" element={<SongRequestsView />} />
           <Route path="*" element={<Navigate replace to="/" />} />

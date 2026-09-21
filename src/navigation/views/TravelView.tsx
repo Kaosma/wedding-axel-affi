@@ -3,11 +3,11 @@ import MainContentCard from "../../components/cards/MainContentCard";
 import { Car, Train } from 'lucide-react';
 import { useTheme } from "../../app/AppStyling";
 import { rgba } from "polished";
-import { useTranslation } from "react-i18next";
+
 
 const RootContainer = styled.div`
   color: black;
-  background-color: ${() => rgba(useTheme().colors.terracotta.secondary, 0.95)};
+  background-color: ${() => rgba(useTheme().colors.red.secondary, 0.95)};
   background-size: cover;
   background-position: center;
   height: fit-content;
@@ -20,14 +20,14 @@ const RootContainer = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-size: 2rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin: 0;
   font-family: 'Georgia', serif;
 `;
 const SectionTitle = styled.div`
   font-size: 1.1rem;
   font-family: "Georgia", serif;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +44,7 @@ const Column = styled.div`
   min-width: 300px;
 `;
 const ColumnText = styled(Column)`
-  background: ${() => useTheme().colors.peach.lightest};
+  background: green;
   border-radius: 0.75rem;
   padding: 1em;
 `;
@@ -69,7 +69,7 @@ const Card = styled.div`
   padding: 0.5em 1.5em 1.5em 1.5em;
   border-radius: 0.75rem;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  border: 1px solid ${() => useTheme().colors.peach.darker};
+  border: 1px solid green;
   margin-bottom: 1rem;
 `;
 const CardHeading = styled.h3`
@@ -78,7 +78,7 @@ const CardHeading = styled.h3`
   margin-bottom: 0.25rem;
   display: flex;
   justify-content: flex-start;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
 `;
 const SmallText = styled.p`
   margin: 0;
@@ -103,29 +103,29 @@ const Footer = styled.div`
 `;
 
 function TravelView() {
-  const { t } = useTranslation();
+
   return (
     <RootContainer>
       <MainContentCard backgroundColor="hsl(30 100% 94%)">
-        <Title>{t('HowToGetThere')}</Title>
+        <Title>How to Get to the Venue</Title>
         <SectionTitle>Schenströms Väg 1, 730 60 Ramnäs</SectionTitle>
         <Row>
           <ColumnText>
             <IconHeading>
               <Car size={20} />
-              {t('ByCar')}
+              By Car
             </IconHeading>
             <Text>
-              {t('FromStockholm')}
+              From Stockholm: Take the E18 west towards Västerås, then follow road 66 towards Fagersta. After about 30 minutes, take the exit toward Ramnäs.
             </Text>
           </ColumnText>
           <ColumnText>
             <IconHeading>
               <Train size={20} />
-              {t('ByPublicTransport')}
+              By Public Transport
             </IconHeading>
             <Text>
-              {t('TakeTheTrain')}
+              Take the train to Västerås Central Station. From there, you can take a bus or train to Ramnäs. You can also take a taxi from Västerås.
             </Text>
           </ColumnText>
           <Column>
@@ -141,16 +141,16 @@ function TravelView() {
         </Row>
 
         <Card>
-          <CardHeading>{t('Carpooling')}</CardHeading>
+          <CardHeading>Carpooling</CardHeading>
           <SmallText>
-            {t('ThereAreManyOfUs')}
+            There are many of us traveling to the manor this weekend, so we encourage carpooling. If you have an extra seat in your car, please let us know! There might be someone who would love to join you on the way.
           </SmallText>
         </Card>
 
         <Card>
           <CardHeading>Taxi</CardHeading>
           <SmallText>
-            {t('PreferTaxi')}
+            For those who prefer a taxi, there are several options in the area.
             <br />
             Västerås Taxi: 021-18 50 00
             <br />
@@ -159,7 +159,7 @@ function TravelView() {
         </Card>
 
         <Footer>
-          {t('AnyQuestions')} {t('EmailUsAt')} <strong>euawedding@gmail.com</strong>
+          Any questions about transport or lodging? Email us at <strong>euawedding@gmail.com</strong>
         </Footer>
       </MainContentCard>
     </RootContainer>

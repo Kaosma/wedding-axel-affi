@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { AlignJustify, LogOut } from "lucide-react";
-import { useTheme } from "../../app/AppStyling";
-import { useTranslation } from 'react-i18next';
 
 const DropdownContainer = styled.div`
   position: relative;
@@ -44,7 +42,7 @@ const MenuItem = styled(Link)`
   border-radius: 0.5rem;
   font-family: "linnea-variable", "PP Cirka", sans-serif;
   &:hover {
-    background-color: ${() => useTheme().colors.peach.lightest};
+    background-color: green;
     color: black;
   }
 `;
@@ -73,7 +71,7 @@ const LogoutButton = styled.button`
 function MenuDropdown({ userLogoutCallback }: { userLogoutCallback: () => void }) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
+
   const toggleMenu = () => setOpen(!open);
   const closeMenu = () => setOpen(false);
 
@@ -109,14 +107,14 @@ function MenuDropdown({ userLogoutCallback }: { userLogoutCallback: () => void }
 
       {open && (
         <DropdownMenu>
-          <MenuItem to="/home" onClick={closeMenu}>{t('home')}</MenuItem>
+          <MenuItem to="/home" onClick={closeMenu}>Home</MenuItem>
           <MenuItem to="/about-us" onClick={closeMenu}>Toastmasters</MenuItem>
-          <MenuItem to="/your-stay" onClick={closeMenu}>{t('yourStay')}</MenuItem>
-          <MenuItem to="/upload" onClick={closeMenu}>{t('upload')}</MenuItem>
-          <MenuItem to="/schedule" onClick={closeMenu}>{t('schedule')}</MenuItem>
-          <MenuItem to="/travel" onClick={closeMenu}>{t('travel')}</MenuItem>
-          <MenuItem to="/qa" onClick={closeMenu}>{t('qa')}</MenuItem>
-          <LogoutButton onClick={logout}>{t('logout')} <LogOut size={22} /></LogoutButton>
+          <MenuItem to="/your-stay" onClick={closeMenu}>Your Stay</MenuItem>
+          <MenuItem to="/upload" onClick={closeMenu}>Upload</MenuItem>
+          <MenuItem to="/schedule" onClick={closeMenu}>Schedule</MenuItem>
+          <MenuItem to="/travel" onClick={closeMenu}>Travel</MenuItem>
+          <MenuItem to="/qa" onClick={closeMenu}>Q/A</MenuItem>
+          <LogoutButton onClick={logout}>Logout <LogOut size={22} /></LogoutButton>
         </DropdownMenu>
       )}
     </DropdownContainer>

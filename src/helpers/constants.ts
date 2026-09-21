@@ -7,20 +7,8 @@ export const introImage = newUrl('intro_all.png');
 export const middleEnglish = newUrl('middle_en.png');
 export const backEnglish = newUrl('back_en.png');
 export const timelineEnglish = newUrl('timeline_en.png');
-export const middleSpanish = newUrl('middle_es.png');
-export const backSpanish = newUrl('back_es.png');
-export const timelineSpanish = newUrl('timeline_es.png');
-export const middleSwedish = newUrl('middle_sv.png');
-export const backSwedish = newUrl('back_sv.png');
-export const timelineSwedish = newUrl('timeline_sv.png');
 export function getEnglishImage(code: string): string {
   return newUrl(`front_en_${code}.png`);
-}
-export function getSpanishImage(code: string): string {
-  return newUrl(`front_es_${code}.png`);
-}
-export function getSwedishImage(code: string): string {
-  return newUrl(`front_sv_${code}.png`);
 }
 export const logoUrl = newUrl('weddinglogo.svg');
 export const logoTerracottaImg = newUrl('weddinglogoTerracotta.svg');
@@ -39,18 +27,8 @@ export const ivarImage = newUrl('ivar.jpg');
 export const loginLogo = newUrl('loginlogo.png');
 
 export const passcodes: Record<string, string> = {
-  wedding2026: 'single',
-  boda2026: 'single',
-  july2026: 'couple',
-  julio2026: 'couple',
-  family2026: 'family',
-  familia2026: 'family',
-  euawedding26: 'hotelsingle',
-  euaboda26: 'hotelsingle',
-  julywedding26: 'hotelcouple',
-  julioboda26: 'hotelcouple',
-  euafamily26: 'hotelfamily',
-  euafamilia26: 'hotelfamily',
+  july2027: 'family',
+  sexy: 'friends',
 };
 
 export const validCodes = ['2819', '3737', '4619', '5582', '6491', '7364', '8712'];

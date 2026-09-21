@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
 import styled from 'styled-components';
-import { useTheme } from '../../app/AppStyling';
-import LanguageSelector from '../select/LanguageSelector';
 
 export const SONG_PUBLIC_PAGE_BG = 'hsl(30 100% 94%)';
 
@@ -14,15 +12,6 @@ const Shell = styled.div`
   flex-direction: column;
   box-sizing: border-box;
 `;
-
-const TopBar = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.75rem 1rem 0;
-  flex-shrink: 0;
-`;
-
 const Body = styled.div`
   flex: 1;
   display: flex;
@@ -39,12 +28,8 @@ type LocaleCreamShellProps = {
 };
 
 function LocaleCreamShell({ children }: LocaleCreamShellProps) {
-  const theme = useTheme();
   return (
     <Shell>
-      <TopBar>
-        <LanguageSelector color={theme.colors.olive.darker} />
-      </TopBar>
       <Body>{children}</Body>
     </Shell>
   );

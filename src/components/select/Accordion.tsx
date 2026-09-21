@@ -1,7 +1,6 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import styled, { keyframes } from "styled-components";
 import { ChevronDown } from "lucide-react";
-import { useTranslation } from 'react-i18next';
 
 const slideDown = keyframes`
   from { height: 0; opacity: 0; }
@@ -71,15 +70,15 @@ type QuestionAccordionProps = {
 };
 
 export function QuestionAccordion({ faqObject, itemNumber }: QuestionAccordionProps) {
-  const { t } = useTranslation();
+
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value={itemNumber}>
         <AccordionTrigger>
-          {t(faqObject.questionKey)}
+          {faqObject.questionKey}
           <ChevronDown size={16} />
         </AccordionTrigger>
-        <AccordionContent>{t(faqObject.answerKey)}</AccordionContent>
+        <AccordionContent>{faqObject.answerKey}</AccordionContent>
       </AccordionItem>
     </Accordion>
   );

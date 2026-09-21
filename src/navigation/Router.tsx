@@ -28,7 +28,7 @@ function Router({ role }: { role: string | null }) {
   return (
     <Routes>
       <Route path="/" element={<Navigate replace to={homeUrl} />} />
-      <Route path={homeUrl} element={<HomeView />} />
+      <Route path={homeUrl} element={<HomeView role={role} />} />
       <Route path={aboutUrl} element={<AboutView />} />
       <Route path={yourStayUrl} element={<YourStayView role={role} />} />
       <Route path={rsvpUrl} element={<RSVPView viewRole={role} />} />

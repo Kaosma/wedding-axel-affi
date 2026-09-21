@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useTheme } from '../../app/AppStyling';
 import { RSVPFormProps } from '../../helpers/classes';
 import { Heart } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 const FormContainer = styled.div`
   max-width: 500px;
@@ -251,7 +250,7 @@ interface FamilyRSVPFormProps extends RSVPFormProps {
 }
 
 function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
-  const { t } = useTranslation();
+
   const initialFormData = {
     email: '',
     arrival: '',
@@ -385,7 +384,7 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
       <Form onSubmit={handleSubmit}>
         {!role?.startsWith('hotel') && (
           <CheckboxContainerCentered>
-            <Label>{t("StayWithTheWeddingParty")}</Label>
+            <Label>Do you want to stay with us at Schenströmska Mansion during the wedding party? It will cost 2000 SEK per person. Included are both dinners, a brunch on Saturday and a breakfast on Sunday. If you accept, we will plan and book your accommodation and all meals for the entire weekend.</Label>
             <BigCheckboxContainerRow>
               <CheckboxWrapperColumn as="label" htmlFor="accommodation-herrgarden">
                 <HeartCheckbox
@@ -412,7 +411,7 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
                     />
                   )}
                 </HeartIconWrapper>
-                <CheckboxLabel htmlFor="accommodation-herrgarden">{t("Agree")}</CheckboxLabel>
+                <CheckboxLabel htmlFor="accommodation-herrgarden">Joyfully agree</CheckboxLabel>
               </CheckboxWrapperColumn>
               <CheckboxWrapperColumn as="label" htmlFor="accommodation-hotel">
                 <HeartCheckbox
@@ -438,18 +437,18 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
                     />
                   )}
                 </HeartIconWrapper>
-                <CheckboxLabel htmlFor="accommodation-hotel">{t("Decline")}</CheckboxLabel>
+                <CheckboxLabel htmlFor="accommodation-hotel">Respectfully decline</CheckboxLabel>
               </CheckboxWrapperColumn>
             </BigCheckboxContainerRow>
           </CheckboxContainerCentered>
         )}
         <InfoContainer>
-          <Label>{t("ConfirmationInfo")}</Label>
-          <Input type="text" name="email" placeholder={t("EmailForConfirmation")} value={formData.email} onChange={handleSharedChange} required />
+          <Label>CONFIRMATION INFO</Label>
+          <Input type="text" name="email" placeholder="E-mail for confirmation" value={formData.email} onChange={handleSharedChange} required />
         </InfoContainer>
 
         <CheckboxContainer>
-          <Label>{t("ParticipationDays")}</Label>
+          <Label>PARTICIPATION DAYS</Label>
           <CheckboxWrapper as="label" htmlFor="participation-fri">
             <Checkbox
               type="checkbox"
@@ -460,7 +459,7 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
               onChange={handleParticipationDaysChange}
               disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
             />
-            <CheckboxLabel htmlFor="participation-fri">{t("ParticipationFriday")}</CheckboxLabel>
+            <CheckboxLabel htmlFor="participation-fri">Friday | BBQ Dinner &amp; Mingle</CheckboxLabel>
           </CheckboxWrapper>
           <CheckboxWrapper as="label" htmlFor="brunch-sat">
             <Checkbox
@@ -472,7 +471,7 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
               onChange={handleBrunchChange}
               disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
             />
-            <CheckboxLabel htmlFor="brunch-sat">{t("ParticipationBrunch")}</CheckboxLabel>
+            <CheckboxLabel htmlFor="brunch-sat">Saturday | Brunch</CheckboxLabel>
           </CheckboxWrapper>
           <CheckboxWrapper as="label" htmlFor="participation-sat">
             <Checkbox
@@ -484,7 +483,7 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
               onChange={handleParticipationDaysChange}
               disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
             />
-            <CheckboxLabel htmlFor="participation-sat">{t("ParticipationSaturday")}</CheckboxLabel>
+            <CheckboxLabel htmlFor="participation-sat">Saturday | Wedding Ceremony &amp; Dinner</CheckboxLabel>
           </CheckboxWrapper>
           <CheckboxWrapper as="label" htmlFor="participation-sun">
             <Checkbox
@@ -496,26 +495,26 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
               onChange={handleParticipationDaysChange}
               disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
             />
-            <CheckboxLabel htmlFor="participation-sun">{t("ParticipationSunday")}</CheckboxLabel>
+            <CheckboxLabel htmlFor="participation-sun">Sunday | Good Bye Breakfast</CheckboxLabel>
           </CheckboxWrapper>
         </CheckboxContainer>
 
         {formData.guests.map((guest, index) => (
           <GuestContainer key={index}>
             <GuestTop>
-              <GuestLabel>{t("FamilyMember")} {index + 1}</GuestLabel>
+              <GuestLabel>Family Member {index + 1}</GuestLabel>
               {formData.guests.length > 1 && (
                 <RemoveFamilyMemberButton type="button" onClick={() => removeFamilyMember(index)} >×</RemoveFamilyMemberButton>
               )}
             </GuestTop>
             <InfoContainer>
-              <Label>{t("BasicInfo")}</Label>
-              <Input type="text" name="firstName" placeholder={t("FirstName")} value={guest.firstName} onChange={(e) => handleGuestChange(e, index)} required />
-              <Input type="text" name="lastName" placeholder={t("LastName")} value={guest.lastName} onChange={(e) => handleGuestChange(e, index)} required />
+              <Label>BASIC INFO</Label>
+              <Input type="text" name="firstName" placeholder="First Name" value={guest.firstName} onChange={(e) => handleGuestChange(e, index)} required />
+              <Input type="text" name="lastName" placeholder="Last Name" value={guest.lastName} onChange={(e) => handleGuestChange(e, index)} required />
             </InfoContainer>
 
             <CheckboxContainer>
-              <Label>{t("Preferences")}</Label>
+              <Label>PREFERENCES</Label>
               <CheckboxContainerRow>
                 <CheckboxWrapper as="label" htmlFor={`alcohol_${index}`}>
                   <Checkbox
@@ -527,7 +526,7 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
                     onChange={e => handleGuestChange(e, index)}
                     required
                   />
-                  <CheckboxLabel htmlFor={`alcohol_${index}`}>{t("Alcohol")}</CheckboxLabel>
+                  <CheckboxLabel htmlFor={`alcohol_${index}`}>Alcohol</CheckboxLabel>
                 </CheckboxWrapper>
                 <CheckboxWrapper as="label" htmlFor={`non-alcohol_${index}`}>
                   <Checkbox
@@ -538,17 +537,17 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
                     checked={guest.alcohol === 'Non-alcohol'}
                     onChange={e => handleGuestChange(e, index)}
                   />
-                  <CheckboxLabel htmlFor={`non-alcohol_${index}`}>{t("NonAlcohol")}</CheckboxLabel>
+                  <CheckboxLabel htmlFor={`non-alcohol_${index}`}>Non-alcohol</CheckboxLabel>
                 </CheckboxWrapper>
               </CheckboxContainerRow>
             </CheckboxContainer>
-            <Input type="text" name="music" placeholder={t("Music")} value={guest.music} onChange={(e) => handleGuestChange(e, index)} />
-            <Textarea name="food" placeholder={t("Food")} value={guest.food} onChange={(e) => handleGuestChange(e, index)} />
+            <Input type="text" name="music" placeholder="A song that makes you dance" value={guest.music} onChange={(e) => handleGuestChange(e, index)} />
+            <Textarea name="food" placeholder="Do you have any food preferences, allergies, or special requests?" value={guest.food} onChange={(e) => handleGuestChange(e, index)} />
           </GuestContainer>
         ))}
 
-        <AddFamilyMemberButton type="button" onClick={addFamilyMember} >{t("AddFamilyMember")} +</AddFamilyMemberButton>
-        <SubmitButton type="submit">{t("Submit")}</SubmitButton>
+        <AddFamilyMemberButton type="button" onClick={addFamilyMember} >Add family member +</AddFamilyMemberButton>
+        <SubmitButton type="submit">Submit RSVP</SubmitButton>
       </Form>
     </FormContainer>
   );

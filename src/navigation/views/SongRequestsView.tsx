@@ -10,7 +10,6 @@ import {
 import { useTheme } from '../../app/AppStyling';
 import { Check, GripVertical, ListMusic, Trash2 } from 'lucide-react';
 import { rgba } from 'polished';
-import { useTranslation } from 'react-i18next';
 import { db, onValue, ref, remove, update } from '../../firebase/firebase';
 import LocaleCreamShell from '../../components/layout/LocaleCreamShell';
 
@@ -19,12 +18,10 @@ const Content = styled.div`
   max-width: 800px;
   margin: 0 auto;
 `;
-
 const TitleWrapper = styled.div`
   text-align: center;
   margin-bottom: 2rem;
 `;
-
 const TitleRow = styled.div`
   display: flex;
   align-items: center;
@@ -32,14 +29,12 @@ const TitleRow = styled.div`
   gap: 0.5rem;
   margin-bottom: 1rem;
 `;
-
 const Title = styled.h1`
   font-size: 2rem;
   font-family: 'Georgia', serif;
   color: ${() => useTheme().colors.olive.darker};
   margin: 0;
 `;
-
 const Subtitle = styled.p`
   font-size: 1.1rem;
   color: ${() => useTheme().colors.olive.darker};
@@ -48,7 +43,6 @@ const Subtitle = styled.p`
   line-height: 1.6;
   font-family: 'Georgia', serif;
 `;
-
 const List = styled.ul`
   list-style: none;
   padding: 0;
@@ -57,12 +51,10 @@ const List = styled.ul`
   width: 100%;
   position: relative;
 `;
-
 const slideTransition = css`
   transition: transform 0.25s ease, opacity 0.2s ease, max-height 0.25s ease,
     margin 0.25s ease, padding 0.25s ease;
 `;
-
 const collapseOut = keyframes`
   to {
     max-height: 0;
@@ -70,7 +62,6 @@ const collapseOut = keyframes`
     opacity: 0;
   }
 `;
-
 const ItemSlot = styled.li<{ $dragging: boolean; $removing: boolean }>`
   position: relative;
   margin-bottom: 0.5rem;
@@ -85,7 +76,6 @@ const ItemSlot = styled.li<{ $dragging: boolean; $removing: boolean }>`
       animation: ${collapseOut} 0.2s ease forwards;
     `};
 `;
-
 const DeleteBg = styled.div<{ $progress: number }>`
   position: absolute;
   inset: 0;
@@ -99,7 +89,6 @@ const DeleteBg = styled.div<{ $progress: number }>`
   opacity: ${({ $progress }) => Math.min(1, $progress)};
   pointer-events: none;
 `;
-
 const DeleteLabel = styled.span`
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
   font-size: 0.85rem;
@@ -107,7 +96,6 @@ const DeleteLabel = styled.span`
   text-transform: uppercase;
   margin-left: 0.5rem;
 `;
-
 type ForegroundProps = {
   $checked: boolean;
   $offsetX: number;
@@ -116,7 +104,6 @@ type ForegroundProps = {
   $swiping: boolean;
   $animateBack: boolean;
 };
-
 const ItemForeground = styled.div<ForegroundProps>`
   position: relative;
   display: flex;
@@ -141,7 +128,6 @@ const ItemForeground = styled.div<ForegroundProps>`
   ${({ $swiping, $dragging, $animateBack }) =>
     $animateBack || (!$swiping && !$dragging) ? slideTransition : ''};
 `;
-
 const DragHandle = styled.button`
   display: inline-flex;
   align-items: center;
@@ -166,7 +152,6 @@ const DragHandle = styled.button`
     border-radius: 4px;
   }
 `;
-
 const SongMetaBlock = styled.div<{ $checked: boolean }>`
   display: flex;
   align-items: center;
@@ -176,7 +161,6 @@ const SongMetaBlock = styled.div<{ $checked: boolean }>`
   opacity: ${({ $checked }) => ($checked ? 0.55 : 1)};
   transition: opacity 0.2s ease;
 `;
-
 const SongText = styled.span<{ $checked: boolean }>`
   font-family: 'Georgia', serif;
   font-size: 1rem;
@@ -186,14 +170,12 @@ const SongText = styled.span<{ $checked: boolean }>`
   word-break: break-word;
   text-decoration: ${({ $checked }) => ($checked ? 'line-through' : 'none')};
 `;
-
 const Meta = styled.span`
   font-size: 0.75rem;
   color: ${() => rgba(useTheme().colors.olive.darker, 0.65)};
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
   flex-shrink: 0;
 `;
-
 const CheckButton = styled.button<{ $done: boolean }>`
   display: inline-flex;
   align-items: center;
@@ -210,7 +192,7 @@ const CheckButton = styled.button<{ $done: boolean }>`
 
   &:hover {
     background: ${({ $done, theme }) =>
-      $done ? theme.colors.olive.darker : rgba(theme.colors.olive.primary, 0.12)};
+    $done ? theme.colors.olive.darker : rgba(theme.colors.olive.primary, 0.12)};
   }
 
   &:focus-visible {
@@ -218,7 +200,6 @@ const CheckButton = styled.button<{ $done: boolean }>`
     outline-offset: 2px;
   }
 `;
-
 const EmptyState = styled.p`
   text-align: center;
   font-family: 'Georgia', serif;
@@ -279,7 +260,7 @@ type SwipeState = {
 
 function SongRequestsView() {
   const theme = useTheme();
-  const { t } = useTranslation();
+
   const [items, setItems] = useState<SongRequestDoc[]>([]);
   const [loading, setLoading] = useState(true);
   const [removing, setRemoving] = useState<Set<string>>(new Set());
@@ -601,16 +582,16 @@ function SongRequestsView() {
         <TitleWrapper>
           <TitleRow>
             <ListMusic size={24} color={theme.colors.olive.primary} />
-            <Title>{t('songRequestsTitle')}</Title>
+            <Title>Requests</Title>
             <ListMusic size={24} color={theme.colors.olive.primary} />
           </TitleRow>
-          <Subtitle>{t('songRequestsSubtitle')}</Subtitle>
+          <Subtitle>Mark a song as played when it has been queued or played.</Subtitle>
         </TitleWrapper>
 
         {loading ? (
-          <EmptyState>{t('songRequestsLoading')}</EmptyState>
+          <EmptyState>Loading…</EmptyState>
         ) : displayItems.length === 0 ? (
-          <EmptyState>{t('songRequestsEmpty')}</EmptyState>
+          <EmptyState>No song requests yet.</EmptyState>
         ) : (
           <List>
             {displayItems.map((row) => {
@@ -637,7 +618,7 @@ function SongRequestsView() {
                     {deleteProgress > 0 ? (
                       <>
                         <Trash2 size={20} />
-                        <DeleteLabel>{t('songRequestsDelete')}</DeleteLabel>
+                        <DeleteLabel>Delete request</DeleteLabel>
                       </>
                     ) : null}
                   </DeleteBg>
@@ -656,7 +637,7 @@ function SongRequestsView() {
                     <DragHandle
                       type="button"
                       data-drag-handle
-                      aria-label={t('songRequestsReorder')}
+                      aria-label="Drag to reorder"
                       onPointerDown={(e) => handleDragStart(e, row.id)}
                       onPointerMove={handleDragMove}
                       onPointerUp={handleDragEnd}
@@ -675,8 +656,8 @@ function SongRequestsView() {
                       onClick={() => toggleChecked(row.id, row.checked)}
                       aria-label={
                         row.checked
-                          ? t('songRequestsMarkUnplayed')
-                          : t('songRequestsMarkPlayed')
+                          ? "Mark as unplayed"
+                          : "Mark as played"
                       }
                       aria-pressed={row.checked}
                     >

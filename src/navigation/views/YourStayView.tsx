@@ -3,8 +3,6 @@ import { mansionImg, mapImg } from "../../helpers/constants";
 import MainContentCard from "../../components/cards/MainContentCard";
 import { ArrowUpRight, Calendar, Map, MapPin, MessageCircleQuestion, Shirt, X, Bed, ExternalLink } from 'lucide-react';
 import { useState } from "react";
-import { useTheme } from "../../app/AppStyling";
-import { useTranslation } from "react-i18next";
 
 const RootContainer = styled.div`
   color: black;
@@ -55,7 +53,7 @@ const CardTitle = styled.h3`
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
 `;
 const TextContainer = styled.div`
   display: flex;
@@ -67,7 +65,7 @@ const TextContainer = styled.div`
 const CardText = styled.p`
   margin: 0.25rem 0;
   font-size: 1rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
 `;
 const CardTextSpecial = styled(CardText)`
   display: flex;
@@ -183,7 +181,7 @@ const AccommodationModal = styled.div`
   position: relative;
 `;
 const ModalTitle = styled.h2`
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin-bottom: 1.5rem;
   text-align: center;
   font-size: 1.5rem;
@@ -192,10 +190,10 @@ const HotelSection = styled.div`
   margin-bottom: 2rem;
 `;
 const SectionTitle = styled.h3`
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin-bottom: 1rem;
   font-size: 1.2rem;
-  border-bottom: 2px solid ${() => useTheme().colors.peach.primary};
+  border-bottom: 2px solid green;
   padding-bottom: 0.5rem;
 `;
 const HotelCard = styled.div`
@@ -203,20 +201,20 @@ const HotelCard = styled.div`
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
-  border-left: 4px solid ${() => useTheme().colors.peach.primary};
+  border-left: 4px solid green;
 `;
 const HotelName = styled.h4`
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin: 0 0 0.5rem 0;
   font-size: 1.1rem;
 `;
 const HotelDetails = styled.div`
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
 `;
 const HotelLink = styled.a`
-  color: ${() => useTheme().colors.peach.primary};
+  color: green;
   text-decoration: none;
   font-weight: 600;
   display: inline-flex;
@@ -229,17 +227,17 @@ const HotelLink = styled.a`
   }
 `;
 const DistanceInfo = styled.div`
-  background: ${() => useTheme().colors.peach.lightest};
+  background: green;
   border-radius: 6px;
   padding: 1rem;
   margin-top: 1rem;
   text-align: center;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   font-size: 0.9rem;
 `;
 
 function YourStayView({ role }: { role: string | null }) {
-  const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const [accommodationOpen, setAccommodationOpen] = useState(false);
   const googleLocation = 'https://www.google.com/maps/dir//Schenstr%C3%B6ms+v%C3%A4g+1,+735+60+Ramn%C3%A4s,+Sverige/@59.7805224,16.0999931,12z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x465e778e4c4395f7:0x5eb9543796e54bc5!2m2!1d16.1823928!2d59.7805482?entry=ttu&g_ep=EgoyMDI1MDczMC4wIKXMDSoASAFQAw%3D%3D';
@@ -263,44 +261,44 @@ function YourStayView({ role }: { role: string | null }) {
         <>
           <ModalOverlay onClick={() => setAccommodationOpen(false)}>
             <AccommodationModal onClick={(e) => e.stopPropagation()}>
-              <ModalTitle>{t("AccomodationOptions")}</ModalTitle>
+              <ModalTitle>Accomodation Options</ModalTitle>
 
               {role && !role.startsWith('hotel') && (
                 <HotelSection>
-                  <SectionTitle>{t("Exclusive")}</SectionTitle>
+                  <SectionTitle>Exclusive Stay with the Wedding Party</SectionTitle>
 
                   <HotelCard>
                     <HotelName>Schenströmska Herrgården</HotelName>
                     <HotelDetails>📍 Ramnäs, Västerås</HotelDetails>
-                    <HotelDetails>💰 {t("800SEKPerNight")}</HotelDetails>
-                    <HotelDetails>✨ {t("LimitedAvailability")}</HotelDetails>
+                    <HotelDetails>💰 2000 SEK per person</HotelDetails>
+                    <HotelDetails>✨ Includes two nights, dinner on Friday, brunch and breakfast on Saturday and Sunday.</HotelDetails>
                   </HotelCard>
                 </HotelSection>
               )}
 
               <HotelSection>
-                <SectionTitle>{t("HotelsInRamnäs")}</SectionTitle>
+                <SectionTitle>Hotels in Ramnäs</SectionTitle>
 
                 <HotelCard>
                   <HotelName>Nadden Hotel</HotelName>
                   <HotelDetails>📍 Ramnäs, Västerås</HotelDetails>
-                  <HotelDetails>🏨 {t("BoutiqueHotel")}</HotelDetails>
+                  <HotelDetails>🏨 Close to Schenströmska Herrgården</HotelDetails>
                   <HotelDetails>📞 +46 220 133 70</HotelDetails>
                   <HotelLink href="https://naddenhotell.se/" target="_blank" rel="noopener noreferrer">
-                    {t("VisitWebsite")} <ExternalLink size={16} />
+                    Visit Website <ExternalLink size={16} />
                   </HotelLink>
                 </HotelCard>
               </HotelSection>
 
               <HotelSection>
-                <SectionTitle>{t("HotelsInVästerås")}</SectionTitle>
+                <SectionTitle>Hotels in Västerås (15-20 min drive)</SectionTitle>
 
                 <HotelCard>
                   <HotelName>Elite Stadshotellet Västerås</HotelName>
                   <HotelDetails>📍 Stora Gatan 7, Västerås</HotelDetails>
                   <HotelDetails>📞 +46 21 10 28 00</HotelDetails>
                   <HotelLink href="https://www.elite.se/hotell/vasteras/elite-stadshotellet-vasteras/?utm_source=google&utm_medium=cpc&utm_campaign=%5BPB%5D%20%5BS%5D%20%5BPerformance%5D%20%5BB%5D%20Elite%20-%20Hotell%20%2B%20Ort&utm_term=Elite%20Stadshotellet%20V%C3%A4ster%C3%A5s&gad_source=1&gad_campaignid=18480603064&gbraid=0AAAAADkFkH9CtCwB-y6mEYBRnO6WpPgC5&gclid=Cj0KCQjw8p7GBhCjARIsAEhghZ3sI0l31nMV-j-iXMnI1byzxmFeGaNw_KxZ7nnSigCMQ6eMlcAvZ2EaAiMXEALw_wcB" target="_blank" rel="noopener noreferrer">
-                    {t("VisitWebsite")} <ExternalLink size={16} />
+                    Visit Website <ExternalLink size={16} />
                   </HotelLink>
                 </HotelCard>
 
@@ -309,7 +307,7 @@ function YourStayView({ role }: { role: string | null }) {
                   <HotelDetails>📍 Pilgatan 33, Västerås</HotelDetails>
                   <HotelDetails>📞 +46 21 495 58 00</HotelDetails>
                   <HotelLink href="https://www.scandichotels.com/en/hotels/scandic-vasteras" target="_blank" rel="noopener noreferrer">
-                    {t("VisitWebsite")} <ExternalLink size={16} />
+                    Visit Website <ExternalLink size={16} />
                   </HotelLink>
                 </HotelCard>
 
@@ -318,13 +316,13 @@ function YourStayView({ role }: { role: string | null }) {
                   <HotelDetails>📍 Kopparbergsvägen 10, Västerås</HotelDetails>
                   <HotelDetails>📞 +46 21 10 10 10</HotelDetails>
                   <HotelLink href="https://plazavasteras.se/" target="_blank" rel="noopener noreferrer">
-                    {t("VisitWebsite")} <ExternalLink size={16} />
+                    Visit Website <ExternalLink size={16} />
                   </HotelLink>
                 </HotelCard>
               </HotelSection>
 
               <DistanceInfo>
-                💡 <strong>{t("Tip")}</strong> {t("WeRecommend")}
+                💡 <strong>Tip</strong> We recommend booking as early as possible to ensure availability.
               </DistanceInfo>
             </AccommodationModal>
           </ModalOverlay>
@@ -339,15 +337,15 @@ function YourStayView({ role }: { role: string | null }) {
             <IconWrapper>
               <Calendar size={32} />
             </IconWrapper>
-            <CardTitle>{t("Dates")}</CardTitle>
-            <CardText>{t("FridayToSunday")}</CardText>
-            <CardText><Emphasis>{t("July24thTo26th")}</Emphasis></CardText>
+            <CardTitle>Dates</CardTitle>
+            <CardText>Friday - Sunday</CardText>
+            <CardText><Emphasis>July 24th - 26th</Emphasis></CardText>
           </Card>
           <Card onClick={(() => openTab(googleLocation))}>
             <IconWrapper>
               <MapPin size={32} />
             </IconWrapper>
-            <CardTitle>{t("Location")}</CardTitle>
+            <CardTitle>Location</CardTitle>
             <CardText>Schenströmska Herrgården</CardText>
             <CardText><Emphasis>Ramnäs</Emphasis></CardText>
           </Card>
@@ -355,34 +353,34 @@ function YourStayView({ role }: { role: string | null }) {
             <IconWrapper>
               <Bed size={32} />
             </IconWrapper>
-            <CardTitle>{t("Accommodation")}</CardTitle>
-            <CardText>{t("NearbyHotels")}</CardText>
-            <CardText><Emphasis>{t("ViewOptions")}</Emphasis></CardText>
+            <CardTitle>Accommodation</CardTitle>
+            <CardText>Nearby Hotels</CardText>
+            <CardText><Emphasis>View Options</Emphasis></CardText>
           </Card>
           <Card onClick={(() => openTab(emailLink))}>
             <IconWrapper>
               <MessageCircleQuestion size={32} />
             </IconWrapper>
-            <CardTitle>{t("ForOtherQuestions")}</CardTitle>
-            <CardText>{t("CheckQAndA")}</CardText>
-            <CardText>{t("OrContactUsOn")}<Emphasis> euawedding@gmail.com</Emphasis></CardText>
+            <CardTitle>For other questions</CardTitle>
+            <CardText>Check Q&amp;A</CardText>
+            <CardText>Or contact us on<Emphasis> euawedding@gmail.com</Emphasis></CardText>
           </Card>
           <Card>
             <IconWrapper>
               <Shirt size={32} />
             </IconWrapper>
-            <CardTitle>{t("Dresscode")}</CardTitle>
+            <CardTitle>Dresscode</CardTitle>
             <TextContainer>
-              <CardTextSpecial>{t("Fredag")} <EmphasisSpecial>{t("FridaySunsetColors")}</EmphasisSpecial></CardTextSpecial>
-              <CardTextSpecial>{t("Lördag")} <EmphasisSpecial>{t("SaturdaySuitAndDress")}</EmphasisSpecial></CardTextSpecial>
-              <CardTextSpecial>{t("Söndag")} <EmphasisSpecial>{t("SundayCasual")}</EmphasisSpecial></CardTextSpecial>
+              <CardTextSpecial>Friday <EmphasisSpecial>White Party</EmphasisSpecial></CardTextSpecial>
+              <CardTextSpecial>Saturday <EmphasisSpecial>Suit and Dress</EmphasisSpecial></CardTextSpecial>
+              <CardTextSpecial>Sunday <EmphasisSpecial>Casual</EmphasisSpecial></CardTextSpecial>
             </TextContainer>
           </Card>
           <Card onClick={() => setOpen(true)}>
             <IconWrapper>
               <Map size={32} />
             </IconWrapper>
-            <CardTitle>{t("Map")}</CardTitle>
+            <CardTitle>Map</CardTitle>
             <ImageCard onClick={() => setOpen(true)}>
               <CornerIcon>
                 <ArrowUpRight color="orange" />

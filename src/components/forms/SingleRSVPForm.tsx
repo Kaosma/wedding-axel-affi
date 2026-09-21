@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useTheme } from '../../app/AppStyling';
 import { RSVPFormProps } from '../../helpers/classes';
 import { Heart } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 const FormContainer = styled.div`
   max-width: 500px;
@@ -218,7 +217,7 @@ interface SingleRSVPFormProps extends RSVPFormProps {
   role: string;
 }
 function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
-  const { t } = useTranslation();
+
   const initialFormData = {
     email: '',
     arrival: '',
@@ -323,7 +322,7 @@ function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
       <Form onSubmit={handleSubmit}>
         {!role?.startsWith('hotel') && (
           <CheckboxContainerCentered>
-            <Label>{t("StayWithTheWeddingParty")}</Label>
+            <Label>Do you want to stay with us at Schenströmska Mansion during the wedding party? It will cost 2000 SEK per person. Included are both dinners, a brunch on Saturday and a breakfast on Sunday. If you accept, we will plan and book your accommodation and all meals for the entire weekend.</Label>
             <BigCheckboxContainerRow>
               <CheckboxWrapperColumn as="label" htmlFor="accommodation-herrgarden">
                 <HeartCheckbox
@@ -350,7 +349,7 @@ function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
                     />
                   )}
                 </HeartIconWrapper>
-                <CheckboxLabel htmlFor="accommodation-herrgarden">{t("Agree")}</CheckboxLabel>
+                <CheckboxLabel htmlFor="accommodation-herrgarden">Joyfully agree</CheckboxLabel>
               </CheckboxWrapperColumn>
               <CheckboxWrapperColumn as="label" htmlFor="accommodation-hotel">
                 <HeartCheckbox
@@ -376,21 +375,21 @@ function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
                     />
                   )}
                 </HeartIconWrapper>
-                <CheckboxLabel htmlFor="accommodation-hotel">{t("Decline")}</CheckboxLabel>
+                <CheckboxLabel htmlFor="accommodation-hotel">Respectfully decline</CheckboxLabel>
               </CheckboxWrapperColumn>
             </BigCheckboxContainerRow>
           </CheckboxContainerCentered>
         )}
         <InfoContainer>
-          <Label>{t("ConfirmationInfo")}</Label>
-          <Input type="text" name="firstName" placeholder={t("FirstName")} value={formData.guests[0].firstName} onChange={(e) => handleGuestChange(e, 0)} required />
-          <Input type="text" name="lastName" placeholder={t("LastName")} value={formData.guests[0].lastName} onChange={(e) => handleGuestChange(e, 0)} required />
-          <Input type="text" name="email" placeholder={t("EmailForConfirmation")} value={formData.email} onChange={handleChange} required />
+          <Label>CONFIRMATION INFO</Label>
+          <Input type="text" name="firstName" placeholder="First Name" value={formData.guests[0].firstName} onChange={(e) => handleGuestChange(e, 0)} required />
+          <Input type="text" name="lastName" placeholder="Last Name" value={formData.guests[0].lastName} onChange={(e) => handleGuestChange(e, 0)} required />
+          <Input type="text" name="email" placeholder="E-mail for confirmation" value={formData.email} onChange={handleChange} required />
         </InfoContainer>
 
         <GridContainer>
           <CheckboxContainer>
-            <Label>{t("ParticipationDays")}</Label>
+            <Label>PARTICIPATION DAYS</Label>
             <CheckboxWrapper as="label" htmlFor="participation-fri">
               <Checkbox
                 type="checkbox"
@@ -401,7 +400,7 @@ function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
                 onChange={handleParticipationDaysChange}
                 disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
               />
-              <CheckboxLabel htmlFor="participation-fri">{t("ParticipationFriday")}</CheckboxLabel>
+              <CheckboxLabel htmlFor="participation-fri">Friday | BBQ Dinner &amp; Mingle</CheckboxLabel>
             </CheckboxWrapper>
             <CheckboxWrapper as="label" htmlFor="brunch-sat">
               <Checkbox
@@ -413,7 +412,7 @@ function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
                 onChange={handleBrunchChange}
                 disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
               />
-              <CheckboxLabel htmlFor="brunch-sat">{t("ParticipationBrunch")}</CheckboxLabel>
+              <CheckboxLabel htmlFor="brunch-sat">Saturday | Brunch</CheckboxLabel>
             </CheckboxWrapper>
             <CheckboxWrapper as="label" htmlFor="participation-sat">
               <Checkbox
@@ -425,7 +424,7 @@ function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
                 onChange={handleParticipationDaysChange}
                 disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
               />
-              <CheckboxLabel htmlFor="participation-sat">{t("ParticipationSaturday")}</CheckboxLabel>
+              <CheckboxLabel htmlFor="participation-sat">Saturday | Wedding Ceremony &amp; Dinner</CheckboxLabel>
             </CheckboxWrapper>
             <CheckboxWrapper as="label" htmlFor="participation-sun">
               <Checkbox
@@ -437,12 +436,12 @@ function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
                 onChange={handleParticipationDaysChange}
                 disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
               />
-              <CheckboxLabel htmlFor="participation-sun">{t("ParticipationSunday")}</CheckboxLabel>
+              <CheckboxLabel htmlFor="participation-sun">Sunday | Good Bye Breakfast</CheckboxLabel>
             </CheckboxWrapper>
           </CheckboxContainer>
         </GridContainer>
         <InfoContainer>
-          <Label>{t("Preferences")}</Label>
+          <Label>PREFERENCES</Label>
           <CheckboxContainerRow>
             <CheckboxWrapper as="label" htmlFor="alcohol">
               <Checkbox
@@ -454,7 +453,7 @@ function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
                 onChange={(e) => handleGuestChange(e, 0)}
                 required
               />
-              <CheckboxLabel htmlFor="alcohol">{t("Alcohol")}</CheckboxLabel>
+              <CheckboxLabel htmlFor="alcohol">Alcohol</CheckboxLabel>
             </CheckboxWrapper>
             <CheckboxWrapper as="label" htmlFor="non-alcohol">
               <Checkbox
@@ -465,18 +464,18 @@ function SingleRSVPForm({ submitCallback, role }: SingleRSVPFormProps) {
                 checked={formData.guests[0].alcohol === 'Non-alcohol'}
                 onChange={(e) => handleGuestChange(e, 0)}
               />
-              <CheckboxLabel htmlFor="non-alcohol">{t("NonAlcohol")}</CheckboxLabel>
+              <CheckboxLabel htmlFor="non-alcohol">Non-alcohol</CheckboxLabel>
             </CheckboxWrapper>
           </CheckboxContainerRow>
-          <Input type="text" name="music" placeholder={t("Music")} value={formData.guests[0].music} onChange={(e) => handleGuestChange(e, 0)} />
+          <Input type="text" name="music" placeholder="A song that makes you dance" value={formData.guests[0].music} onChange={(e) => handleGuestChange(e, 0)} />
           <Textarea
             name="food"
-            placeholder={t("Food")}
+            placeholder="Do you have any food preferences, allergies, or special requests?"
             value={formData.guests[0].food}
             onChange={(e) => handleGuestChange(e, 0)}
           />
         </InfoContainer>
-        <SubmitButton type="submit">{t("Submit")}</SubmitButton>
+        <SubmitButton type="submit">Submit RSVP</SubmitButton>
       </Form>
     </FormContainer>
   );

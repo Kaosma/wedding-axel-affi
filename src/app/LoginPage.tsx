@@ -4,8 +4,6 @@ import './App.css';
 import { loginLogo, passcodes } from '../helpers/constants';
 import { useTheme } from './AppStyling';
 import { Eye, EyeOff } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import LanguageSelector from '../components/select/LanguageSelector';
 
 const IconWrapper = styled.div`
   background-image: url(${loginLogo});
@@ -47,19 +45,6 @@ const Background = styled.div`
     padding: 1rem 1rem 2rem 1rem;
   }
 `;
-const TopBar = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 0.5rem;
-  margin-bottom: 1rem;
-
-  @media (max-width: 480px) {
-    margin-bottom: 0.5rem;
-    padding: 0;
-    width: 100%;
-  }
-`;
 const Card = styled.div`
   border-radius: 28px;
   background: transparent;
@@ -94,7 +79,7 @@ const Heading = styled.h1`
 const Intro = styled.p`
   margin: 0 auto clamp(2rem, 4vw, 2.5rem);
   line-height: 1.6;
-  color: ${() => useTheme().colors.terracotta.dark};
+  color: green;
   font-size: 1.05rem;
   max-width: 25rem;
 
@@ -126,7 +111,7 @@ const InputField = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${() => useTheme().colors.terracotta.secondary};
+    border-color: green;
     box-shadow: 0 0 0 6px rgba(217, 108, 74, 0.16);
   }
 
@@ -141,7 +126,7 @@ const SubmitButton = styled.button`
   padding: 1rem 1.25rem;
   border: none;
   border-radius: 20px;
-  background: ${() => useTheme().colors.terracotta.primary};
+  background: green;
   color: white;
   font-size: 1.15rem;
   font-weight: 400;
@@ -201,7 +186,7 @@ const ToggleVisibilityButton = styled.button`
 
   &:focus-visible {
     outline: none;
-    color: ${() => useTheme().colors.terracotta.secondary};
+    color: green;
   }
 
   @media (max-width: 480px) {
@@ -226,7 +211,7 @@ function LoginPage({ loginCallback }: { loginCallback: (role: string) => void })
   const [passcode, setPasscode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showPasscode, setShowPasscode] = useState(false);
-  const { t } = useTranslation();
+
 
   const handlePasscodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasscode(e.target.value);
@@ -243,7 +228,7 @@ function LoginPage({ loginCallback }: { loginCallback: (role: string) => void })
       localStorage.setItem('auth_role', role);
       loginCallback(role);
     } else {
-      setErrorMessage(t('incorrectPasscode'));
+      setErrorMessage('The passcode you entered is not correct. Please try again.');
     }
   };
 
@@ -258,14 +243,11 @@ function LoginPage({ loginCallback }: { loginCallback: (role: string) => void })
 
   return (
     <Background>
-      <TopBar>
-        <LanguageSelector color={useTheme().colors.terracotta.secondary} />
-      </TopBar>
       <Card>
         <IconWrapper />
-        <Heading>{t('welcome')}</Heading>
+        <Heading>Welcome to our wedding</Heading>
         <Intro>
-          {t('intro')}
+          To cherish our special day, please enter your passcode from the invitation below.
         </Intro>
 
         <Form onSubmit={handleSubmit}>
@@ -276,7 +258,7 @@ function LoginPage({ loginCallback }: { loginCallback: (role: string) => void })
                 type={showPasscode ? 'text' : 'password'}
                 value={passcode}
                 onChange={handlePasscodeChange}
-                placeholder={t('enterPasscode')}
+                placeholder="Enter your passcode"
                 autoComplete="off"
               />
               <ToggleVisibilityButton
@@ -289,7 +271,7 @@ function LoginPage({ loginCallback }: { loginCallback: (role: string) => void })
             </PasswordFieldWrapper>
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           </div>
-          <SubmitButton type="submit">{t('enter')}</SubmitButton>
+          <SubmitButton type="submit">Enter</SubmitButton>
         </Form>
       </Card>
     </Background>

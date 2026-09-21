@@ -5,11 +5,11 @@ import { Heart } from "lucide-react";
 import { QuestionAccordion } from "../../components/select/Accordion";
 import { rgba } from "polished";
 import { faqs } from "../../helpers/constants";
-import { useTranslation } from "react-i18next";
+
 
 const RootContainer = styled.div`
   color: black;
-  background-color: ${() => rgba(useTheme().colors.terracotta.secondary, 0.95)};
+  background-color: ${() => rgba(useTheme().colors.red.secondary, 0.95)};
   min-height: 100vh;
   height: fit-content;
   align-items: center;
@@ -32,13 +32,13 @@ const TitleRow = styled.div`
 const Title = styled.h1`
   font-size: 2rem;
   font-family: "Georgia", serif;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   font-family: 'Georgia', serif;
   margin: 0em;
 `;
 const Subtitle = styled.p`
   font-size: 1.1rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   max-width: 40rem;
   margin: 0 auto;
   line-height: 1.6;
@@ -58,7 +58,7 @@ const SectionCardHeader = styled.div`
 const SectionTitle = styled.div`
   font-size: 1.6rem;
   font-family: "Georgia", serif;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,38 +66,38 @@ const SectionTitle = styled.div`
 const SectionDescription = styled.div`
   font-size: 1rem;
   font-family: "Georgia", serif;
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
 `;
 const ContactSection = styled.div`
   text-align: center;
 `;
 const ContactText = styled.p`
-  color: ${() => useTheme().colors.olive.darker};
+  color: green;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
 `;
 
 function QNAView() {
   const theme = useTheme();
-  const { t } = useTranslation();
+
   return (
     <RootContainer>
       <MainContentCard backgroundColor="hsl(30 100% 94%)">
 
         <TitleWrapper>
           <TitleRow>
-            <Heart size={24} color={theme.colors.olive.primary} />
-            <Title>{t('QuestionsAndAnswers')}</Title>
-            <Heart size={24} color={theme.colors.olive.primary} />
+            <Heart size={24} color="#000" />
+            <Title>Questions and Answers</Title>
+            <Heart size={24} color="#000" />
           </TitleRow>
-          <Subtitle>{t('CommonQuestions')}</Subtitle>
+          <Subtitle>We've answered some of the most common questions about our special day. If you don't see your question here, please don't hesitate to reach out to us directly!</Subtitle>
         </TitleWrapper>
 
         <SectionCard>
           <SectionCardHeader>
-            <SectionTitle>{t('FrequentlyAskedQuestions')}</SectionTitle>
+            <SectionTitle>Frequently Asked Questions</SectionTitle>
             <SectionDescription>
-              {t('EverythingYouNeedToKnow')}
+              Everything you need to know for our weekend
             </SectionDescription>
           </SectionCardHeader>
           {faqs.map((faq, index) => (
@@ -108,17 +108,17 @@ function QNAView() {
         <ContactSection>
           <Heart
             size={32}
-            color={theme.colors.olive.primary}
+            color={theme.colors.red.secondary}
             style={{ marginBottom: "1rem" }}
           />
           <SectionTitle style={{ fontSize: "1.3rem", marginBottom: "0.5rem" }}>
-            {t('StillHaveQuestions')}
+            Still Have Questions?
           </SectionTitle>
           <SectionDescription style={{ marginBottom: "1rem" }}>
-            {t('WeAreHereToHelp')}
+            We're here to help! Don't hesitate to reach out if you need anything else.
           </SectionDescription>
-          <ContactText>{t('Email')}: euawedding@gmail.com</ContactText>
-          <ContactText>{t('Phone')}: +46 737728175</ContactText>
+          <ContactText>Email: euawedding@gmail.com</ContactText>
+          <ContactText>Phone: +46 737728175</ContactText>
         </ContactSection>
       </MainContentCard>
     </RootContainer>
