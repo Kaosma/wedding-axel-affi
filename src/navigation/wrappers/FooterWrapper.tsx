@@ -12,12 +12,12 @@ const FooterContainer = styled.div`
   justify-content: center;
   border-top: 2px solid ${() => useTheme().colors.red.primary};
 `;
-const TopSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+// const TopSection = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// `;
 const BottomSection = styled.div`
   padding: 1.5rem 0rem;
   display: flex;

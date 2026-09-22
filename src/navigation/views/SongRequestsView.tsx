@@ -80,7 +80,7 @@ const DeleteBg = styled.div<{ $progress: number }>`
   position: absolute;
   inset: 0;
   border-radius: 0.5rem;
-  background: ${({ theme }) => theme.colors.error.delete};
+  background: ${useTheme().colors.error.delete};
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -184,15 +184,15 @@ const CheckButton = styled.button<{ $done: boolean }>`
   height: 2.5rem;
   border-radius: 50%;
   border: 2px solid
-    ${({ $done, theme }) => ($done ? theme.colors.red.primary : theme.colors.red.primary)};
+    ${({ $done }) => ($done ? useTheme().colors.red.primary : useTheme().colors.red.primary)};
   background: ${({ $done, theme }) => ($done ? theme.colors.red.primary : 'transparent')};
   cursor: pointer;
   flex-shrink: 0;
   transition: background 0.15s ease, border-color 0.15s ease;
 
   &:hover {
-    background: ${({ $done, theme }) =>
-    $done ? theme.colors.red.primary : rgba(theme.colors.red.primary, 0.12)};
+    background: ${({ $done }) =>
+    $done ? useTheme().colors.red.primary : rgba(useTheme().colors.red.primary, 0.12)};
   }
 
   &:focus-visible {

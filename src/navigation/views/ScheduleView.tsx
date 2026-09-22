@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import MainContentCard from "../../components/cards/MainContentCard";
-import ScheduleCard from "../../components/cards/ScheduleCard";
-import { CheckCheck } from "lucide-react";
+// import ScheduleCard from "../../components/cards/ScheduleCard";
+// import { CheckCheck } from "lucide-react";
 import { useTheme } from "../../app/AppStyling";
 import { rgba } from "polished";
 
@@ -18,18 +18,18 @@ const RootContainer = styled.div`
   display: flex;
   padding: 3em 0;
 `;
-const DayByDayWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  margin-top: 2em;
-`;
-const ScheduleTitle = styled.div`
-  color: ${() => useTheme().colors.mix.dark};
-  font-size: 30px;
-  font-family: "linnea-bold", "PP Cirka", sans-serif;
-  font-weight: 800;
-`;
+// const DayByDayWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 1em;
+//   margin-top: 2em;
+// `;
+// const ScheduleTitle = styled.div`
+//   color: ${() => useTheme().colors.mix.dark};
+//   font-size: 30px;
+//   font-family: "linnea-bold", "PP Cirka", sans-serif;
+//   font-weight: 800;
+// `;
 const TempText = styled.div`
   color: ${() => useTheme().colors.red.primary};
 `;
