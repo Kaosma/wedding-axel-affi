@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import { useTheme } from '../../app/AppStyling';
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 import { LogOut } from "lucide-react";
+import { useTheme } from "../../app/AppStyling";
 
 const Container = styled.div`
   height: 100%;
   display: flex;
 `;
-const MenuLinkItem = styled(Link)`
+
+const MenuLinkItem = styled(NavLink)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -17,7 +17,6 @@ const MenuLinkItem = styled(Link)`
 
   font-family: "linnea-variable", "PP Cirka", sans-serif;
   font-size: 1rem;
-
   color: ${useTheme().colors.red.primary};
   text-decoration: none;
 
@@ -27,10 +26,14 @@ const MenuLinkItem = styled(Link)`
   }
 
   &:hover,
-  &:focus,
-  &:active {
+  &:focus {
     color: ${useTheme().colors.red.primary};
     text-decoration: underline;
+  }
+
+  &.active {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
   }
 
   @media (min-width: 1250px) {
@@ -41,91 +44,75 @@ const MenuLinkItem = styled(Link)`
     font-size: 1.2rem;
   }
 `;
+
 const LogoutItem = styled.div`
   display: flex;
   gap: 1em;
-  text-decoration: none;
-  color: ${() => useTheme().colors.red.primary};
-  margin: 0em 2.5em;
-  :hover {
-    color: ${() => useTheme().colors.red.secondary};
+  color: ${useTheme().colors.red.primary};
+  margin: 0 2.5em;
+
+  &:hover {
+    color: ${useTheme().colors.red.secondary};
   }
 `;
+
 const MenuItemText = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  ::selection {
+
+  &::selection {
     color: none;
     background: none;
   }
-  /* For Mozilla Firefox */
-  ::-moz-selection {
+
+  &::-moz-selection {
     color: none;
     background: none;
   }
 `;
 
-function HeaderMenu({ userLogoutCallback }: { userLogoutCallback: () => void }) {
-  const location = useLocation();
-
-  const [toggledItem, setToggledItem] = useState('instruments');
-  useEffect(() => {
-    setToggledItem(location.pathname.replace('/', ''));
-  }, [location.pathname]);
-
+function HeaderMenu({
+  userLogoutCallback,
+}: {
+  userLogoutCallback: () => void;
+}) {
   return (
     <Container id="header-menu-ref">
-      <MenuLinkItem
-        to={'home'}
-        color={toggledItem === 'home' ? 'black' : 'white'}
-      >
+      <MenuLinkItem to="/home" end>
         <MenuItemText>Home</MenuItemText>
       </MenuLinkItem>
-      <MenuLinkItem
-        to="toastmasters"
-        color={toggledItem === 'toastmasters' ? 'black' : 'white'}
-      >
+
+      <MenuLinkItem to="/toastmasters">
         <MenuItemText>Toastmasters</MenuItemText>
       </MenuLinkItem>
-      <MenuLinkItem
-        to="info"
-        color={toggledItem === 'info' ? 'black' : 'white'}
-      >
+
+      <MenuLinkItem to="/info">
         <MenuItemText>Info</MenuItemText>
       </MenuLinkItem>
-      <MenuLinkItem
-        to="accomodation"
-        color={toggledItem === 'accomodation' ? 'black' : 'white'}
-      >
-        <MenuItemText>Accomodation</MenuItemText>
+
+      <MenuLinkItem to="/accomodation">
+        <MenuItemText>Accommodation</MenuItemText>
       </MenuLinkItem>
-      <MenuLinkItem
-        to="upload"
-        color={toggledItem === 'upload' ? 'black' : 'white'}
-      >
+
+      <MenuLinkItem to="/upload">
         <MenuItemText>Upload</MenuItemText>
       </MenuLinkItem>
-      <MenuLinkItem
-        to="schedule"
-        color={toggledItem === 'schedule' ? 'black' : 'white'}
-      >
+
+      <MenuLinkItem to="/schedule">
         <MenuItemText>Schedule</MenuItemText>
       </MenuLinkItem>
-      <MenuLinkItem
-        to="travel"
-        color={toggledItem === 'travel' ? 'black' : 'white'}
-      >
+
+      <MenuLinkItem to="/travel">
         <MenuItemText>Travel</MenuItemText>
       </MenuLinkItem>
-      <MenuLinkItem
-        to="qa"
-        color={toggledItem === 'qa' ? 'black' : 'white'}
-      >
+
+      <MenuLinkItem to="/qa">
         <MenuItemText>Q/A</MenuItemText>
       </MenuLinkItem>
-      <LogoutItem onClick={() => userLogoutCallback()}>
+
+      <LogoutItem onClick={userLogoutCallback}>
         <MenuItemText>
           <LogOut size={22} />
         </MenuItemText>
