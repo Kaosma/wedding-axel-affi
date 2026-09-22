@@ -5,11 +5,11 @@ import RSVPView from './views/RSVPView';
 import ScheduleView from './views/ScheduleView';
 import TravelView from './views/TravelView';
 import QAView from './views/QAView';
-import { scrollToTop } from '../helpers/functions';
 import ToastmastersView from './views/ToastmastersView';
 import YourInvitationView from './views/YourInvitationView';
 import InfoView from './views/InfoView';
 import AccomodationView from './views/AccomodationView';
+import { scrollToTop } from "../helpers/functions";
 
 const homeUrl = '/home';
 const toastmastersUrl = '/toastmasters';

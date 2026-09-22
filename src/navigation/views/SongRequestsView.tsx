@@ -185,7 +185,7 @@ const CheckButton = styled.button<{ $done: boolean }>`
   border-radius: 50%;
   border: 2px solid
     ${({ $done }) => ($done ? useTheme().colors.red.primary : useTheme().colors.red.primary)};
-  background: ${({ $done, theme }) => ($done ? theme.colors.red.primary : 'transparent')};
+  background: ${({ $done }) => ($done ? useTheme().colors.red.primary : 'transparent')};
   cursor: pointer;
   flex-shrink: 0;
   transition: background 0.15s ease, border-color 0.15s ease;
