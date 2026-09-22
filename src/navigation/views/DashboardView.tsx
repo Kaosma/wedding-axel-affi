@@ -43,12 +43,12 @@ const TitleRow = styled.div`
   gap: 0.75rem;
 `;
 const HeartIcon = styled(Heart)`
-  color: ${() => useTheme().colors.terracotta.secondary};
+  color: ${() => useTheme().colors.red.primary};
   flex-shrink: 0;
 `;
 const Title = styled.h1`
   font-family: ${({ theme }) => theme.fonts.serif};
-  color: ${() => useTheme().colors.terracotta.secondary};
+  color: ${() => useTheme().colors.red.primary};
   font-size: 2.25rem;
   margin: 0;
   font-weight: 700;
@@ -86,9 +86,9 @@ const BottomRow = styled.div`
   }
 `;
 const Card = styled.article`
-  background: ${() => useTheme().colors.background.light};
+  background: ${() => useTheme().colors.red.tertiary};
   border-radius: 12px;
-  border: 1px solid ${() => useTheme().colors.peach.light};
+  border: 1px solid ${() => useTheme().colors.red.secondary};
   box-shadow: 0 4px 20px ${() => useTheme().shadow.secondary};
   padding: 1.5rem;
   display: flex;
@@ -113,7 +113,7 @@ const IconCircle = styled.div<{ $accent?: 'purple' }>`
   background: ${({ $accent }) =>
     $accent ? 'rgba(147, 112, 219, 0.2)' : 'rgba(217, 108, 74, 0.15)'};
   color: ${({ $accent }) =>
-    $accent ? '#9370db' : () => useTheme().colors.terracotta.secondary};
+    $accent ? '#9370db' : () => useTheme().colors.red.primary};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,7 +121,7 @@ const IconCircle = styled.div<{ $accent?: 'purple' }>`
 `;
 const CardTitle = styled.h2`
   font-family: 'Linnea-bold', serif;
-  color: ${() => useTheme().colors.terracotta.secondary};
+  color: ${() => useTheme().colors.red.primary};
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0;
@@ -157,7 +157,7 @@ const CountdownLabel = styled.div`
 const RsvpCountdownSection = styled.div`
   margin-top: 1.25rem;
   padding-top: 1.25rem;
-  border-top: 1px solid ${() => useTheme().colors.peach.light};
+  border-top: 1px solid ${() => useTheme().colors.red.secondary};
   text-align: center;
 `;
 const RsvpBigNumber = styled.div`
@@ -172,14 +172,14 @@ const RsvpSubtext = styled.div`
 `;
 const ProgressBar = styled.div`
   height: 8px;
-  background: ${() => useTheme().colors.background.medium};
+  background: ${() => useTheme().colors.red.secondary};
   border-radius: 4px;
   overflow: hidden;
 `;
 const ProgressFill = styled.div<{ $percent: number }>`
   height: 100%;
   width: ${({ $percent }) => $percent}%;
-  background: ${() => useTheme().colors.terracotta.secondary};
+  background: ${() => useTheme().colors.red.primary};
   border-radius: 4px;
   transition: width 0.5s ease;
 `;
@@ -264,8 +264,8 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   width: min(720px, 100%);
   max-height: 80vh;
-  background: ${() => useTheme().colors.background.light};
-  border: 1px solid ${() => useTheme().colors.peach.light};
+  background: ${() => useTheme().colors.red.tertiary};
+  border: 1px solid ${() => useTheme().colors.red.secondary};
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   padding: 1rem 1rem 1.25rem;
@@ -279,8 +279,8 @@ const ModalHeader = styled.div`
   margin-bottom: 0.75rem;
 `;
 const ModalCloseButton = styled.button`
-  border: 1px solid ${() => useTheme().colors.peach.light};
-  background: ${() => useTheme().colors.background.medium};
+  border: 1px solid ${() => useTheme().colors.red.secondary};
+  background: ${() => useTheme().colors.red.secondary};
   color: #4a2314;
   border-radius: 8px;
   padding: 0.3rem 0.45rem;
@@ -306,15 +306,15 @@ const WeatherGrid = styled.div`
 `;
 const WeatherDay = styled.div`
   padding: 0.75rem;
-  background: ${() => useTheme().colors.background.light};
+  background: ${() => useTheme().colors.red.tertiary};
   border-radius: 8px;
-  border: 1px solid ${() => useTheme().colors.peach.light};
+  border: 1px solid ${() => useTheme().colors.red.secondary};
 `;
 const WeatherDayName = styled.div`
   font-family: ${({ theme }) => theme.fonts.serif};
   font-size: 1rem;
   font-weight: 600;
-  color: ${() => useTheme().colors.terracotta.secondary};
+  color: ${() => useTheme().colors.red.primary};
   margin-bottom: 0.5rem;
 `;
 const WeatherTemp = styled.div`
@@ -351,10 +351,10 @@ const EmailLists = styled.div`
   }
 `;
 const EmailListCard = styled.div`
-  border: 1px solid ${() => useTheme().colors.peach.light};
+  border: 1px solid ${() => useTheme().colors.red.secondary};
   border-radius: 10px;
   padding: 0.9rem;
-  background: ${() => useTheme().colors.background.light};
+  background: ${() => useTheme().colors.red.tertiary};
 `;
 const EmailListHeader = styled.div`
   display: flex;
@@ -365,12 +365,12 @@ const EmailListHeader = styled.div`
 `;
 const EmailListTitle = styled.div`
   font-family: ${({ theme }) => theme.fonts.serif};
-  color: ${() => useTheme().colors.terracotta.secondary};
+  color: ${() => useTheme().colors.red.primary};
   font-weight: 600;
 `;
 const CopyButton = styled.button`
-  border: 1px solid ${() => useTheme().colors.peach.light};
-  background: ${() => useTheme().colors.background.medium};
+  border: 1px solid ${() => useTheme().colors.red.secondary};
+  background: ${() => useTheme().colors.red.secondary};
   color: #4a2314;
   border-radius: 8px;
   padding: 0.35rem 0.6rem;
@@ -378,7 +378,7 @@ const CopyButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: ${() => useTheme().colors.peach.light};
+    background: ${() => useTheme().colors.red.secondary};
   }
 `;
 const EmailBlock = styled.pre`
@@ -861,7 +861,7 @@ function DashboardView() {
                 </RsvpRow>
                 <RsvpRow>
                   <RsvpRowLeft>
-                    <Hourglass size={18} color={theme.colors.peach.dark} />
+                    <Hourglass size={18} color={theme.colors.red.primary} />
                     Pending
                   </RsvpRowLeft>
                   <RsvpRowRight>{pending}</RsvpRowRight>
@@ -895,14 +895,14 @@ function DashboardView() {
               <>
                 <StayRow>
                   <StayLeft>
-                    <Home size={18} color={theme.colors.terracotta.secondary} />
+                    <Home size={18} color={theme.colors.red.primary} />
                     Herrgården
                   </StayLeft>
                   <span>{herrgardenGuests}</span>
                 </StayRow>
                 <StayRow>
                   <StayLeft>
-                    <Building2 size={18} color={theme.colors.terracotta.secondary} />
+                    <Building2 size={18} color={theme.colors.red.primary} />
                     Hotel
                   </StayLeft>
                   <span>{hotelGuests}</span>
@@ -970,28 +970,28 @@ function DashboardView() {
             <>
               <StayRow>
                 <StayLeft>
-                  <CalendarDays size={18} color={theme.colors.terracotta.secondary} />
+                  <CalendarDays size={18} color={theme.colors.red.primary} />
                   Friday Dinner & Mingle
                 </StayLeft>
                 <span>{fridayAttendance}</span>
               </StayRow>
               <StayRow>
                 <StayLeft>
-                  <CalendarDays size={18} color={theme.colors.terracotta.secondary} />
+                  <CalendarDays size={18} color={theme.colors.red.primary} />
                   Saturday Wedding
                 </StayLeft>
                 <span>{saturdayAttendance}</span>
               </StayRow>
               <StayRow>
                 <StayLeft>
-                  <CalendarDays size={18} color={theme.colors.terracotta.secondary} />
+                  <CalendarDays size={18} color={theme.colors.red.primary} />
                   Saturday Brunch
                 </StayLeft>
                 <span>{saturdayBrunchAttendance}</span>
               </StayRow>
               <StayRow>
                 <StayLeft>
-                  <CalendarDays size={18} color={theme.colors.terracotta.secondary} />
+                  <CalendarDays size={18} color={theme.colors.red.primary} />
                   Sunday Breakfast
                 </StayLeft>
                 <span>{sundayBreakfastAttendance}</span>

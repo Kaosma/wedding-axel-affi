@@ -13,7 +13,7 @@ const PrimaryButton = styled.button<{
   align-items: center;
   justify-content: center;
   gap: ${({ gap }) => (gap ? `${gap}em` : '0em')};
-  background-color: ${() => useTheme().colors.olive.primary};
+  background-color: ${() => useTheme().colors.red.secondary};
   color: ${() => useTheme().colors.mix.lightest};
   width: ${({ width }) => (width ? `${width}em` : '11em')};
   height: ${({ height }) => (height ? `${height}em` : '3em')};
@@ -28,7 +28,7 @@ const PrimaryButton = styled.button<{
   filter: ${({ disabled }) => (disabled ? 'alpha(opacity=65)' : 'none')};
   border: 1px solid transparent;
   :hover {
-    border: 1px solid ${() => useTheme().colors.peach.darkest};
+    border: 1px solid ${() => useTheme().colors.red.primary};
   }
   &:focus-visible {
     outline: none;

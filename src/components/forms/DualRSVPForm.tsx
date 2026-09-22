@@ -78,7 +78,7 @@ const Textarea = styled.textarea`
 const Label = styled.label`
   font-weight: 600;
   font-size: 0.8rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -130,7 +130,7 @@ const CheckboxWrapperColumn = styled(CheckboxWrapper)`
 const Checkbox = styled.input`
   width: 1.2rem;
   height: 1.2rem;
-  accent-color: ${() => useTheme().colors.terracotta.primary};
+  accent-color: ${() => useTheme().colors.red.secondary};
   border: 1px solid #d3c6ba;
   border-radius: 2rem;
   flex-shrink: 0;
@@ -142,7 +142,7 @@ const Checkbox = styled.input`
   cursor: pointer;
 
   &:checked {
-    background-color: ${() => useTheme().colors.terracotta.primary};
+    background-color: ${() => useTheme().colors.red.secondary};
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='white' d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
   }
 
@@ -172,7 +172,7 @@ const HeartIconWrapper = styled.label`
 `;
 const CheckboxLabel = styled.label`
   font-size: 0.9rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   font-weight: 500;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   cursor: pointer;
@@ -193,7 +193,7 @@ const GridContainer = styled.div`
   align-items: start;
 `;
 const SubmitButton = styled.button`
-  background-color: ${() => useTheme().colors.terracotta.primary};
+  background-color: ${() => useTheme().colors.red.secondary};
   color: #fff;
   font-size: 1rem;
   padding: 0.75rem 1.5rem;
@@ -205,7 +205,7 @@ const SubmitButton = styled.button`
   font-weight: 800;
 
   &:hover {
-    background-color: ${() => useTheme().colors.terracotta.primary};
+    background-color: ${() => useTheme().colors.red.secondary};
   }
   &:focus-visible {
     outline: none;
@@ -342,14 +342,14 @@ function DualRSVPForm({ submitCallback, role }: DualRSVPFormProps) {
                   {formData.accommodation === 'herrgarden' ? (
                     <Heart
                       size={60}
-                      fill={theme.colors.terracotta.dark}
-                      color={theme.colors.terracotta.dark}
+                      fill={theme.colors.red.primary}
+                      color={theme.colors.red.primary}
                     />
                   ) : (
                     <Heart
                       size={60}
                       fill="none"
-                      color={theme.colors.terracotta.dark}
+                      color={theme.colors.red.primary}
                     />
                   )}
                 </HeartIconWrapper>
@@ -368,14 +368,14 @@ function DualRSVPForm({ submitCallback, role }: DualRSVPFormProps) {
                   {formData.accommodation === 'hotel' ? (
                     <Heart
                       size={60}
-                      fill={theme.colors.terracotta.dark}
-                      color={theme.colors.terracotta.dark}
+                      fill={theme.colors.red.primary}
+                      color={theme.colors.red.primary}
                     />
                   ) : (
                     <Heart
                       size={60}
                       fill="none"
-                      color={theme.colors.terracotta.dark}
+                      color={theme.colors.red.primary}
                     />
                   )}
                 </HeartIconWrapper>

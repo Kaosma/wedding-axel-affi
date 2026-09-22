@@ -61,7 +61,7 @@ const IconWrapper = styled.div`
 
 const Content = styled.div`
   flex: 1;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   font-weight: 500;
   font-size: 0.95rem;
 `;
@@ -69,7 +69,7 @@ const Content = styled.div`
 const CloseButton = styled.button`
   background: none;
   border: none;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 4px;
