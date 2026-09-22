@@ -32,12 +32,12 @@ const TitleRow = styled.div`
 const Title = styled.h1`
   font-size: 2rem;
   font-family: 'Georgia', serif;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   margin: 0;
 `;
 const Subtitle = styled.p`
   font-size: 1.1rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   max-width: 40rem;
   margin: 0 auto;
   line-height: 1.6;
@@ -113,7 +113,7 @@ const ItemForeground = styled.div<ForegroundProps>`
   padding: 0.85rem 0.75rem 0.85rem 0.5rem;
   border-radius: 0.5rem;
   background: ${({ $checked }) => ($checked ? 'rgba(0,0,0,0.06)' : '#fff8f1')};
-  border: 1px solid ${() => rgba(useTheme().colors.olive.darker, 0.12)};
+  border: 1px solid ${() => rgba(useTheme().colors.red.primary, 0.12)};
   transform: translate3d(
     ${({ $offsetX }) => `${$offsetX}px`},
     ${({ $offsetY }) => `${$offsetY}px`},
@@ -136,7 +136,7 @@ const DragHandle = styled.button`
   height: 2.5rem;
   border: none;
   background: transparent;
-  color: ${() => rgba(useTheme().colors.olive.darker, 0.55)};
+  color: ${() => rgba(useTheme().colors.red.primary, 0.55)};
   cursor: grab;
   flex-shrink: 0;
   padding: 0;
@@ -147,7 +147,7 @@ const DragHandle = styled.button`
   }
 
   &:focus-visible {
-    outline: 2px solid ${() => useTheme().colors.peach.tertiary};
+    outline: 2px solid ${() => useTheme().colors.red.tertiary};
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -164,7 +164,7 @@ const SongMetaBlock = styled.div<{ $checked: boolean }>`
 const SongText = styled.span<{ $checked: boolean }>`
   font-family: 'Georgia', serif;
   font-size: 1rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   text-align: left;
   flex: 1;
   word-break: break-word;
@@ -172,7 +172,7 @@ const SongText = styled.span<{ $checked: boolean }>`
 `;
 const Meta = styled.span`
   font-size: 0.75rem;
-  color: ${() => rgba(useTheme().colors.olive.darker, 0.65)};
+  color: ${() => rgba(useTheme().colors.red.primary, 0.65)};
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
   flex-shrink: 0;
 `;
@@ -184,26 +184,26 @@ const CheckButton = styled.button<{ $done: boolean }>`
   height: 2.5rem;
   border-radius: 50%;
   border: 2px solid
-    ${({ $done, theme }) => ($done ? theme.colors.olive.darker : theme.colors.olive.primary)};
-  background: ${({ $done, theme }) => ($done ? theme.colors.olive.darker : 'transparent')};
+    ${({ $done, theme }) => ($done ? theme.colors.red.primary : theme.colors.red.primary)};
+  background: ${({ $done, theme }) => ($done ? theme.colors.red.primary : 'transparent')};
   cursor: pointer;
   flex-shrink: 0;
   transition: background 0.15s ease, border-color 0.15s ease;
 
   &:hover {
     background: ${({ $done, theme }) =>
-    $done ? theme.colors.olive.darker : rgba(theme.colors.olive.primary, 0.12)};
+    $done ? theme.colors.red.primary : rgba(theme.colors.red.primary, 0.12)};
   }
 
   &:focus-visible {
-    outline: 2px solid ${() => useTheme().colors.peach.tertiary};
+    outline: 2px solid ${() => useTheme().colors.red.tertiary};
     outline-offset: 2px;
   }
 `;
 const EmptyState = styled.p`
   text-align: center;
   font-family: 'Georgia', serif;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   opacity: 0.85;
 `;
 
@@ -581,9 +581,9 @@ function SongRequestsView() {
       <Content>
         <TitleWrapper>
           <TitleRow>
-            <ListMusic size={24} color={theme.colors.olive.primary} />
+            <ListMusic size={24} color={theme.colors.red.primary} />
             <Title>Requests</Title>
-            <ListMusic size={24} color={theme.colors.olive.primary} />
+            <ListMusic size={24} color={theme.colors.red.primary} />
           </TitleRow>
           <Subtitle>Mark a song as played when it has been queued or played.</Subtitle>
         </TitleWrapper>
@@ -663,7 +663,7 @@ function SongRequestsView() {
                     >
                       <Check
                         size={18}
-                        color={row.checked ? '#fffef8' : theme.colors.olive.darker}
+                        color={row.checked ? '#fffef8' : theme.colors.red.primary}
                         strokeWidth={row.checked ? 2.75 : 2}
                         aria-hidden
                       />
