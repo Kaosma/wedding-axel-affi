@@ -259,7 +259,6 @@ type SwipeState = {
 };
 
 function SongRequestsView() {
-  const theme = useTheme();
 
   const [items, setItems] = useState<SongRequestDoc[]>([]);
   const [loading, setLoading] = useState(true);
@@ -581,9 +580,9 @@ function SongRequestsView() {
       <Content>
         <TitleWrapper>
           <TitleRow>
-            <ListMusic size={24} color={theme.colors.red.primary} />
+            <ListMusic size={24} color={useTheme().colors.red.primary} />
             <Title>Requests</Title>
-            <ListMusic size={24} color={theme.colors.red.primary} />
+            <ListMusic size={24} color={useTheme().colors.red.primary} />
           </TitleRow>
           <Subtitle>Mark a song as played when it has been queued or played.</Subtitle>
         </TitleWrapper>
@@ -663,7 +662,7 @@ function SongRequestsView() {
                     >
                       <Check
                         size={18}
-                        color={row.checked ? '#fffef8' : theme.colors.red.primary}
+                        color={row.checked ? '#fffef8' : useTheme().colors.red.primary}
                         strokeWidth={row.checked ? 2.75 : 2}
                         aria-hidden
                       />

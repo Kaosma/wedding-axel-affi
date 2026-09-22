@@ -47,7 +47,7 @@ const HeartIcon = styled(Heart)`
   flex-shrink: 0;
 `;
 const Title = styled.h1`
-  font-family: ${({ theme }) => theme.fonts.serif};
+  font-family: ${() => useTheme().fonts.serif};
   color: ${() => useTheme().colors.red.primary};
   font-size: 2.25rem;
   margin: 0;
@@ -58,7 +58,7 @@ const Title = styled.h1`
   }
 `;
 const Subtitle = styled.p`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 1rem;
   opacity: 0.85;
   margin: 0;
@@ -137,7 +137,7 @@ const CountdownUnit = styled.div`
   text-align: center;
 `;
 const CountdownValue = styled.div`
-  font-family: ${({ theme }) => theme.fonts.serif};
+  font-family: ${() => useTheme().fonts.serif};
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
@@ -147,7 +147,7 @@ const CountdownValue = styled.div`
   }
 `;
 const CountdownLabel = styled.div`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.75rem;
   opacity: 0.8;
   text-transform: uppercase;
@@ -161,12 +161,12 @@ const RsvpCountdownSection = styled.div`
   text-align: center;
 `;
 const RsvpBigNumber = styled.div`
-  font-family: ${({ theme }) => theme.fonts.serif};
+  font-family: ${() => useTheme().fonts.serif};
   font-size: 2.5rem;
   font-weight: 700;
 `;
 const RsvpSubtext = styled.div`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.95rem;
   opacity: 0.85;
 `;
@@ -192,7 +192,7 @@ const RsvpRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.9rem;
 `;
 const RsvpRowLeft = styled.span`
@@ -207,7 +207,7 @@ const StayRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.95rem;
 `;
 const StayLeft = styled.span`
@@ -216,23 +216,23 @@ const StayLeft = styled.span`
   gap: 0.5rem;
 `;
 const BigDayDate = styled.div`
-  font-family: ${({ theme }) => theme.fonts.serif};
+  font-family: ${() => useTheme().fonts.serif};
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
 `;
 const BigDaySubtext = styled.div`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.95rem;
   opacity: 0.85;
 `;
 const SongCount = styled.div`
-  font-family: ${({ theme }) => theme.fonts.serif};
+  font-family: ${() => useTheme().fonts.serif};
   font-size: 2rem;
   font-weight: 700;
 `;
 const SongSubtext = styled.div`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.95rem;
   opacity: 0.85;
 `;
@@ -248,7 +248,7 @@ const SongList = styled.ul`
   overflow: auto;
 `;
 const SongListItem = styled.li`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.95rem;
 `;
 const ModalOverlay = styled.div`
@@ -311,32 +311,32 @@ const WeatherDay = styled.div`
   border: 1px solid ${() => useTheme().colors.red.secondary};
 `;
 const WeatherDayName = styled.div`
-  font-family: ${({ theme }) => theme.fonts.serif};
+  font-family: ${() => useTheme().fonts.serif};
   font-size: 1rem;
   font-weight: 600;
   color: ${() => useTheme().colors.red.primary};
   margin-bottom: 0.5rem;
 `;
 const WeatherTemp = styled.div`
-  font-family: ${({ theme }) => theme.fonts.serif};
+  font-family: ${() => useTheme().fonts.serif};
   font-size: 1.5rem;
   font-weight: 700;
   color: #4a2314;
 `;
 const WeatherDesc = styled.div`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.85rem;
   opacity: 0.9;
   margin-top: 0.25rem;
 `;
 const WeatherPrecip = styled.div`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.8rem;
   opacity: 0.85;
   margin-top: 0.25rem;
 `;
 const WeatherUpdated = styled.div`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.7rem;
   opacity: 0.7;
   margin-top: 0.75rem;
@@ -364,7 +364,7 @@ const EmailListHeader = styled.div`
   margin-bottom: 0.75rem;
 `;
 const EmailListTitle = styled.div`
-  font-family: ${({ theme }) => theme.fonts.serif};
+  font-family: ${() => useTheme().fonts.serif};
   color: ${() => useTheme().colors.red.primary};
   font-weight: 600;
 `;
@@ -387,7 +387,7 @@ const EmailBlock = styled.pre`
   overflow: auto;
   white-space: pre-wrap;
   word-break: break-word;
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${() => useTheme().fonts.sans};
   font-size: 0.85rem;
   line-height: 1.4;
 `;
@@ -746,7 +746,6 @@ function useRsvpStats(): RsvpStats {
 }
 
 function DashboardView() {
-  const theme = useTheme();
   const countdown = useCountdown(weddingDate);
   const {
     confirmed,
@@ -840,7 +839,7 @@ function DashboardView() {
             <CardTitle>Guest RSVPs</CardTitle>
           </CardHeader>
           {rsvpError && (
-            <RsvpSubtext style={{ color: theme.colors.error.light }}>{rsvpError}</RsvpSubtext>
+            <RsvpSubtext style={{ color: useTheme().colors.error.light }}>{rsvpError}</RsvpSubtext>
           )}
           {rsvpLoading ? (
             <RsvpSubtext>Loading…</RsvpSubtext>
@@ -854,14 +853,14 @@ function DashboardView() {
               <RsvpBreakdown>
                 <RsvpRow>
                   <RsvpRowLeft>
-                    <Check size={18} color={theme.colors.success.iconDetails} />
+                    <Check size={18} color={useTheme().colors.success.iconDetails} />
                     Confirmed
                   </RsvpRowLeft>
                   <RsvpRowRight>{confirmed}</RsvpRowRight>
                 </RsvpRow>
                 <RsvpRow>
                   <RsvpRowLeft>
-                    <Hourglass size={18} color={theme.colors.red.primary} />
+                    <Hourglass size={18} color={useTheme().colors.red.primary} />
                     Pending
                   </RsvpRowLeft>
                   <RsvpRowRight>{pending}</RsvpRowRight>
@@ -895,14 +894,14 @@ function DashboardView() {
               <>
                 <StayRow>
                   <StayLeft>
-                    <Home size={18} color={theme.colors.red.primary} />
+                    <Home size={18} color={useTheme().colors.red.primary} />
                     Herrgården
                   </StayLeft>
                   <span>{herrgardenGuests}</span>
                 </StayRow>
                 <StayRow>
                   <StayLeft>
-                    <Building2 size={18} color={theme.colors.red.primary} />
+                    <Building2 size={18} color={useTheme().colors.red.primary} />
                     Hotel
                   </StayLeft>
                   <span>{hotelGuests}</span>
@@ -970,28 +969,28 @@ function DashboardView() {
             <>
               <StayRow>
                 <StayLeft>
-                  <CalendarDays size={18} color={theme.colors.red.primary} />
+                  <CalendarDays size={18} color={useTheme().colors.red.primary} />
                   Friday Dinner & Mingle
                 </StayLeft>
                 <span>{fridayAttendance}</span>
               </StayRow>
               <StayRow>
                 <StayLeft>
-                  <CalendarDays size={18} color={theme.colors.red.primary} />
+                  <CalendarDays size={18} color={useTheme().colors.red.primary} />
                   Saturday Wedding
                 </StayLeft>
                 <span>{saturdayAttendance}</span>
               </StayRow>
               <StayRow>
                 <StayLeft>
-                  <CalendarDays size={18} color={theme.colors.red.primary} />
+                  <CalendarDays size={18} color={useTheme().colors.red.primary} />
                   Saturday Brunch
                 </StayLeft>
                 <span>{saturdayBrunchAttendance}</span>
               </StayRow>
               <StayRow>
                 <StayLeft>
-                  <CalendarDays size={18} color={theme.colors.red.primary} />
+                  <CalendarDays size={18} color={useTheme().colors.red.primary} />
                   Sunday Breakfast
                 </StayLeft>
                 <span>{sundayBreakfastAttendance}</span>
@@ -1049,7 +1048,7 @@ function DashboardView() {
             <CardTitle>Weather (Ramnäs)</CardTitle>
           </CardHeader>
           {weatherError && (
-            <RsvpSubtext style={{ color: theme.colors.error.light }}>{weatherError}</RsvpSubtext>
+            <RsvpSubtext style={{ color: useTheme().colors.error.light }}>{weatherError}</RsvpSubtext>
           )}
           {weatherLoading && !weatherFriday && !weatherSaturday ? (
             <RsvpSubtext>Loading forecast…</RsvpSubtext>

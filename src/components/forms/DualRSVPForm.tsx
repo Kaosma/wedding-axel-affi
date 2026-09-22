@@ -233,7 +233,6 @@ function DualRSVPForm({ submitCallback, role }: DualRSVPFormProps) {
     ]
   };
   const [formData, setFormData] = useState(initialFormData);
-  const theme = useTheme();
 
   const calculateArrivalDeparture = (selectedDays: string[]) => {
     if (selectedDays.length === 0) {
@@ -342,14 +341,14 @@ function DualRSVPForm({ submitCallback, role }: DualRSVPFormProps) {
                   {formData.accommodation === 'herrgarden' ? (
                     <Heart
                       size={60}
-                      fill={theme.colors.red.primary}
-                      color={theme.colors.red.primary}
+                      fill={useTheme().colors.red.primary}
+                      color={useTheme().colors.red.primary}
                     />
                   ) : (
                     <Heart
                       size={60}
                       fill="none"
-                      color={theme.colors.red.primary}
+                      color={useTheme().colors.red.primary}
                     />
                   )}
                 </HeartIconWrapper>
@@ -368,14 +367,14 @@ function DualRSVPForm({ submitCallback, role }: DualRSVPFormProps) {
                   {formData.accommodation === 'hotel' ? (
                     <Heart
                       size={60}
-                      fill={theme.colors.red.primary}
-                      color={theme.colors.red.primary}
+                      fill={useTheme().colors.red.primary}
+                      color={useTheme().colors.red.primary}
                     />
                   ) : (
                     <Heart
                       size={60}
                       fill="none"
-                      color={theme.colors.red.primary}
+                      color={useTheme().colors.red.primary}
                     />
                   )}
                 </HeartIconWrapper>

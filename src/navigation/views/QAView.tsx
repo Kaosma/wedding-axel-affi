@@ -77,7 +77,6 @@ const ContactText = styled.p`
 `;
 
 function QNAView() {
-  const theme = useTheme();
 
   return (
     <RootContainer>
@@ -107,7 +106,7 @@ function QNAView() {
         <ContactSection>
           <Heart
             size={32}
-            color={theme.colors.red.primary}
+            color={useTheme().colors.red.primary}
             style={{ marginBottom: "1rem" }}
           />
           <SectionTitle style={{ fontSize: "1.3rem", marginBottom: "0.5rem" }}>

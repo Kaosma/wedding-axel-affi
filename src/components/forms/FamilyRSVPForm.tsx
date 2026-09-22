@@ -263,7 +263,6 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
     ]
   };
   const [formData, setFormData] = useState(initialFormData);
-  const theme = useTheme();
 
   const calculateArrivalDeparture = (selectedDays: string[]) => {
     if (selectedDays.length === 0) {
@@ -400,14 +399,14 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
                   {formData.accommodation === 'herrgarden' ? (
                     <Heart
                       size={60}
-                      fill={theme.colors.red.primary}
-                      color={theme.colors.red.primary}
+                      fill={useTheme().colors.red.primary}
+                      color={useTheme().colors.red.primary}
                     />
                   ) : (
                     <Heart
                       size={60}
                       fill="none"
-                      color={theme.colors.red.primary}
+                      color={useTheme().colors.red.primary}
                     />
                   )}
                 </HeartIconWrapper>
@@ -426,14 +425,14 @@ function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
                   {formData.accommodation === 'hotel' ? (
                     <Heart
                       size={60}
-                      fill={theme.colors.red.primary}
-                      color={theme.colors.red.primary}
+                      fill={useTheme().colors.red.primary}
+                      color={useTheme().colors.red.primary}
                     />
                   ) : (
                     <Heart
                       size={60}
                       fill="none"
-                      color={theme.colors.red.primary}
+                      color={useTheme().colors.red.primary}
                     />
                   )}
                 </HeartIconWrapper>
