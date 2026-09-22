@@ -8,7 +8,6 @@ import { faqs } from "../../helpers/constants";
 
 
 const RootContainer = styled.div`
-  color: black;
   background-color: ${() => rgba(useTheme().colors.red.secondary, 0.95)};
   min-height: 100vh;
   height: fit-content;
@@ -32,13 +31,13 @@ const TitleRow = styled.div`
 const Title = styled.h1`
   font-size: 2rem;
   font-family: "Georgia", serif;
-  color: green;
+  color: ${() => useTheme().colors.red.primary};
   font-family: 'Georgia', serif;
   margin: 0em;
 `;
 const Subtitle = styled.p`
   font-size: 1.1rem;
-  color: green;
+  color: ${() => useTheme().colors.red.primary};
   max-width: 40rem;
   margin: 0 auto;
   line-height: 1.6;
@@ -58,7 +57,7 @@ const SectionCardHeader = styled.div`
 const SectionTitle = styled.div`
   font-size: 1.6rem;
   font-family: "Georgia", serif;
-  color: green;
+  color: ${() => useTheme().colors.red.primary};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,13 +65,13 @@ const SectionTitle = styled.div`
 const SectionDescription = styled.div`
   font-size: 1rem;
   font-family: "Georgia", serif;
-  color: green;
+  color: #555;
 `;
 const ContactSection = styled.div`
   text-align: center;
 `;
 const ContactText = styled.p`
-  color: green;
+  color: ${() => useTheme().colors.red.primary};
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
 `;
@@ -86,9 +85,9 @@ function QNAView() {
 
         <TitleWrapper>
           <TitleRow>
-            <Heart size={24} color="#000" />
+            <Heart size={24} color={useTheme().colors.red.primary} />
             <Title>Questions and Answers</Title>
-            <Heart size={24} color="#000" />
+            <Heart size={24} color={useTheme().colors.red.primary} />
           </TitleRow>
           <Subtitle>We've answered some of the most common questions about our special day. If you don't see your question here, please don't hesitate to reach out to us directly!</Subtitle>
         </TitleWrapper>
@@ -108,7 +107,7 @@ function QNAView() {
         <ContactSection>
           <Heart
             size={32}
-            color={theme.colors.red.secondary}
+            color={theme.colors.red.primary}
             style={{ marginBottom: "1rem" }}
           />
           <SectionTitle style={{ fontSize: "1.3rem", marginBottom: "0.5rem" }}>

@@ -10,6 +10,7 @@ const FooterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-top: 2px solid ${() => useTheme().colors.red.primary};
 `;
 const TopSection = styled.div`
   display: flex;

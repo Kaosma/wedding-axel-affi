@@ -1,6 +1,7 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import styled, { keyframes } from "styled-components";
 import { ChevronDown } from "lucide-react";
+import { useTheme } from "../../app/AppStyling";
 
 const slideDown = keyframes`
   from { height: 0; opacity: 0; }
@@ -28,7 +29,7 @@ const AccordionTrigger = styled(AccordionPrimitive.Trigger)`
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #E17256;
+  color: ${() => useTheme().colors.red.primary};
   box-sizing: border-box;
   margin-top: 1em;
   text-align: left;

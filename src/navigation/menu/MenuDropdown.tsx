@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { AlignJustify, LogOut } from "lucide-react";
+import { useTheme } from "../../app/AppStyling";
 
 const DropdownContainer = styled.div`
   position: relative;
@@ -42,7 +43,7 @@ const MenuItem = styled(Link)`
   border-radius: 0.5rem;
   font-family: "linnea-variable", "PP Cirka", sans-serif;
   &:hover {
-    background-color: green;
+    border: 1px solid ${() => useTheme().colors.red.primary};
     color: black;
   }
 `;
@@ -102,14 +103,15 @@ function MenuDropdown({ userLogoutCallback }: { userLogoutCallback: () => void }
   return (
     <DropdownContainer ref={dropdownRef}>
       <MenuButton onClick={toggleMenu} aria-label="Menu">
-        <AlignJustify size={24} color="white" />
+        <AlignJustify size={24} color={useTheme().colors.red.primary} />
       </MenuButton>
 
       {open && (
         <DropdownMenu>
           <MenuItem to="/home" onClick={closeMenu}>Home</MenuItem>
-          <MenuItem to="/about-us" onClick={closeMenu}>Toastmasters</MenuItem>
-          <MenuItem to="/your-stay" onClick={closeMenu}>Your Stay</MenuItem>
+          <MenuItem to="/toastmasters" onClick={closeMenu}>Toastmasters</MenuItem>
+          <MenuItem to="/info" onClick={closeMenu}>Info</MenuItem>
+          <MenuItem to="/accomodation" onClick={closeMenu}>Accomodation</MenuItem>
           <MenuItem to="/upload" onClick={closeMenu}>Upload</MenuItem>
           <MenuItem to="/schedule" onClick={closeMenu}>Schedule</MenuItem>
           <MenuItem to="/travel" onClick={closeMenu}>Travel</MenuItem>

@@ -46,6 +46,7 @@ const DefaultTheme = {
     red: {
       primary: '#fc2211',
       secondary: '#f8dfdb',
+      tertiary: '#f9d6f1',
     },
     border: {
       gray: '#6e8294',

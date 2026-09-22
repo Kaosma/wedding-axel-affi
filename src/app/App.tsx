@@ -81,8 +81,8 @@ function App() {
         <Routes>
           <Route path="/your-invitation/:code" element={<YourInvitationView />} />
           <Route path="/dashboard" element={<DashboardView />} />
-          <Route path="/upload" element={<UploadView />} />
-          <Route path="/upload/:eventId" element={<Navigate replace to="/upload" />} />
+          <Route path="/home" element={<UploadView />} />
+          <Route path="/upload/:eventId" element={<Navigate replace to="/home" />} />
           <Route path="/images" element={<ImagesView />} />
           <Route path="/music" element={<MusicRequestView />} />
           <Route path="/new-reqests" element={<Navigate replace to="/new-requests" />} />

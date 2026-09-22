@@ -1,24 +1,10 @@
 import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import './App.css';
-import { loginLogo, passcodes } from '../helpers/constants';
+import { passcodes } from '../helpers/constants';
 import { useTheme } from './AppStyling';
 import { Eye, EyeOff } from 'lucide-react';
 
-const IconWrapper = styled.div`
-  background-image: url(${loginLogo});
-  background-size: cover;
-  background-position: center;
-  width: 207px;
-  height: 278px;
-  margin: 1em 0 4em 0;
-
-  @media (max-width: 480px) {
-    width: 160px;
-    height: 215px;
-    margin: 0.5em 0 2.5em 0;
-  }
-`;
 const pulse = keyframes`
   0% {
     transform: scale(1);
@@ -38,7 +24,7 @@ const Background = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   padding: 1em 1.5rem 3rem 1.5rem;
-  background: linear-gradient(180deg, #fff7ec 0%, #f9ddc1 100%);
+  background: ${() => useTheme().colors.red.secondary};
 
   @media (max-width: 480px) {
     justify-content: flex-start;
@@ -55,15 +41,17 @@ const Card = styled.div`
   justify-content: center;
   width: min(100%, 28rem);
   padding: 0 0.5rem;
+  margin-top: 5rem;
 `;
 const Heading = styled.h1`
   margin: 0 0 1.25rem;
   font-size: 2.5rem;
   font-family: 'Linnea-bold', serif;
-  color: #af523a;
+  color: ${() => useTheme().colors.red.primary};
   white-space: nowrap;
   text-transform: uppercase;
   animation: ${pulse} 3s ease-in-out infinite;
+  margin-top: 5rem;
 
   @media (max-width: 600px) {
     font-size: clamp(2rem, 7vw, 2.2rem);
@@ -79,7 +67,7 @@ const Heading = styled.h1`
 const Intro = styled.p`
   margin: 0 auto clamp(2rem, 4vw, 2.5rem);
   line-height: 1.6;
-  color: green;
+  color: ${() => useTheme().colors.red.primary};
   font-size: 1.05rem;
   max-width: 25rem;
 
@@ -101,7 +89,7 @@ const InputField = styled.input`
   border-radius: 20px;
   border: 1.5px solid rgba(210, 137, 99, 0.5);
   background: transparent;
-  color: #8a4f37;
+  color: ${() => useTheme().colors.red.primary};
   font-size: 1rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
@@ -111,7 +99,7 @@ const InputField = styled.input`
 
   &:focus {
     outline: none;
-    border-color: green;
+    border-color: transparent;
     box-shadow: 0 0 0 6px rgba(217, 108, 74, 0.16);
   }
 
@@ -124,10 +112,10 @@ const InputField = styled.input`
 const SubmitButton = styled.button`
   width: 100%;
   padding: 1rem 1.25rem;
-  border: none;
+  border: 1px solid ${() => useTheme().colors.red.primary};
   border-radius: 20px;
-  background: green;
-  color: white;
+  background: transparent;
+  color: ${() => useTheme().colors.red.primary};
   font-size: 1.15rem;
   font-weight: 400;
   cursor: pointer;
@@ -145,6 +133,7 @@ const SubmitButton = styled.button`
     transform: translateY(-1px);
     box-shadow: 0 16px 30px rgba(217, 108, 74, 0.2);
     filter: brightness(1.02);
+    border: 1px solid ${() => useTheme().colors.red.primary};
   }
 
   &:active {
@@ -206,6 +195,36 @@ const ErrorMessage = styled.p`
     font-size: 0.9rem;
   }
 `;
+const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+  width: 20rem;
+  color: ${() => useTheme().colors.red.primary};
+`;
+const NameText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6rem;
+  font-weight: 600;
+  z-index: 1;
+  margin: -1rem 0;
+  font-family: "linnea-light", "PP Cirka", sans-serif;
+  @media (max-width: 750px) {
+    font-size: 5rem;
+  }
+  @media (max-width: 650px) {
+    font-size: 4rem;
+  }
+  @media (max-width: 600px) {
+    font-size: 3rem;
+  }
+  @media (max-width: 500px) {
+    font-size: 4rem;
+  }
+`;
 
 function LoginPage({ loginCallback }: { loginCallback: (role: string) => void }) {
   const [passcode, setPasscode] = useState('');
@@ -244,7 +263,11 @@ function LoginPage({ loginCallback }: { loginCallback: (role: string) => void })
   return (
     <Background>
       <Card>
-        <IconWrapper />
+        <InfoWrapper>
+          <NameText>AFSOON</NameText>
+          <NameText>&</NameText>
+          <NameText>AXEL</NameText>
+        </InfoWrapper>
         <Heading>Welcome to our wedding</Heading>
         <Intro>
           To cherish our special day, please enter your passcode from the invitation below.

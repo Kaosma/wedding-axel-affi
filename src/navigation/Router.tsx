@@ -4,15 +4,17 @@ import HomeView from "./views/HomeView";
 import RSVPView from './views/RSVPView';
 import ScheduleView from './views/ScheduleView';
 import TravelView from './views/TravelView';
-import YourStayView from './views/YourStayView';
 import QAView from './views/QAView';
 import { scrollToTop } from '../helpers/functions';
-import AboutView from './views/AboutView';
+import ToastmastersView from './views/ToastmastersView';
 import YourInvitationView from './views/YourInvitationView';
+import InfoView from './views/InfoView';
+import AccomodationView from './views/AccomodationView';
 
 const homeUrl = '/home';
-const aboutUrl = '/about-us';
-const yourStayUrl = '/your-stay';
+const toastmastersUrl = '/toastmasters';
+const infoUrl = '/info';
+const accomodationUrl = '/accomodation';
 const rsvpUrl = '/rsvp';
 const scheduleUrl = '/schedule';
 const travelUrl = '/travel';
@@ -29,8 +31,9 @@ function Router({ role }: { role: string | null }) {
     <Routes>
       <Route path="/" element={<Navigate replace to={homeUrl} />} />
       <Route path={homeUrl} element={<HomeView role={role} />} />
-      <Route path={aboutUrl} element={<AboutView />} />
-      <Route path={yourStayUrl} element={<YourStayView role={role} />} />
+      <Route path={toastmastersUrl} element={<ToastmastersView />} />
+      <Route path={infoUrl} element={<InfoView role={role} />} />
+      <Route path={accomodationUrl} element={<AccomodationView />} />
       <Route path={rsvpUrl} element={<RSVPView viewRole={role} />} />
       <Route path={scheduleUrl} element={<ScheduleView />} />
       <Route path={travelUrl} element={<TravelView />} />

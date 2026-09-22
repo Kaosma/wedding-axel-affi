@@ -20,14 +20,14 @@ const RootContainer = styled.div`
 const Title = styled.h2`
   text-align: center;
   font-size: 2rem;
-  color: green;
+  color: ${() => useTheme().colors.red.primary};
   margin: 0;
   font-family: 'Georgia', serif;
 `;
 const SectionTitle = styled.div`
   font-size: 1.1rem;
   font-family: "Georgia", serif;
-  color: green;
+  color: ${() => useTheme().colors.red.primary};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +44,7 @@ const Column = styled.div`
   min-width: 300px;
 `;
 const ColumnText = styled(Column)`
-  background: green;
+  background: white;
   border-radius: 0.75rem;
   padding: 1em;
 `;
@@ -52,7 +52,7 @@ const IconHeading = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: #fd8553;
+  color: ${() => useTheme().colors.red.primary};
   font-weight: 800;
   font-size: 1.1rem;
   margin-bottom: 0.25rem;
@@ -69,7 +69,7 @@ const Card = styled.div`
   padding: 0.5em 1.5em 1.5em 1.5em;
   border-radius: 0.75rem;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  border: 1px solid green;
+  border: 1px solid ${() => useTheme().colors.red.primary};
   margin-bottom: 1rem;
 `;
 const CardHeading = styled.h3`
@@ -78,7 +78,7 @@ const CardHeading = styled.h3`
   margin-bottom: 0.25rem;
   display: flex;
   justify-content: flex-start;
-  color: green;
+  color: ${() => useTheme().colors.red.primary};
 `;
 const SmallText = styled.p`
   margin: 0;
@@ -89,13 +89,13 @@ const SmallText = styled.p`
   text-align: start;
 `;
 const Footer = styled.div`
-  background: rgba(253, 133, 83, 0.6);
+  background: white;
   padding: 1rem;
   border-radius: 0.75rem;
   font-size: 0.95rem;
   text-align: flex;
   margin-top: 2rem;
-  color: #334155;
+  color: ${() => useTheme().colors.red.primary};
 
   strong {
     font-weight: 800;
@@ -107,8 +107,8 @@ function TravelView() {
   return (
     <RootContainer>
       <MainContentCard backgroundColor="hsl(30 100% 94%)">
-        <Title>How to Get to the Venue</Title>
-        <SectionTitle>Schenströms Väg 1, 730 60 Ramnäs</SectionTitle>
+        <Title>How to Get to the Castle</Title>
+        <SectionTitle>Häringe Slott is located approximately 35 km south of Stockholm, at 137 91 Västerhaninge. The castle is reached via road 73 and is about 25 minutes from Stockholm by car.</SectionTitle>
         <Row>
           <ColumnText>
             <IconHeading>
@@ -116,7 +116,7 @@ function TravelView() {
               By Car
             </IconHeading>
             <Text>
-              From Stockholm: Take the E18 west towards Västerås, then follow road 66 towards Fagersta. After about 30 minutes, take the exit toward Ramnäs.
+              From Stockholm, take road 73 towards Nynäshamn. Exit at Tungelsta/Landfjärden, then follow the signs towards Häringe Slott. The journey takes approximately 25–30 minutes, depending on traffic.
             </Text>
           </ColumnText>
           <ColumnText>
@@ -125,12 +125,12 @@ function TravelView() {
               By Public Transport
             </IconHeading>
             <Text>
-              Take the train to Västerås Central Station. From there, you can take a bus or train to Ramnäs. You can also take a taxi from Västerås.
+              Take the commuter train from Stockholm to Västerhaninge station. From there, take bus 847 towards Ösmo and get off at Häringe grindar. The castle is approximately 800 metres from the bus stop, which is about a 10–15 minute walk. Please check the current train and bus times before travelling, as connections may vary depending on the day and time.
             </Text>
           </ColumnText>
           <Column>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2008.1287750043382!2d16.179817877660813!3d59.780548174835985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465e778e4c4395f7%3A0x5eb9543796e54bc5!2sSchenstr%C3%B6mska%20Herrg%C3%A5rden!5e0!3m2!1ssv!2sse!4v1758623905484!5m2!1ssv!2sse"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2052.5600476785926!2d18.011667077630726!3d59.039333974475134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f6358ee2309ab%3A0x7adc3944c34aa233!2sH%C3%A4ringe%20slott!5e0!3m2!1ssv!2sse!4v1790068592135!5m2!1ssv!2sse"
               width="100%"
               height="200"
               style={{ border: 0, borderRadius: '0.75rem' }}
@@ -143,18 +143,17 @@ function TravelView() {
         <Card>
           <CardHeading>Carpooling</CardHeading>
           <SmallText>
-            There are many of us traveling to the manor this weekend, so we encourage carpooling. If you have an extra seat in your car, please let us know! There might be someone who would love to join you on the way.
+            If you are driving to the wedding and have an extra seat available, please let us know. There may be other guests who would be happy to travel with you. If you need a lift to Häringe Slott, please also let us know and we will try to help coordinate a ride.
           </SmallText>
         </Card>
 
         <Card>
-          <CardHeading>Taxi</CardHeading>
+          <CardHeading>Taxi or Uber</CardHeading>
           <SmallText>
-            For those who prefer a taxi, there are several options in the area.
+            You can take a taxi directly from Stockholm or Västerhaninge to Häringe Slott. When booking, use the full destination:
             <br />
-            Västerås Taxi: 021-18 50 00
             <br />
-            Sweden Taxi: 021-12 22 22
+            Stockholm Taxi: 08-15 00 00
           </SmallText>
         </Card>
 

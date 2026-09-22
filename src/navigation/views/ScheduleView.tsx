@@ -30,13 +30,16 @@ const ScheduleTitle = styled.div`
   font-family: "linnea-bold", "PP Cirka", sans-serif;
   font-weight: 800;
 `;
+const TempText = styled.div`
+  color: ${() => useTheme().colors.red.primary};
+`;
 
 function ScheduleView() {
 
   return (
     <RootContainer>
       <MainContentCard backgroundColor='hsl(30 100% 94%)'>
-        <DayByDayWrapper>
+        {/* <DayByDayWrapper>
           <ScheduleTitle>Friday</ScheduleTitle>
           <ScheduleCard
             icon={CheckCheck}
@@ -65,7 +68,8 @@ function ScheduleView() {
             description="Dscription"
             location="Location"
           />
-        </DayByDayWrapper>
+        </DayByDayWrapper> */}
+        <TempText>Stay tuned, more info will come soon.</TempText>
       </MainContentCard>
     </RootContainer>
   );

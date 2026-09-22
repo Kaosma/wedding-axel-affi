@@ -84,16 +84,22 @@ function HeaderMenu({ userLogoutCallback }: { userLogoutCallback: () => void }) 
         <MenuItemText>Home</MenuItemText>
       </MenuLinkItem>
       <MenuLinkItem
-        to="about-us"
-        color={toggledItem === 'about-us' ? 'black' : 'white'}
+        to="toastmasters"
+        color={toggledItem === 'toastmasters' ? 'black' : 'white'}
       >
         <MenuItemText>Toastmasters</MenuItemText>
       </MenuLinkItem>
       <MenuLinkItem
-        to="your-stay"
-        color={toggledItem === 'your-stay' ? 'black' : 'white'}
+        to="info"
+        color={toggledItem === 'info' ? 'black' : 'white'}
       >
-        <MenuItemText>Your Stay</MenuItemText>
+        <MenuItemText>Info</MenuItemText>
+      </MenuLinkItem>
+      <MenuLinkItem
+        to="accomodation"
+        color={toggledItem === 'accomodation' ? 'black' : 'white'}
+      >
+        <MenuItemText>Accomodation</MenuItemText>
       </MenuLinkItem>
       <MenuLinkItem
         to="upload"

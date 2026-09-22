@@ -140,6 +140,9 @@ const Pic3Image = styled.div`
   transform-origin: center;
 `;
 const NameText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 6rem;
   font-weight: 600;
   z-index: 1;
