@@ -18,18 +18,18 @@ const MenuLinkItem = styled(Link)`
   font-family: "linnea-variable", "PP Cirka", sans-serif;
   font-size: 1rem;
 
-  color: ${({ theme }) => theme.colors.red.primary};
+  color: ${useTheme().colors.red.primary};
   text-decoration: none;
 
   &:link,
   &:visited {
-    color: ${({ theme }) => theme.colors.red.primary};
+    color: ${useTheme().colors.red.primary};
   }
 
   &:hover,
   &:focus,
   &:active {
-    color: ${({ theme }) => theme.colors.red.primary};
+    color: ${useTheme().colors.red.primary};
     text-decoration: underline;
   }
 

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { introImage, middleEnglish, backEnglish, timelineEnglish, validCodes, getEnglishImage } from '../../helpers/constants';
+import { useTheme } from '../../app/AppStyling';
 
 
 const PageContainer = styled.div`
@@ -16,8 +17,8 @@ const Header = styled.header`
   margin-bottom: 3rem;
 `;
 const Title = styled.h1`
-  font-family: ${({ theme }) => theme.fonts.serif};
-  color: ${({ theme }) => theme.colors.primary};
+  font-family: ${useTheme().fonts.serif};
+  color: ${useTheme().colors.primary};
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
 
@@ -26,8 +27,8 @@ const Title = styled.h1`
   }
 `;
 const Subtitle = styled.p`
-  font-family: ${({ theme }) => theme.fonts.sans};
-  color: ${({ theme }) => theme.colors.foreground};
+  font-family: ${useTheme().fonts.sans};
+  color: ${useTheme().colors.foreground};
   font-size: 1.125rem;
   opacity: 0.8;
 `;
@@ -62,8 +63,8 @@ const CardImage = styled.img`
   display: block;
 `;
 const EnterButton = styled.button`
-  font-family: ${({ theme }) => theme.fonts.sans};
-  background: ${({ theme }) => theme.colors.primary};
+  font-family: ${useTheme().fonts.sans};
+  background: ${useTheme().colors.primary};
   color: white;
   border: none;
   padding: 1rem 3rem;
@@ -75,7 +76,7 @@ const EnterButton = styled.button`
   box-shadow: 0 4px 16px rgba(181, 82, 57, 0.3);
 
   &:hover {
-    background: ${({ theme }) => theme.colors.accent};
+    background: ${useTheme().colors.accent};
     transform: translateY(-2px);
     box-shadow: 0 6px 24px rgba(181, 82, 57, 0.4);
   }

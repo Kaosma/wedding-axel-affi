@@ -30,13 +30,13 @@ const TitleRow = styled.div`
 const Title = styled.h1`
   font-size: 2rem;
   font-family: 'Georgia', serif;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   margin: 0;
 `;
 
 const Subtitle = styled.p`
   font-size: 1.1rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   max-width: 40rem;
   margin: 0 auto;
   line-height: 1.6;
@@ -54,7 +54,7 @@ const Form = styled.form`
 const StatusText = styled.p`
   font-family: 'Georgia', serif;
   font-size: 0.95rem;
-  color: ${() => useTheme().colors.olive.darker};
+  color: ${() => useTheme().colors.red.primary};
   margin: 0.5rem 0 0;
   text-align: center;
   min-height: 1.5em;
@@ -67,7 +67,6 @@ const ErrorText = styled(StatusText)`
 const MIN_SONG_LENGTH = 3;
 
 function MusicRequestView() {
-  const theme = useTheme();
 
   const [song, setSong] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -107,9 +106,9 @@ function MusicRequestView() {
       <Content>
         <TitleWrapper>
           <TitleRow>
-            <Music size={24} color={theme.colors.olive.primary} />
+            <Music size={24} color={useTheme().colors.red.primary} />
             <Title>Request a song</Title>
-            <Music size={24} color={theme.colors.olive.primary} />
+            <Music size={24} color={useTheme().colors.red.primary} />
           </TitleRow>
           <Subtitle>Tell us what you would love to hear on the dance floor. One song at a time!</Subtitle>
         </TitleWrapper>

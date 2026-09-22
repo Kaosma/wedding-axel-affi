@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { weddingPhotoUploadDay } from "../../helpers/constants";
+import { useTheme } from "../../app/AppStyling";
 
 const MAX_FILES = 20;
 const UPLOAD_URL =
@@ -15,9 +16,9 @@ const PageContainer = styled.div`
   align-items: center;
 `;
 const Card = styled.div`
-  background: ${({ theme }) => theme.colors.red.secondary};
+  background: ${useTheme().colors.red.secondary};
   border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.red.secondary};
+  border: 1px solid ${useTheme().colors.red.secondary};
   box-shadow: 0 8px 32px rgba(181, 82, 57, 0.15);
   padding: 1.75rem 1.5rem 2rem;
   max-width: 480px;
@@ -25,8 +26,8 @@ const Card = styled.div`
   text-align: center;
 `;
 const Title = styled.h1`
-  font-family: "Linnea-bold", ${({ theme }) => theme.fonts.serif};
-  color: ${({ theme }) => theme.colors.red.primary};
+  font-family: "Linnea-bold", ${useTheme().fonts.serif};
+  color: ${useTheme().colors.red.primary};
   font-size: 1.5rem;
   margin: 0 0 0.5rem;
   text-transform: uppercase;
@@ -36,9 +37,9 @@ const Title = styled.h1`
   }
 `;
 const Subtitle = styled.p`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.95rem;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${useTheme().colors.foreground};
   opacity: 0.85;
   margin: 0 0 1.5rem;
 `;
@@ -58,7 +59,7 @@ const PreviewThumb = styled.div`
   border-radius: 10px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.06);
-  border: 1px solid ${({ theme }) => theme.colors.peach.light};
+  border: 1px solid ${useTheme().colors.red.primary};
 
   img {
     width: 100%;
@@ -109,19 +110,19 @@ const ProgressTrack = styled.div`
   max-width: 260px;
   height: 8px;
   border-radius: 999px;
-  background: ${({ theme }) => theme.colors.peach.light};
+  background: ${useTheme().colors.red.primary};
   overflow: hidden;
 `;
 const ProgressFill = styled.div`
   height: 100%;
   width: 0;
   border-radius: inherit;
-  background: ${({ theme }) => theme.colors.primary};
+  background: ${useTheme().colors.primary};
   transition: width 0.2s ease-out;
 `;
 const UploadButton = styled.button`
-  font-family: ${({ theme }) => theme.fonts.sans};
-  background: ${({ theme }) => theme.colors.primary};
+  font-family: ${useTheme().fonts.sans};
+  background: ${useTheme().colors.primary};
   color: white;
   border: none;
   outline: none;
@@ -134,7 +135,7 @@ const UploadButton = styled.button`
   box-shadow: 0 4px 16px rgba(181, 82, 57, 0.25);
 
   &:hover:enabled {
-    background: ${({ theme }) => theme.colors.accent};
+    background: ${useTheme().colors.accent};
     transform: translateY(-1px);
     box-shadow: 0 6px 22px rgba(181, 82, 57, 0.35);
   }
@@ -152,8 +153,8 @@ const UploadButton = styled.button`
 `;
 const SecondaryButton = styled(UploadButton)`
   background: transparent;
-  color: ${({ theme }) => theme.colors.primary};
-  border: 1.5px solid ${({ theme }) => theme.colors.primary};
+  color: ${useTheme().colors.primary};
+  border: 1.5px solid ${useTheme().colors.primary};
   box-shadow: none;
 
   &:hover:enabled {
@@ -164,15 +165,15 @@ const SecondaryButton = styled(UploadButton)`
 `;
 const ProgressText = styled.p`
   margin-top: 1rem;
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.9rem;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${useTheme().colors.foreground};
 `;
 const HintText = styled.p`
   margin: 0.75rem 0 0;
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.8rem;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${useTheme().colors.foreground};
   opacity: 0.7;
 `;
 

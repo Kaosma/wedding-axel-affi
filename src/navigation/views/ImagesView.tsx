@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { weddingPhotoUploadDay } from "../../helpers/constants";
+import { useTheme } from "../../app/AppStyling";
 
 const PAGE_SIZE = 9;
 const IMAGES_API =
@@ -21,17 +22,17 @@ const PageContainer = styled.div`
   align-items: center;
 `;
 const Card = styled.div`
-  background: ${({ theme }) => theme.colors.background.light};
+  background: ${useTheme().colors.red.secondary};
   border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.peach.light};
+  border: 1px solid ${useTheme().colors.red.tertiary};
   box-shadow: 0 8px 32px rgba(181, 82, 57, 0.15);
   padding: 1.75rem 1.5rem 2rem;
   max-width: 1100px;
   width: 100%;
 `;
 const Title = styled.h1`
-  font-family: "Linnea-bold", ${({ theme }) => theme.fonts.serif};
-  color: ${({ theme }) => theme.colors.terracotta.tertiary};
+  font-family: "Linnea-bold", ${useTheme().fonts.serif};
+  color: ${useTheme().colors.red.primary};
   font-size: 1.6rem;
   margin: 0 0 0.5rem;
   text-transform: uppercase;
@@ -42,9 +43,9 @@ const Title = styled.h1`
   }
 `;
 const Subtitle = styled.p`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.95rem;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${useTheme().colors.foreground};
   opacity: 0.85;
   margin: 0 0 1.75rem;
   text-align: center;
@@ -61,22 +62,22 @@ const PasscodeInput = styled.input`
   width: 100%;
   padding: 0.7rem 1rem;
   border-radius: 999px;
-  border: 1px solid ${({ theme }) => theme.colors.peach.light};
-  background: ${({ theme }) => theme.colors.background.light};
-  font-family: ${({ theme }) => theme.fonts.sans};
+  border: 1px solid ${useTheme().colors.red.tertiary};
+  background: ${useTheme().colors.red.secondary};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${useTheme().colors.foreground};
 
   &:focus {
-    border-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${useTheme().colors.primary};
     box-shadow: 0 0 0 4px rgba(217, 108, 74, 0.16);
   }
 `;
 const Button = styled.button`
-  font-family: ${({ theme }) => theme.fonts.sans};
-  background: ${({ theme }) => theme.colors.primary};
+  font-family: ${useTheme().fonts.sans};
+  background: ${useTheme().colors.primary};
   color: white;
   border: none;
   outline: none;
@@ -89,7 +90,7 @@ const Button = styled.button`
   box-shadow: 0 4px 16px rgba(181, 82, 57, 0.25);
 
   &:hover:enabled {
-    background: ${({ theme }) => theme.colors.accent};
+    background: ${useTheme().colors.accent};
     transform: translateY(-1px);
     box-shadow: 0 6px 22px rgba(181, 82, 57, 0.35);
   }
@@ -101,16 +102,16 @@ const Button = styled.button`
   }
 `;
 const ErrorText = styled.p`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.85rem;
-  color: ${({ theme }) => theme.colors.error.light};
+  color: ${useTheme().colors.error.light};
   margin: 0;
   text-align: center;
 `;
 const LoadingText = styled.p`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.9rem;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${useTheme().colors.foreground};
   text-align: center;
   margin: 0 0 1.25rem;
 `;
@@ -133,7 +134,7 @@ const MediaTile = styled.button`
   overflow: hidden;
   border-radius: 12px;
   background: rgba(0, 0, 0, 0.06);
-  border: 1px solid ${({ theme }) => theme.colors.peach.light};
+  border: 1px solid ${useTheme().colors.red.tertiary};
   padding: 0;
   cursor: pointer;
   display: block;
@@ -153,7 +154,7 @@ const MediaTile = styled.button`
   }
 
   &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline: 2px solid ${useTheme().colors.primary};
     outline-offset: 2px;
   }
 `;
@@ -162,7 +163,7 @@ const VideoBadge = styled.span`
   top: 0.45rem;
   left: 0.45rem;
   z-index: 1;
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -174,9 +175,9 @@ const VideoBadge = styled.span`
   pointer-events: none;
 `;
 const EmptyText = styled.p`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.9rem;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${useTheme().colors.foreground};
   opacity: 0.7;
   text-align: center;
   margin: 1.5rem 0 0.5rem;
@@ -196,9 +197,9 @@ const PaginationRow = styled.div`
   gap: 0.65rem;
 `;
 const MetaText = styled.p`
-  font-family: ${({ theme }) => theme.fonts.sans};
+  font-family: ${useTheme().fonts.sans};
   font-size: 0.8rem;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${useTheme().colors.foreground};
   opacity: 0.65;
   margin: 0;
 `;
