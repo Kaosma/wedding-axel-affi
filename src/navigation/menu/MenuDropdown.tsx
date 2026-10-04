@@ -109,13 +109,14 @@ function MenuDropdown({ userLogoutCallback }: { userLogoutCallback: () => void }
       {open && (
         <DropdownMenu>
           <MenuItem to="/home" onClick={closeMenu}>Home</MenuItem>
-          <MenuItem to="/toastmasters" onClick={closeMenu}>Toastmasters</MenuItem>
           <MenuItem to="/info" onClick={closeMenu}>Info</MenuItem>
           <MenuItem to="/accomodation" onClick={closeMenu}>Accomodation</MenuItem>
-          <MenuItem to="/upload" onClick={closeMenu}>Upload</MenuItem>
           <MenuItem to="/schedule" onClick={closeMenu}>Schedule</MenuItem>
+          <MenuItem to="/toastmasters" onClick={closeMenu}>Toastmasters</MenuItem>
           <MenuItem to="/travel" onClick={closeMenu}>Travel</MenuItem>
+          <MenuItem to="/upload" onClick={closeMenu}>Upload</MenuItem>
           <MenuItem to="/qa" onClick={closeMenu}>Q/A</MenuItem>
+          <MenuItem to="/rsvp" onClick={closeMenu}>RSVP</MenuItem>
           <LogoutButton onClick={logout}>Logout <LogOut size={22} /></LogoutButton>
         </DropdownMenu>
       )}

@@ -11,8 +11,6 @@ import YourInvitationView from '../navigation/views/YourInvitationView';
 import DashboardView from '../navigation/views/DashboardView';
 import UploadView from '../navigation/views/UploadView';
 import ImagesView from '../navigation/views/ImagesView';
-import MusicRequestView from '../navigation/views/MusicRequestView';
-import SongRequestsView from '../navigation/views/SongRequestsView';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -34,7 +32,6 @@ function App() {
 
   const handleLogin = (role: string) => {
     setUserRole(role);
-    console.log(role);
     setLoggedIn(true);
   };
 
@@ -84,9 +81,6 @@ function App() {
           <Route path="/home" element={<UploadView />} />
           <Route path="/upload/:eventId" element={<Navigate replace to="/home" />} />
           <Route path="/images" element={<ImagesView />} />
-          <Route path="/music" element={<MusicRequestView />} />
-          <Route path="/new-reqests" element={<Navigate replace to="/new-requests" />} />
-          <Route path="/new-requests" element={<SongRequestsView />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       ) : loggedIn ? (

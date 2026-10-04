@@ -158,7 +158,7 @@ function TravelView() {
         </Card>
 
         <Footer>
-          Any questions about transport or lodging? Email us at <strong>euawedding@gmail.com</strong>
+          Any questions about transport or lodging? Check <strong>Q&amp;A</strong>
         </Footer>
       </MainContentCard>
     </RootContainer>

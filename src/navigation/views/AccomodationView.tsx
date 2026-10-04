@@ -6,7 +6,6 @@ import { useTheme } from "../../app/AppStyling";
 
 const RootContainer = styled.div`
   color: black;
-  background-image: url("/images/affiaxel.avif");
   background-size: cover;
   background-position: center;
   height: fit-content;

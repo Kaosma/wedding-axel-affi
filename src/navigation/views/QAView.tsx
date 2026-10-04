@@ -70,11 +70,6 @@ const SectionDescription = styled.div`
 const ContactSection = styled.div`
   text-align: center;
 `;
-const ContactText = styled.p`
-  color: ${() => useTheme().colors.red.primary};
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-`;
 
 function QNAView() {
 
@@ -115,8 +110,6 @@ function QNAView() {
           <SectionDescription style={{ marginBottom: "1rem" }}>
             We're here to help! Don't hesitate to reach out if you need anything else.
           </SectionDescription>
-          <ContactText>Email: euawedding@gmail.com</ContactText>
-          <ContactText>Phone: +46 737728175</ContactText>
         </ContactSection>
       </MainContentCard>
     </RootContainer>

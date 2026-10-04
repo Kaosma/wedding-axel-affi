@@ -27,8 +27,8 @@ const IconContainer = styled(Link)`
 `;
 const AppLogo = styled.img`
   color: white;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   fill: #3498db;
   transition: fill 0.3s ease;
 `;

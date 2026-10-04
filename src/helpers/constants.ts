@@ -28,7 +28,7 @@ export const loginLogo = newUrl('loginlogo.png');
 
 export const passcodes: Record<string, string> = {
   july2027: 'family',
-  sexy: 'friends',
+  aawedding: 'friends',
 };
 
 export const validCodes = ['2819', '3737', '4619', '5582', '6491', '7364', '8712'];
@@ -51,9 +51,9 @@ export const faqs: { questionKey: string; answerKey: string }[] = [
       "The whole ceremony will take place within the confines of Häringe Castle.",
   },
   {
-    questionKey: "Do I have to stay at Häringe Castle?",
+    questionKey: "Should I stay at Häringe Castle?",
     answerKey:
-      "We would love for our overseas guests to stay with us at the castle. If you live in Stockholm, we hope you’ll consider making it a little staycation, but we completely understand if you prefer to join us just for the day.",
+      "We would love for our guests to stay with us at the castle. If you live in Stockholm, we hope you’ll consider making it a little staycation, but we completely understand if you prefer to join us just for the day.",
   },
   {
     questionKey: "How do I book my stay at Häringe Castle?",

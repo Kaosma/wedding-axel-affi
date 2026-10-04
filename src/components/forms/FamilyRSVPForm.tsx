@@ -1,152 +1,157 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import {
+  ChangeEvent,
+  FormEvent,
+  useState,
+} from 'react';
 import { db, push, ref } from '../../firebase/firebase';
 import styled from 'styled-components';
 import { useTheme } from '../../app/AppStyling';
-import { RSVPFormProps } from '../../helpers/classes';
+import { RSVP, RSVPFormProps } from '../../helpers/classes';
 import { Heart } from 'lucide-react';
 
 const FormContainer = styled.div`
+  width: 100%;
   max-width: 500px;
-  min-width: 350px;
+  min-width: 0;
   margin: 2rem auto;
-  padding: 2rem 3rem 3rem 3rem;
+  padding: 2rem 3rem 3rem;
   background: #fff8f1;
   border-radius: 0.5rem;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
   font-family: 'Georgia', serif;
+
   @media (max-width: 500px) {
-    padding: 2rem 1.5rem 3rem 1.5rem;
+    padding: 2rem 1.5rem 3rem;
   }
 `;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
 `;
-const InfoContainer = styled.div`
+
+const Section = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
 `;
+
+const Question = styled.h3`
+  margin: 0;
+  color: ${() => useTheme().colors.red.primary};
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+`;
+
 const Input = styled.input`
+  width: 100%;
+  box-sizing: border-box;
   padding: 0.75rem 1rem;
   border: 1px solid #d3c6ba;
   background: #fff;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: black;
+  color: #000;
+  font-family:
+    'Gill Sans',
+    'Gill Sans MT',
+    Calibri,
+    'Trebuchet MS',
+    sans-serif;
+
+  &:focus {
+    outline: none;
+    border-color: ${() => useTheme().colors.red.secondary};
+  }
+
   &:-webkit-autofill {
     box-shadow: 0 0 0 1000px white inset !important;
     -webkit-text-fill-color: black !important;
-    transition: background-color 5000s ease-in-out 0s;
-  }
-
-  &:-webkit-autofill:focus {
-    box-shadow: 0 0 0 1000px white inset !important;
-    -webkit-text-fill-color: black !important;
-  }
-  &:focus-visible {
-    outline: none;
-  }
-  &:focus {
-    outline: none;
   }
 `;
+
 const Textarea = styled.textarea`
+  width: 100%;
+  min-height: 100px;
+  box-sizing: border-box;
   padding: 0.75rem 1rem;
   border: 1px solid #d3c6ba;
   background: #fff;
-  resize: none;
-  min-height: 100px;
-  color: black;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  margin-bottom: 2rem;
-  &:focus-visible {
-    outline: none;
-  }
+  color: #000;
+  resize: vertical;
+  font-family:
+    'Gill Sans',
+    'Gill Sans MT',
+    Calibri,
+    'Trebuchet MS',
+    sans-serif;
+
   &:focus {
     outline: none;
+    border-color: ${() => useTheme().colors.red.secondary};
   }
 `;
-const Label = styled.label`
-  font-weight: 600;
-  font-size: 0.8rem;
+
+const OptionList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const Option = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   color: ${() => useTheme().colors.red.primary};
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-`;
-const GuestLabel = styled(Label)`
-  justify-content: center;
-`;
-const CheckboxContainer = styled.div`
-  display: flex;
-  margin: 1rem 0 0 0;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-const GuestContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1rem;
-`;
-const GuestTop = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const CheckboxContainerCentered = styled.div`
-  display: flex;
-  margin: 0;
-  flex-direction: column;
-  align-items: center;
-`;
-const CheckboxContainerRow = styled(CheckboxContainer)`
-  flex-direction: row;
-  margin: 0;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`;
-const BigCheckboxContainerRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-`;
-const CheckboxWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0;
   cursor: pointer;
-  @media (max-width: 500px) {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+  font-family:
+    'Gill Sans',
+    'Gill Sans MT',
+    Calibri,
+    'Trebuchet MS',
+    sans-serif;
+  line-height: 1.4;
 `;
-const CheckboxWrapperColumn = styled(CheckboxWrapper)`
-  flex-direction: column;
-`;
-const Checkbox = styled.input`
+
+const Radio = styled.input`
   width: 1.2rem;
   height: 1.2rem;
-  accent-color: ${() => useTheme().colors.red.secondary};
-  border: 1px solid #d3c6ba;
-  border-radius: 2rem;
   flex-shrink: 0;
-  margin-top: 0.1rem;
+  margin: 0;
   appearance: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: white;
+  border: 2px solid ${() => useTheme().colors.red.primary};
+  border-radius: 50%;
+  background-color: #fff;
   cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
+  &::before {
+    content: '';
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background-color: #fff;
+    transform: scale(0);
+    transition: transform 0.15s ease;
+  }
 
   &:checked {
     background-color: ${() => useTheme().colors.red.secondary};
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='white' d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+    border-color: ${() => useTheme().colors.red.secondary};
+  }
+
+  &:checked::before {
+    transform: scale(1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${() => useTheme().colors.red.secondary};
+    outline-offset: 2px;
   }
 
   &:disabled {
@@ -156,397 +161,640 @@ const Checkbox = styled.input`
     opacity: 0.6;
   }
 `;
-const CheckboxLabel = styled.label`
-  font-size: 0.9rem;
-  color: ${() => useTheme().colors.red.primary};
-  font-weight: 500;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+const Checkbox = styled.input`
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid ${() => useTheme().colors.red.primary};
+  border-radius: 0.25rem;
+  background-color: #fff;
   cursor: pointer;
-  line-height: 1.4;
-  flex: 1;
+  display: grid;
+  place-content: center;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
+  &::before {
+    content: '✓';
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: bold;
+    line-height: 1;
+    transform: scale(0);
+    transition: transform 0.15s ease;
+  }
+
+  &:checked {
+    background-color: ${() => useTheme().colors.red.secondary};
+    border-color: ${() => useTheme().colors.red.secondary};
+  }
+
+  &:checked::before {
+    transform: scale(1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${() => useTheme().colors.red.secondary};
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    background-color: #f5f5f5;
+    border-color: #d3c6ba;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+`;
+
+const GuestContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d3c6ba;
 `;
-const HeartCheckbox = styled.input`
-  display: none;
-`;
-const HeartIconWrapper = styled.label`
+
+const GuestHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  justify-content: space-between;
+  gap: 1rem;
+`;
 
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-const AddFamilyMemberButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 0.8rem;
+const GuestTitle = styled.h4`
+  margin: 0;
   color: ${() => useTheme().colors.red.primary};
-  cursor: pointer;
-  align-self: start;
-  padding-left: 0.5rem;
-  &:focus-visible {
-    outline: none;
-  }
-  &:focus {
-    outline: none;
-  }
-  &:hover {
-    text-decoration: underline;
-  }
+  font-size: 0.95rem;
 `;
-const RemoveFamilyMemberButton = styled.button`
-  background: none;
+
+const RemoveButton = styled.button`
+  padding: 0.25rem;
   border: none;
+  background: none;
   color: #000;
   cursor: pointer;
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  &:focus-visible {
-    outline: none;
-  }
-  &:focus {
-    outline: none;
-  }
+  font-size: 1.25rem;
+
   &:hover {
     font-weight: bold;
   }
 `;
-const SubmitButton = styled.button`
-  background-color: ${() => useTheme().colors.red.secondary};
-  color: #fff;
-  font-size: 1rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 1rem;
+
+const AddGuestButton = styled.button`
+  align-self: flex-start;
+  padding: 0;
   border: none;
+  background: none;
+  color: ${() => useTheme().colors.red.primary};
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: "linnea-bold", "PP Cirka", sans-serif;
-  font-weight: 800;
+  font-size: 0.85rem;
 
   &:hover {
-    background-color: ${() => useTheme().colors.red.secondary};
-  }
-  &:focus-visible {
-    outline: none;
-  }
-  &:focus {
-    outline: none;
+    text-decoration: underline;
   }
 `;
 
+const SubmitButton = styled.button`
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: ${() => useTheme().colors.red.secondary};
+  color: #fff;
+  cursor: pointer;
+  font-family: 'linnea-bold', 'PP Cirka', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+`;
+
+const HeartOption = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: ${() => useTheme().colors.red.primary};
+  cursor: pointer;
+  font-family:
+    'Gill Sans',
+    'Gill Sans MT',
+    Calibri,
+    'Trebuchet MS',
+    sans-serif;
+  text-align: center;
+`;
+
+const HiddenRadio = styled.input`
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+`;
+
+const HeartRow = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 0.5rem;
+
+  @media (max-width: 500px) {
+    gap: 1.5rem;
+  }
+`;
+
+type Attendance = 'yes' | 'no' | '';
+
+type Accommodation = 'castle' | 'other' | '';
+
+type Guest = {
+  name: string;
+  dietaryRestrictions: string;
+};
+
+type FormData = {
+  attendance: Attendance;
+  accommodation: Accommodation;
+  participationDays: string[];
+  guests: Guest[];
+  unableToAttendName: string;
+};
+
 interface FamilyRSVPFormProps extends RSVPFormProps {
-  role: string;
+  role: string | null;
 }
 
-function FamilyRSVPForm({ submitCallback, role }: FamilyRSVPFormProps) {
-
-  const initialFormData = {
-    email: '',
-    arrival: '',
-    departure: '',
-    brunch: '',
-    participationDays: [] as string[],
-    accommodation: role?.startsWith('hotel') ? 'hotel' : '',
+function FamilyRSVPForm({
+  submitCallback,
+  role,
+}: FamilyRSVPFormProps) {
+  const initialFormData: FormData = {
+    attendance: '',
+    accommodation: '',
+    participationDays: [],
     guests: [
-      { firstName: '', lastName: '', music: '', food: '', alcohol: '' },
-    ]
-  };
-  const [formData, setFormData] = useState(initialFormData);
-
-  const calculateArrivalDeparture = (selectedDays: string[]) => {
-    if (selectedDays.length === 0) {
-      return { arrival: '', departure: '' };
-    }
-
-    const dayOrder = ['Fri', 'Sat', 'Sun'];
-    const sortedDays = selectedDays.sort((a, b) => dayOrder.indexOf(a) - dayOrder.indexOf(b));
-
-    return {
-      arrival: sortedDays[0],
-      departure: sortedDays[sortedDays.length - 1]
-    };
+      {
+        name: '',
+        dietaryRestrictions: '',
+      },
+    ],
+    unableToAttendName: '',
   };
 
-  const removeFamilyMember = (index: number) => {
-    setFormData((prev) => {
-      const updatedGuests = [...prev.guests];
-      updatedGuests.splice(index, 1);
-      return { ...prev, guests: updatedGuests };
-    });
-  };
+  const [formData, setFormData] =
+    useState<FormData>(initialFormData);
 
-  const handleGuestChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    index: number
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
+
+  const availableDays =
+    role === 'family'
+      ? [
+        {
+          value: 'Saturday',
+          label: 'Saturday - Wedding Ceremony and Dinner',
+        },
+        {
+          value: 'Sunday',
+          label: 'Sunday - Goodbye Breakfast',
+        },
+      ]
+      : [
+        {
+          value: 'Friday',
+          label: 'Friday - Welcome dinner for friends',
+        },
+        {
+          value: 'Saturday',
+          label: 'Saturday - Wedding Ceremony and Dinner',
+        },
+        {
+          value: 'Sunday',
+          label: 'Sunday - Goodbye Breakfast',
+        },
+      ];
+
+  const handleUnableToAttendNameChange = (
+    event: ChangeEvent<HTMLInputElement>
   ) => {
-    const target = e.target as HTMLInputElement | HTMLTextAreaElement;
-    const { name, value } = target;
-    const isCheckbox = (target as HTMLInputElement).type === "checkbox";
-
-    // Extract the field name without the index (e.g., "alcohol_0" -> "alcohol")
-    const fieldName = name.replace(/_0$|_1$|_2$|_3$|_4$|_5$|_6$|_7$|_8$|_9$/, '');
-
-    const formattedValue = isCheckbox
-      ? ((target as HTMLInputElement).checked ? value : "")
-      : fieldName === "firstName" || fieldName === "lastName"
-        ? value.charAt(0).toUpperCase() + value.slice(1)
-        : value;
-
-    const newGuests = [...formData.guests];
-    newGuests[index] = {
-      ...newGuests[index],
-      [fieldName]: formattedValue,
-    };
-
-    setFormData({ ...formData, guests: newGuests });
-  };
-
-  const handleParticipationDaysChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
-
-    const updatedDays = checked
-      ? [...formData.participationDays, value]
-      : formData.participationDays.filter(day => day !== value);
-
-    const { arrival, departure } = calculateArrivalDeparture(updatedDays);
-
-    setFormData({
-      ...formData,
-      participationDays: updatedDays,
-      arrival,
-      departure
-    });
-  };
-
-  const handleSharedChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    // If accommodation changes to herrgarden for non-hotel role, set all participation days
-    if (name === 'accommodation' && value === 'herrgarden' && !role?.startsWith('hotel')) {
-      setFormData({
-        ...formData,
-        [name]: value,
-        participationDays: ['Fri', 'Sat', 'Sun'],
-        arrival: 'Fri',
-        departure: 'Sun',
-        brunch: 'brunch',
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value
-      });
-    }
-  };
-
-  const handleBrunchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { checked } = e.target;
-    setFormData({
-      ...formData,
-      brunch: checked ? 'brunch' : 'no-brunch'
-    });
-  };
-
-  const addFamilyMember = () => {
-    setFormData((prev) => ({
-      ...prev,
-      guests: [...prev.guests, { firstName: '', lastName: '', music: '', food: '', alcohol: '' }],
+    setFormData((previous) => ({
+      ...previous,
+      unableToAttendName: event.target.value,
     }));
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const { participationDays, ...data } = formData;
-      await push(ref(db, 'rsvpResponses'), data).then(() => submitCallback(data)).then(() => {
+  const handleAttendanceChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    const attendance = event.target.value as Attendance;
+
+    setFormData((previous) => ({
+      ...previous,
+      attendance,
+      participationDays:
+        attendance === 'no'
+          ? []
+          : previous.participationDays,
+      accommodation:
+        attendance === 'no'
+          ? ''
+          : previous.accommodation,
+      guests:
+        attendance === 'no'
+          ? initialFormData.guests
+          : previous.guests,
+    }));
+  };
+
+  const handleAccommodationChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setFormData((previous) => ({
+      ...previous,
+      accommodation:
+        event.target.value as Accommodation,
+    }));
+  };
+
+  const handleParticipationDaysChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value, checked } = event.target;
+
+    setFormData((previous) => ({
+      ...previous,
+      participationDays: checked
+        ? [...previous.participationDays, value]
+        : previous.participationDays.filter(
+          (day) => day !== value
+        ),
+    }));
+  };
+
+  const handleGuestChange = (
+    index: number,
+    field: keyof Guest,
+    value: string
+  ) => {
+    setFormData((previous) => {
+      const guests = [...previous.guests];
+
+      guests[index] = {
+        ...guests[index],
+        [field]: value,
+      };
+
+      return {
+        ...previous,
+        guests,
+      };
+    });
+  };
+
+  const addGuest = () => {
+    setFormData((previous) => ({
+      ...previous,
+      guests: [
+        ...previous.guests,
+        {
+          name: '',
+          dietaryRestrictions: '',
+        },
+      ],
+    }));
+  };
+
+  const removeGuest = (index: number) => {
+    setFormData((previous) => ({
+      ...previous,
+      guests: previous.guests.filter(
+        (_, guestIndex) => guestIndex !== index
+      ),
+    }));
+  };
+
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    if (formData.attendance === 'no') {
+      const response: RSVP = {
+        attendance: 'no',
+        accommodation: null,
+        participationDays: [],
+        guests: [
+          {
+            name: formData.unableToAttendName.trim(),
+            dietaryRestrictions: '',
+          },
+        ],
+      };
+
+      try {
+        setIsSubmitting(true);
+
+        await push(
+          ref(db, 'affiAxelRsvp'),
+          response
+        );
+
+        submitCallback(response);
         setFormData(initialFormData);
-      });
+      } catch (error) {
+        console.error('Error submitting RSVP:', error);
+        alert('Error submitting RSVP.');
+      } finally {
+        setIsSubmitting(false);
+      }
+
+      return;
+    }
+
+    const response: RSVP = {
+      attendance: 'yes',
+      accommodation:
+        formData.accommodation === 'castle'
+          ? 'castle'
+          : 'other',
+      participationDays:
+        formData.participationDays,
+      guests: formData.guests.map((guest) => ({
+        name: guest.name.trim(),
+        dietaryRestrictions:
+          guest.dietaryRestrictions.trim(),
+      })),
+    };
+
+    try {
+      setIsSubmitting(true);
+
+      await push(
+        ref(db, 'rsvpResponses'),
+        response
+      );
+
+      submitCallback(response);
+      setFormData(initialFormData);
     } catch (error) {
-      console.error('Error submitting:', error);
+      console.error('Error submitting RSVP:', error);
       alert('Error submitting RSVP.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
+  const canSubmit =
+    !isSubmitting &&
+    formData.attendance !== '' &&
+    (
+      formData.attendance === 'no'
+        ? formData.unableToAttendName.trim().length > 0
+        : (
+          formData.accommodation !== '' &&
+          formData.participationDays.length > 0 &&
+          formData.guests.length > 0 &&
+          formData.guests.every(
+            (guest) => guest.name.trim().length > 0
+          )
+        )
+    );
 
   return (
     <FormContainer>
       <Form onSubmit={handleSubmit}>
-        {!role?.startsWith('hotel') && (
-          <CheckboxContainerCentered>
-            <Label>Do you want to stay with us at Schenströmska Mansion during the wedding party? It will cost 2000 SEK per person. Included are both dinners, a brunch on Saturday and a breakfast on Sunday. If you accept, we will plan and book your accommodation and all meals for the entire weekend.</Label>
-            <BigCheckboxContainerRow>
-              <CheckboxWrapperColumn as="label" htmlFor="accommodation-herrgarden">
-                <HeartCheckbox
-                  type="radio"
-                  name="accommodation"
-                  id="accommodation-herrgarden"
-                  value="herrgarden"
-                  checked={formData.accommodation === 'herrgarden'}
-                  onChange={handleSharedChange}
-                  required
-                />
-                <HeartIconWrapper htmlFor="accommodation-herrgarden">
-                  {formData.accommodation === 'herrgarden' ? (
-                    <Heart
-                      size={60}
-                      fill={useTheme().colors.red.primary}
-                      color={useTheme().colors.red.primary}
-                    />
-                  ) : (
-                    <Heart
-                      size={60}
-                      fill="none"
-                      color={useTheme().colors.red.primary}
-                    />
-                  )}
-                </HeartIconWrapper>
-                <CheckboxLabel htmlFor="accommodation-herrgarden">Joyfully agree</CheckboxLabel>
-              </CheckboxWrapperColumn>
-              <CheckboxWrapperColumn as="label" htmlFor="accommodation-hotel">
-                <HeartCheckbox
-                  type="radio"
-                  name="accommodation"
-                  id="accommodation-hotel"
-                  value="hotel"
-                  checked={formData.accommodation === 'hotel'}
-                  onChange={handleSharedChange}
-                />
-                <HeartIconWrapper htmlFor="accommodation-hotel">
-                  {formData.accommodation === 'hotel' ? (
-                    <Heart
-                      size={60}
-                      fill={useTheme().colors.red.primary}
-                      color={useTheme().colors.red.primary}
-                    />
-                  ) : (
-                    <Heart
-                      size={60}
-                      fill="none"
-                      color={useTheme().colors.red.primary}
-                    />
-                  )}
-                </HeartIconWrapper>
-                <CheckboxLabel htmlFor="accommodation-hotel">Respectfully decline</CheckboxLabel>
-              </CheckboxWrapperColumn>
-            </BigCheckboxContainerRow>
-          </CheckboxContainerCentered>
-        )}
-        <InfoContainer>
-          <Label>CONFIRMATION INFO</Label>
-          <Input type="text" name="email" placeholder="E-mail for confirmation" value={formData.email} onChange={handleSharedChange} required />
-        </InfoContainer>
+        <Section>
+          <Question>
+            Will you be joining us?
+          </Question>
 
-        <CheckboxContainer>
-          <Label>PARTICIPATION DAYS</Label>
-          <CheckboxWrapper as="label" htmlFor="participation-fri">
-            <Checkbox
-              type="checkbox"
-              name="participationDays"
-              id="participation-fri"
-              value="Fri"
-              checked={formData.participationDays.includes('Fri')}
-              onChange={handleParticipationDaysChange}
-              disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
-            />
-            <CheckboxLabel htmlFor="participation-fri">Friday | BBQ Dinner &amp; Mingle</CheckboxLabel>
-          </CheckboxWrapper>
-          <CheckboxWrapper as="label" htmlFor="brunch-sat">
-            <Checkbox
-              type="checkbox"
-              name="brunch"
-              id="brunch-sat"
-              value="Sat"
-              checked={formData.brunch === 'brunch'}
-              onChange={handleBrunchChange}
-              disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
-            />
-            <CheckboxLabel htmlFor="brunch-sat">Saturday | Brunch</CheckboxLabel>
-          </CheckboxWrapper>
-          <CheckboxWrapper as="label" htmlFor="participation-sat">
-            <Checkbox
-              type="checkbox"
-              name="participationDays"
-              id="participation-sat"
-              value="Sat"
-              checked={formData.participationDays.includes('Sat')}
-              onChange={handleParticipationDaysChange}
-              disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
-            />
-            <CheckboxLabel htmlFor="participation-sat">Saturday | Wedding Ceremony &amp; Dinner</CheckboxLabel>
-          </CheckboxWrapper>
-          <CheckboxWrapper as="label" htmlFor="participation-sun">
-            <Checkbox
-              type="checkbox"
-              name="participationDays"
-              id="participation-sun"
-              value="Sun"
-              checked={formData.participationDays.includes('Sun')}
-              onChange={handleParticipationDaysChange}
-              disabled={!role?.startsWith('hotel') && formData.accommodation === 'herrgarden'}
-            />
-            <CheckboxLabel htmlFor="participation-sun">Sunday | Good Bye Breakfast</CheckboxLabel>
-          </CheckboxWrapper>
-        </CheckboxContainer>
+          <HeartRow>
+            <HeartOption htmlFor="attendance-yes">
+              <HiddenRadio
+                id="attendance-yes"
+                type="radio"
+                name="attendance"
+                value="yes"
+                checked={
+                  formData.attendance === 'yes'
+                }
+                onChange={handleAttendanceChange}
+                required
+              />
 
-        {formData.guests.map((guest, index) => (
-          <GuestContainer key={index}>
-            <GuestTop>
-              <GuestLabel>Family Member {index + 1}</GuestLabel>
-              {formData.guests.length > 1 && (
-                <RemoveFamilyMemberButton type="button" onClick={() => removeFamilyMember(index)} >×</RemoveFamilyMemberButton>
-              )}
-            </GuestTop>
-            <InfoContainer>
-              <Label>BASIC INFO</Label>
-              <Input type="text" name="firstName" placeholder="First Name" value={guest.firstName} onChange={(e) => handleGuestChange(e, index)} required />
-              <Input type="text" name="lastName" placeholder="Last Name" value={guest.lastName} onChange={(e) => handleGuestChange(e, index)} required />
-            </InfoContainer>
+              <Heart
+                size={54}
+                fill={
+                  formData.attendance === 'yes'
+                    ? useTheme().colors.red.primary
+                    : 'none'
+                }
+                color={
+                  useTheme().colors.red.primary
+                }
+              />
 
-            <CheckboxContainer>
-              <Label>PREFERENCES</Label>
-              <CheckboxContainerRow>
-                <CheckboxWrapper as="label" htmlFor={`alcohol_${index}`}>
-                  <Checkbox
+              <span>Yes, we’ll be there!</span>
+            </HeartOption>
+
+            <HeartOption htmlFor="attendance-no">
+              <HiddenRadio
+                id="attendance-no"
+                type="radio"
+                name="attendance"
+                value="no"
+                checked={
+                  formData.attendance === 'no'
+                }
+                onChange={handleAttendanceChange}
+                required
+              />
+
+              <Heart
+                size={54}
+                fill={
+                  formData.attendance === 'no'
+                    ? useTheme().colors.red.primary
+                    : 'none'
+                }
+                color={
+                  useTheme().colors.red.primary
+                }
+              />
+
+              <span>Sadly, we can’t make it</span>
+            </HeartOption>
+          </HeartRow>
+          {formData.attendance === 'no' && (
+            <Input
+              type="text"
+              name="unableToAttendName"
+              placeholder="Name"
+              value={formData.unableToAttendName}
+              onChange={handleUnableToAttendNameChange}
+              required
+            />
+          )}
+        </Section>
+
+        {formData.attendance === 'yes' && (
+          <>
+            <Section>
+              <Question>
+                Will you be staying over at Häringe Castle?
+              </Question>
+
+              <OptionList>
+                <Option htmlFor="accommodation-castle">
+                  <Radio
+                    id="accommodation-castle"
                     type="radio"
-                    id={`alcohol_${index}`}
-                    name={`alcohol_${index}`}
-                    value="Alcohol"
-                    checked={guest.alcohol === 'Alcohol'}
-                    onChange={e => handleGuestChange(e, index)}
+                    name="accommodation"
+                    value="castle"
+                    checked={
+                      formData.accommodation === 'castle'
+                    }
+                    onChange={
+                      handleAccommodationChange
+                    }
                     required
                   />
-                  <CheckboxLabel htmlFor={`alcohol_${index}`}>Alcohol</CheckboxLabel>
-                </CheckboxWrapper>
-                <CheckboxWrapper as="label" htmlFor={`non-alcohol_${index}`}>
-                  <Checkbox
-                    type="radio"
-                    id={`non-alcohol_${index}`}
-                    name={`alcohol_${index}`}
-                    value="Non-alcohol"
-                    checked={guest.alcohol === 'Non-alcohol'}
-                    onChange={e => handleGuestChange(e, index)}
-                  />
-                  <CheckboxLabel htmlFor={`non-alcohol_${index}`}>Non-alcohol</CheckboxLabel>
-                </CheckboxWrapper>
-              </CheckboxContainerRow>
-            </CheckboxContainer>
-            <Input type="text" name="music" placeholder="A song that makes you dance" value={guest.music} onChange={(e) => handleGuestChange(e, index)} />
-            <Textarea name="food" placeholder="Do you have any food preferences, allergies, or special requests?" value={guest.food} onChange={(e) => handleGuestChange(e, index)} />
-          </GuestContainer>
-        ))}
+                  Yes, at Häringe Castle
+                </Option>
 
-        <AddFamilyMemberButton type="button" onClick={addFamilyMember} >Add family member +</AddFamilyMemberButton>
-        <SubmitButton type="submit">Submit RSVP</SubmitButton>
+                <Option htmlFor="accommodation-other">
+                  <Radio
+                    id="accommodation-other"
+                    type="radio"
+                    name="accommodation"
+                    value="other"
+                    checked={
+                      formData.accommodation === 'other'
+                    }
+                    onChange={
+                      handleAccommodationChange
+                    }
+                    required
+                  />
+                  No, I will arrange other accommodation
+                </Option>
+              </OptionList>
+            </Section>
+
+            <Section>
+              <Question>
+                Participation days
+              </Question>
+
+              <OptionList>
+                {availableDays.map((day) => (
+                  <Option
+                    key={day.value}
+                    htmlFor={`day-${day.value}`}
+                  >
+                    <Checkbox
+                      id={`day-${day.value}`}
+                      type="checkbox"
+                      name="participationDays"
+                      value={day.value}
+                      checked={formData.participationDays.includes(
+                        day.value
+                      )}
+                      onChange={
+                        handleParticipationDaysChange
+                      }
+                    />
+
+                    {day.label}
+                  </Option>
+                ))}
+              </OptionList>
+            </Section>
+
+            <Section>
+              <Question>
+                Guest information
+              </Question>
+
+              {formData.guests.map((guest, index) => (
+                <GuestContainer key={index}>
+                  <GuestHeader>
+                    <GuestTitle>
+                      Guest {index + 1}
+                    </GuestTitle>
+
+                    {formData.guests.length > 1 && (
+                      <RemoveButton
+                        type="button"
+                        onClick={() =>
+                          removeGuest(index)
+                        }
+                        aria-label={`Remove guest ${index + 1
+                          }`}
+                      >
+                        ×
+                      </RemoveButton>
+                    )}
+                  </GuestHeader>
+
+                  <Input
+                    type="text"
+                    placeholder="Name"
+                    value={guest.name}
+                    onChange={(event) =>
+                      handleGuestChange(
+                        index,
+                        'name',
+                        event.target.value
+                      )
+                    }
+                    required
+                  />
+
+                  <Textarea
+                    placeholder="Dietary restrictions or special requests"
+                    value={
+                      guest.dietaryRestrictions
+                    }
+                    onChange={(event) =>
+                      handleGuestChange(
+                        index,
+                        'dietaryRestrictions',
+                        event.target.value
+                      )
+                    }
+                  />
+                </GuestContainer>
+              ))}
+
+              <AddGuestButton
+                type="button"
+                onClick={addGuest}
+              >
+                Add guest +
+              </AddGuestButton>
+            </Section>
+          </>
+        )}
+
+        <SubmitButton
+          type="submit"
+          disabled={!canSubmit}
+        >
+          {isSubmitting
+            ? 'Submitting...'
+            : 'Submit RSVP'}
+        </SubmitButton>
       </Form>
     </FormContainer>
   );

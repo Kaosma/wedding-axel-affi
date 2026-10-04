@@ -64,7 +64,7 @@ function ToastmastersView() {
       <MainContentCard backgroundColor="hsl(30 100% 94%)">
         <Title>Meet Our Toastmasters</Title>
 
-        <ContentText>The powerful trio: Steffi, Aleks and Jaqueline will guide you through the wedding weekend. If you want to give a speech or have any questions these are the girls to reach out to.</ContentText>
+        <ContentText>The powerful trio: Stefanie, Aleksandra and Jaqueline will guide you through the wedding weekend. If you want to give a speech or have any questions these are the girls to reach out to.</ContentText>
 
         <ToastmasterCard>
           <ImageWrapper>

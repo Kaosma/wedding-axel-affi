@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { mapImg } from "../../helpers/constants";
 import MainContentCard from "../../components/cards/MainContentCard";
 import { ArrowUpRight, Calendar, Map, MapPin, MessageCircleQuestion, Shirt } from 'lucide-react';
 import { useState } from "react";
@@ -7,15 +6,35 @@ import { useTheme } from "../../app/AppStyling";
 
 
 const RootContainer = styled.div`
-  color: black;
-  background-image: url("/images/affiaxel.avif");
-  background-size: cover;
-  background-position: center;
-  height: fit-content;
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
-  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  height: fit-content;
   padding: 3rem;
+  overflow: hidden;
+  isolation: isolate;
+`;
+
+const BackgroundVideo = styled.video`
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+`;
+
+const RootContent = styled.div`
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 const InfoGrid = styled.div`
   display: grid;
@@ -94,7 +113,7 @@ const ImageCard = styled.div`
   position: relative;
   width: 100%;
   height: 200px;
-  background-image: url(${mapImg});
+  background-image: url('/images/haringeslott.png');
   background-size: cover;
   background-position: center;
   border-radius: 12px;
@@ -152,7 +171,7 @@ const ModalOverlay = styled.div`
   z-index: 99999;
 `;
 const ModalImage = styled.div`
-  background-image: url(${mapImg});
+  background-image: url('/images/haringeslott.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -168,7 +187,6 @@ function InfoView({ role }: { role: string | null }) {
 
   const [open, setOpen] = useState(false);
   const googleLocation = 'https://maps.app.goo.gl/b3F63JXfekN6MM4L6';
-  const emailLink = 'mailto:euawedding@gmail.com';
 
   const openTab = (url: string) => {
     window.open(url, '_blank');
@@ -176,65 +194,104 @@ function InfoView({ role }: { role: string | null }) {
 
   return (
     <RootContainer>
+      <BackgroundVideo
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/images/backgroundaa.mp4"
+      >
+        <source src="/images/backgroundaa.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </BackgroundVideo>
+
       {open && (
-        <>
-          <ModalOverlay onClick={() => setOpen(false)}>
-            <ModalImage />
-          </ModalOverlay>
-        </>
+        <ModalOverlay onClick={() => setOpen(false)}>
+          <ModalImage />
+        </ModalOverlay>
       )}
-      <MainContentCard elevated={true}>
-        <InfoGrid>
-          <Card>
-            <IconWrapper>
-              <Calendar size={32} />
-            </IconWrapper>
-            <CardTitle>Dates</CardTitle>
-            <CardText>{role && role === 'family' ? 'Saturday' : 'Friday'} - Sunday</CardText>
-            <CardText><Emphasis>{role && role === 'family' ? '3' : '2'}-4 July</Emphasis></CardText>
-          </Card>
-          <Card onClick={(() => openTab(googleLocation))}>
-            <IconWrapper>
-              <MapPin size={32} />
-            </IconWrapper>
-            <CardTitle>Location</CardTitle>
-            <CardText>Häringe Slott</CardText>
-            <CardText><Emphasis>Stockholm</Emphasis></CardText>
-          </Card>
-          <Card onClick={(() => openTab(emailLink))}>
-            <IconWrapper>
-              <MessageCircleQuestion size={32} />
-            </IconWrapper>
-            <CardTitle>For other questions</CardTitle>
-            <CardText>Check Q&amp;A</CardText>
-            <CardText>or contact us on:</CardText>
-            <CardText><Emphasis> afsoonaxel@gmail.com</Emphasis></CardText>
-          </Card>
-          <Card>
-            <IconWrapper>
-              <Shirt size={32} />
-            </IconWrapper>
-            <CardTitle>Dresscode</CardTitle>
-            <TextContainer>
-              {role && role === 'friends' && <CardTextSpecial>Friday <EmphasisSpecial>Beachclub Chic</EmphasisSpecial></CardTextSpecial>}
-              <CardTextSpecial>Saturday <EmphasisSpecial>Summery Suit and Dress</EmphasisSpecial></CardTextSpecial>
-            </TextContainer>
-          </Card>
-        </InfoGrid>
-        <ContentContainer>
-          <Card onClick={() => setOpen(true)}>
-            <IconWrapper>
-              <Map size={32} />
-            </IconWrapper>
-            <CardTitle>Things to do at Häringe Castle</CardTitle>
-            <ImageCard onClick={() => setOpen(true)}>
-              <CornerIcon>
-                <ArrowUpRight color="orange" />
-              </CornerIcon>
-            </ImageCard>
-          </Card>
-        </ContentContainer>
-      </MainContentCard>
+
+      <RootContent>
+        <MainContentCard elevated={true}>
+          <InfoGrid>
+            <Card>
+              <IconWrapper>
+                <Calendar size={32} />
+              </IconWrapper>
+
+              <CardTitle>Dates</CardTitle>
+              <CardText>
+                {role && role === 'family' ? 'Saturday' : 'Friday'} - Sunday
+              </CardText>
+              <CardText>
+                <Emphasis>
+                  {role && role === 'family' ? '3' : '2'}-4 July
+                </Emphasis>
+              </CardText>
+            </Card>
+
+            <Card onClick={() => openTab(googleLocation)}>
+              <IconWrapper>
+                <MapPin size={32} />
+              </IconWrapper>
+
+              <CardTitle>Location</CardTitle>
+              <CardText>Häringe Slott</CardText>
+              <CardText>
+                <Emphasis>Stockholm</Emphasis>
+              </CardText>
+            </Card>
+
+            <Card>
+              <IconWrapper>
+                <MessageCircleQuestion size={32} />
+              </IconWrapper>
+
+              <CardTitle>For other questions</CardTitle>
+              <CardText>
+                Check <Emphasis>Q&amp;A</Emphasis>
+              </CardText>
+            </Card>
+
+            <Card>
+              <IconWrapper>
+                <Shirt size={32} />
+              </IconWrapper>
+
+              <CardTitle>Dresscode</CardTitle>
+
+              <TextContainer>
+                {role && role === 'friends' && (
+                  <CardTextSpecial>
+                    Friday <EmphasisSpecial>Beachclub Chic</EmphasisSpecial>
+                  </CardTextSpecial>
+                )}
+
+                <CardTextSpecial>
+                  Saturday <EmphasisSpecial>Summery Suit and Dress</EmphasisSpecial>
+                </CardTextSpecial>
+              </TextContainer>
+            </Card>
+          </InfoGrid>
+
+          <ContentContainer>
+            <Card onClick={() => setOpen(true)}>
+              <IconWrapper>
+                <Map size={32} />
+              </IconWrapper>
+
+              <CardTitle>Things to do at Häringe Castle</CardTitle>
+
+              <ImageCard>
+                <CornerIcon>
+                  <ArrowUpRight color="orange" />
+                </CornerIcon>
+              </ImageCard>
+            </Card>
+          </ContentContainer>
+        </MainContentCard>
+      </RootContent>
     </RootContainer>
   );
 }

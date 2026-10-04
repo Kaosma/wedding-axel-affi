@@ -47,6 +47,9 @@ const DefaultTheme = {
       primary: '#fc2211',
       secondary: '#f8dfdb',
       tertiary: '#f9d6f1',
+      pink: '#fce4de',
+      white: '#fcf5eb',
+      dark: '#ed1215'
     },
     border: {
       gray: '#6e8294',

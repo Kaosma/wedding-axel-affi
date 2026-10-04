@@ -45,6 +45,38 @@ const MenuLinkItem = styled(NavLink)`
   }
 `;
 
+const MenuLinkItemSpecial = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  margin: 0 0.1em;
+  border: 1px solid ${useTheme().colors.red.primary};
+  border-right: 2px solid ${useTheme().colors.red.primary};
+  border-bottom: 2px solid ${useTheme().colors.red.primary};
+  padding: 0.4em 0.7em;
+  border-radius: 0.1em;
+
+  font-family: "linnea-variable", "PP Cirka", sans-serif;
+  font-size: 1rem;
+  color: ${useTheme().colors.red.primary};
+  text-decoration: none;
+
+  &:link,
+  &:visited {
+    color: ${useTheme().colors.red.primary};
+  }
+  &:hover,
+  &:focus {
+    color: ${useTheme().colors.red.primary};
+    text-decoration: underline;
+  }
+  &.active {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+`;
+
 const LogoutItem = styled.div`
   display: flex;
   gap: 1em;
@@ -84,10 +116,6 @@ function HeaderMenu({
         <MenuItemText>Home</MenuItemText>
       </MenuLinkItem>
 
-      <MenuLinkItem to="/toastmasters">
-        <MenuItemText>Toastmasters</MenuItemText>
-      </MenuLinkItem>
-
       <MenuLinkItem to="/info">
         <MenuItemText>Info</MenuItemText>
       </MenuLinkItem>
@@ -96,21 +124,29 @@ function HeaderMenu({
         <MenuItemText>Accommodation</MenuItemText>
       </MenuLinkItem>
 
-      <MenuLinkItem to="/upload">
-        <MenuItemText>Upload</MenuItemText>
-      </MenuLinkItem>
-
       <MenuLinkItem to="/schedule">
         <MenuItemText>Schedule</MenuItemText>
+      </MenuLinkItem>
+
+      <MenuLinkItem to="/toastmasters">
+        <MenuItemText>Toastmasters</MenuItemText>
       </MenuLinkItem>
 
       <MenuLinkItem to="/travel">
         <MenuItemText>Travel</MenuItemText>
       </MenuLinkItem>
 
+      <MenuLinkItem to="/upload">
+        <MenuItemText>Upload</MenuItemText>
+      </MenuLinkItem>
+
       <MenuLinkItem to="/qa">
         <MenuItemText>Q/A</MenuItemText>
       </MenuLinkItem>
+
+      <MenuLinkItemSpecial to="/rsvp">
+        <MenuItemText>RSVP</MenuItemText>
+      </MenuLinkItemSpecial>
 
       <LogoutItem onClick={userLogoutCallback}>
         <MenuItemText>

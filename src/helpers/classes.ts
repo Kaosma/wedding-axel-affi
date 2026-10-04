@@ -1,15 +1,10 @@
 export interface RSVP {
-  email: string;
-  arrival: string;
-  departure: string;
-  brunch: string;
-  accommodation?: string;
+  attendance: 'yes' | 'no';
+  accommodation: 'castle' | 'other' | null;
+  participationDays: string[];
   guests: {
-    firstName: string;
-    lastName: string;
-    music: string;
-    food: string;
-    alcohol: string;
+    name: string;
+    dietaryRestrictions: string;
   }[];
 }
 
@@ -17,12 +12,4 @@ export type RSVPFormProps = {
   submitCallback: (rsvp: RSVP) => void;
 };
 
-export type RsvpResponse = {
-  email?: string;
-  guests?: unknown[];
-  accommodation?: string;
-  music?: string;
-  arrival?: string;
-  departure?: string;
-  brunch?: string;
-};
+export type RsvpResponse = RSVP;
