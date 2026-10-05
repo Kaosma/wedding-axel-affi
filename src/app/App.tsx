@@ -7,7 +7,6 @@ import { useTheme } from './AppStyling';
 import GlobalStyles from '../styles/GlobalStyles';
 import LoginPage from './LoginPage';
 import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
-import YourInvitationView from '../navigation/views/YourInvitationView';
 import DashboardView from '../navigation/views/DashboardView';
 import UploadView from '../navigation/views/UploadView';
 import ImagesView from '../navigation/views/ImagesView';
@@ -76,7 +75,6 @@ function App() {
         isMusicRequestPage ||
         isSongRequestsPage) ? (
         <Routes>
-          <Route path="/your-invitation/:code" element={<YourInvitationView />} />
           <Route path="/dashboard" element={<DashboardView />} />
           <Route path="/home" element={<UploadView />} />
           <Route path="/upload/:eventId" element={<Navigate replace to="/home" />} />
