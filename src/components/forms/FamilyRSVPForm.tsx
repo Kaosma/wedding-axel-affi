@@ -540,13 +540,15 @@ function FamilyRSVPForm({
       setIsSubmitting(true);
 
       await push(
-        ref(db, 'rsvpResponses'),
+        ref(db, 'affiAxelRsvp'),
         response
       );
 
       submitCallback(response);
       setFormData(initialFormData);
     } catch (error) {
+      console.log(response);
+      console.log(formData);
       console.error('Error submitting RSVP:', error);
       alert('Error submitting RSVP.');
     } finally {
