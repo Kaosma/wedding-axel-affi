@@ -372,7 +372,7 @@ function FamilyRSVPForm({
       : [
         {
           value: 'Friday',
-          label: 'Friday - Welcome dinner for friends',
+          label: 'Friday - Welcome Dinner for Friends',
         },
         {
           value: 'Saturday',
