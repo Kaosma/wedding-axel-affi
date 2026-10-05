@@ -6,7 +6,6 @@ import ScheduleView from './views/ScheduleView';
 import TravelView from './views/TravelView';
 import QAView from './views/QAView';
 import ToastmastersView from './views/ToastmastersView';
-import YourInvitationView from './views/YourInvitationView';
 import InfoView from './views/InfoView';
 import AccomodationView from './views/AccomodationView';
 import { scrollToTop } from "../helpers/functions";
@@ -19,7 +18,6 @@ const rsvpUrl = '/rsvp';
 const scheduleUrl = '/schedule';
 const travelUrl = '/travel';
 const qaUrl = '/qa';
-const yourInvitationUrl = '/your-invitation/:code';
 function Router({ role }: { role: string | null }) {
   const location = useLocation();
 
@@ -38,7 +36,6 @@ function Router({ role }: { role: string | null }) {
       <Route path={scheduleUrl} element={<ScheduleView />} />
       <Route path={travelUrl} element={<TravelView />} />
       <Route path={qaUrl} element={<QAView />} />
-      <Route path={yourInvitationUrl} element={<YourInvitationView />} />
       <Route path="*" element={<Navigate replace to={homeUrl} />} />
     </Routes>
   );
