@@ -1,15 +1,21 @@
-import styled from "styled-components";
-import { useTheme } from "../../app/AppStyling";
+import styled from 'styled-components';
+import { rgba } from 'polished';
+import { useTheme } from '../../app/AppStyling';
 
 const RootContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background: ${() => useTheme().colors.red.secondary};
-  color: white;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+  padding: 3em 0;
+  background: ${() =>
+    rgba(useTheme().colors.red.secondary, 0.95)};
+  color: black;
   text-align: center;
 `;
+
 const HeaderContainer = styled.div`
   position: relative;
   display: flex;
@@ -17,78 +23,77 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   gap: 6em;
-  overflow: hidden;
-  isolation: isolate;
 
   @media (max-width: 350px) {
     gap: 3em;
   }
 `;
-const BackgroundVideo = styled.video`
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-`;
+
 const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6rem;
-  z-index: 1;
-  position: relative;
   width: 100%;
+  gap: 6rem;
   margin-top: 15rem;
   color: ${() => useTheme().colors.red.primary};
+
   @media (max-width: 500px) {
     flex-direction: column;
+    gap: 2rem;
+    margin-top: 8rem;
   }
 `;
+
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  z-index: 1;
   width: 20rem;
   color: ${() => useTheme().colors.red.primary};
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
+
 const HeaderText = styled.div`
   font-size: 1.3rem;
-  text-transform: uppercase;
   font-weight: 500;
-  z-index: 1;
+  text-transform: uppercase;
+
   @media (max-width: 750px) {
     font-size: 0.7rem;
   }
+
   @media (max-width: 500px) {
     font-size: 1rem;
   }
 `;
+
 const ButtonsWrapper = styled.div`
   display: flex;
   gap: 4em;
-  z-index: 1;
   margin-bottom: 2em;
-  position: relative;
+  color: black;
+
   @media (max-width: 350px) {
+    justify-content: center;
     gap: 1em;
     flex-wrap: wrap;
-    justify-content: center;
   }
-  color: black;
 `;
+
 const ContentFooter = styled.div`
   @media (max-width: 500px) {
     display: none;
   }
 `;
-const MainContentFooter = styled.div`
-`;
+
+const MainContentFooter = styled.div``;
+
 const WeddingIntroContainer = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -97,126 +102,146 @@ const WeddingIntroContainer = styled.section`
   margin: 0 auto;
   aspect-ratio: 1 / 1;
 `;
+
 const GridItem = styled.div<{ bgcolor?: string }>`
-  background-color: ${({ bgcolor }) => bgcolor || "transparent"};
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   overflow: hidden;
+  background-color: ${({ bgcolor }) =>
+    bgcolor || 'transparent'};
+  text-align: center;
 `;
+
 const LogoItem = styled.div`
-  background-image: url("/images/pic1.png");
+  width: 80%;
+  height: 80%;
+  background-image: url('/images/pic1.png');
+  background-position: center;
   background-size: 50%;
-  background-position: center;
   background-repeat: no-repeat;
-  width: 80%;
-  height: 80%;
-  object-fit: cover;
 `;
+
 const Pic1Image = styled.div`
-  background-image: url("/images/pic2.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   width: 80%;
   height: 80%;
+  background-image: url('/images/pic2.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   transform-origin: center;
 `;
+
 const Pic2Image = styled.div`
-  background-image: url("/images/pic3.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   width: 80%;
   height: 80%;
+  background-image: url('/images/pic3.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   transform-origin: center;
 `;
+
 const Pic3Image = styled.div`
-  background-image: url("/images/pic4.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   width: 80%;
   height: 80%;
+  background-image: url('/images/pic4.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   transform-origin: center;
 `;
+
 const NameText = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  margin: -1rem 0;
+  font-family: 'linnea-light', 'PP Cirka', sans-serif;
   font-size: 6rem;
   font-weight: 600;
-  z-index: 1;
-  margin: -1rem 0;
-  font-family: "linnea-light", "PP Cirka", sans-serif;
+
   @media (max-width: 750px) {
     font-size: 5rem;
   }
+
   @media (max-width: 650px) {
     font-size: 4rem;
   }
+
   @media (max-width: 600px) {
     font-size: 3rem;
   }
+
   @media (max-width: 500px) {
     font-size: 4rem;
   }
 `;
 
-function HomeView({ role }: { role: string | null }) {
-
+function HomeView({
+  role,
+}: {
+  role: string | null;
+}) {
   return (
     <RootContainer>
       <HeaderContainer>
-        <BackgroundVideo
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/images/backgroundaa.mp4"
-        >
-          <source src="/images/backgroundaa.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </BackgroundVideo>
-
         <HeaderWrapper>
           <InfoWrapper>
-            <HeaderText>We're Getting</HeaderText>
-            <HeaderText>Married!</HeaderText>
+            <HeaderText>
+              We&apos;re Getting
+            </HeaderText>
+
+            <HeaderText>
+              Married!
+            </HeaderText>
           </InfoWrapper>
 
           <InfoWrapper>
             <NameText>AFSOON</NameText>
-            <NameText>&</NameText>
+            <NameText>&amp;</NameText>
             <NameText>AXEL</NameText>
           </InfoWrapper>
 
           <InfoWrapper>
             <HeaderText>
-              {role && role === 'family' ? '3' : '2'}-4 JULY 2027
+              {role === 'family' ? '3' : '2'}-4 JULY 2027
             </HeaderText>
-            <HeaderText>STOCKHOLM, SWEDEN</HeaderText>
+
+            <HeaderText>
+              STOCKHOLM, SWEDEN
+            </HeaderText>
           </InfoWrapper>
         </HeaderWrapper>
 
         <ButtonsWrapper>
-          <ContentFooter>We're getting married ❤︎</ContentFooter>
-          <MainContentFooter>We're getting married ❤︎</MainContentFooter>
-          <ContentFooter>We're getting married ❤︎</ContentFooter>
+          <ContentFooter>
+            We&apos;re getting married ❤︎
+          </ContentFooter>
+
+          <MainContentFooter>
+            We&apos;re getting married ❤︎
+          </MainContentFooter>
+
+          <ContentFooter>
+            We&apos;re getting married ❤︎
+          </ContentFooter>
         </ButtonsWrapper>
       </HeaderContainer>
+
       <WeddingIntroContainer>
-        <GridItem >
+        <GridItem>
           <Pic1Image />
         </GridItem>
+
         <GridItem bgcolor="#f4d1c6">
           <LogoItem />
         </GridItem>
+
         <GridItem>
           <Pic2Image />
         </GridItem>
+
         <GridItem>
           <Pic3Image />
         </GridItem>
