@@ -264,7 +264,7 @@ function InfoView({ role }: { role: string | null }) {
               <TextContainer>
                 {role && role === 'friends' && (
                   <CardTextSpecial>
-                    Friday <EmphasisSpecial>Beachclub Chic</EmphasisSpecial>
+                    Friday <EmphasisSpecial>Semi-casual</EmphasisSpecial>
                   </CardTextSpecial>
                 )}
 
