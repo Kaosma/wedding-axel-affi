@@ -189,7 +189,7 @@ const ErrorMessage = styled.p`
   color: ${() => useTheme().colors.error.dark};
   font-size: 0.95rem;
   text-align: left;
-  margin-top: -0.1rem;
+  margin-top: 0.5rem;
 
   @media (max-width: 480px) {
     font-size: 0.9rem;

@@ -136,9 +136,9 @@ function HeaderMenu({
         <MenuItemText>Travel</MenuItemText>
       </MenuLinkItem>
 
-      <MenuLinkItem to="/upload">
+      {/* <MenuLinkItem to="/upload">
         <MenuItemText>Upload</MenuItemText>
-      </MenuLinkItem>
+      </MenuLinkItem> */}
 
       <MenuLinkItem to="/qa">
         <MenuItemText>Q/A</MenuItemText>

@@ -3,6 +3,7 @@ import MainContentCard from "../../components/cards/MainContentCard";
 import { ArrowUpRight, Calendar, Map, MapPin, MessageCircleQuestion, Shirt } from 'lucide-react';
 import { useState } from "react";
 import { useTheme } from "../../app/AppStyling";
+import { NavLink } from "react-router-dom";
 
 
 const RootContainer = styled.div`
@@ -53,6 +54,24 @@ const IconWrapper = styled.div`
   transition: transform 0.3s ease;
 `;
 const Card = styled.div`
+  background:  #f8f9fa;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  &:hover ${/* sc-selector */ IconWrapper} {
+    transform: scale(1.15);
+  }
+`;
+const NavigationCard = styled(NavLink)`
   background:  #f8f9fa;
   border-radius: 0.75rem;
   padding: 1.5rem;
@@ -226,7 +245,7 @@ function InfoView({ role }: { role: string | null }) {
               </CardText>
               <CardText>
                 <Emphasis>
-                  {role && role === 'family' ? '3' : '2'}-4 July
+                  {role && role === 'family' ? '3' : '2'}-4 July 2027
                 </Emphasis>
               </CardText>
             </Card>
@@ -243,16 +262,16 @@ function InfoView({ role }: { role: string | null }) {
               </CardText>
             </Card>
 
-            <Card>
+            <NavigationCard to='/qa'>
               <IconWrapper>
                 <MessageCircleQuestion size={32} />
               </IconWrapper>
 
               <CardTitle>For other questions</CardTitle>
               <CardText>
-                Check <Emphasis>Q&amp;A</Emphasis>
+                Check <Emphasis>Q&amp;A</Emphasis> or contact us directly
               </CardText>
-            </Card>
+            </NavigationCard>
 
             <Card>
               <IconWrapper>
@@ -269,7 +288,7 @@ function InfoView({ role }: { role: string | null }) {
                 )}
 
                 <CardTextSpecial>
-                  Saturday <EmphasisSpecial>Summery Suit and Dress</EmphasisSpecial>
+                  Saturday <EmphasisSpecial>Summer Formal</EmphasisSpecial>
                 </CardTextSpecial>
               </TextContainer>
             </Card>

@@ -150,7 +150,7 @@ function TravelView() {
         <Card>
           <CardHeading>Taxi or Uber</CardHeading>
           <SmallText>
-            You can take a taxi directly from Stockholm or Västerhaninge to Häringe Slott. When booking, use the full destination:
+            You can take a taxi or Uber (via the app) directly to Häringe Slott. When booking, use the full destination: Häringe slott, 137 91 Västerhaninge
             <br />
             <br />
             Stockholm Taxi: 08-15 00 00

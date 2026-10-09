@@ -6,6 +6,7 @@ import { scrollToTop } from '../../helpers/functions';
 import { RSVP } from '../../helpers/classes';
 import { Heart } from 'lucide-react';
 import { useTheme } from '../../app/AppStyling';
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 const RootContainer = styled.div`
   color: ${() => useTheme().colors.red.primary};
@@ -152,13 +153,24 @@ function RSVPView({ viewRole }: { viewRole: string | null }) {
   };
 
   const handleConfirmation = (rsvp: RSVP) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const functions = getFunctions(undefined, "europe-west1");
+    const confirmationData = {
+      email: rsvp.email,
+      accommodation: rsvp.accommodation,
+      participationDays: rsvp.participationDays,
+    };
+    const sendEmail = httpsCallable(functions, "sendConfirmationEmail")(confirmationData);
+
     setSubmittedRSVP(rsvp);
     setSubmitted(true);
-
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    sendEmail
+      .then(() => {
+        console.log("Email sent to", rsvp.email);
+      })
+      .catch((err: unknown) => {
+        console.error("Email failed", err);
+      });
   };
 
   const isAttending = submittedRSVP?.attendance === 'yes';
@@ -256,6 +268,9 @@ function RSVPView({ viewRole }: { viewRole: string | null }) {
                 <ThankYouMessage>
                   We&apos;re so happy that you&apos;ll be joining us, and we
                   can&apos;t wait to celebrate with you!
+                  <br />
+                  <br />
+                  Your RSVP has been received and an email has been sent to {submittedRSVP?.email} with your RSVP details.
 
                   {submittedRSVP.accommodation === 'castle' && (
                     <>

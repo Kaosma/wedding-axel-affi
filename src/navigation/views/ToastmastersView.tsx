@@ -37,11 +37,21 @@ const ContentText = styled.p`
   font-family: 'Georgia', serif;
   line-height: 1.6;
 `;
+const ToastmasterImage = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  transform: scale(1.9);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+`;
 const ToastmasterCard = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   padding: 1.5rem;
-  margin-bottom: 2rem;
+  margin: 3rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
 `;
 const ContactInfo = styled.div`
@@ -50,12 +60,6 @@ const ContactInfo = styled.div`
   padding: 1rem;
   margin: 1rem 0;
   border-left: 1px solid;
-`;
-const ImageWrapper = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  overflow: hidden;        // <— prevents zoom spill-out
 `;
 
 function ToastmastersView() {
@@ -67,9 +71,7 @@ function ToastmastersView() {
         <ContentText>The powerful trio: Stefanie, Aleksandra and Jaqueline will guide you through the wedding weekend. If you want to give a speech or have any questions these are the girls to reach out to.</ContentText>
 
         <ToastmasterCard>
-          <ImageWrapper>
-            {/* <ToastmasterImage src={saraImage} alt="Sara Skaränger Littmarck" /> */}
-          </ImageWrapper>
+          <ToastmasterImage src="/images/toastmasters.jpeg" alt="Toastmasters" />
         </ToastmasterCard>
 
         <Subtitle>Want to Give a Speech?</Subtitle>

@@ -30,7 +30,7 @@ export const faqs: { questionKey: string; answerKey: string }[] = [
   {
     questionKey: "How do I book my stay at Häringe Castle?",
     answerKey:
-      "Please book your hotel room at the castle using the following link.",
+      "Please book your hotel room under the Accommodation tab.",
   },
   {
     questionKey: "Can I bring a plus one and/or children?",
@@ -91,5 +91,10 @@ export const faqs: { questionKey: string; answerKey: string }[] = [
     questionKey: "Is there an open bar?",
     answerKey:
       "Drinks will be served at various moments throughout the wedding. There won’t be an open bar, but you’ll be able to purchase additional drinks at the bar(s).",
+  },
+  {
+    questionKey: "What should I pack?",
+    answerKey:
+      "Apart from your outfits and dancing shoes, please bring swimwear (if you want to swim) and make sure you have some warm clothes to keep you comfortable through the night!",
   },
 ];

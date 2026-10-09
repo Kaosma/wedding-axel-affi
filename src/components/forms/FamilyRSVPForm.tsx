@@ -317,6 +317,8 @@ type Attendance = 'yes' | 'no' | '';
 
 type Accommodation = 'castle' | 'other' | '';
 
+type Email = string | '';
+
 type Guest = {
   name: string;
   dietaryRestrictions: string;
@@ -326,6 +328,7 @@ type FormData = {
   attendance: Attendance;
   accommodation: Accommodation;
   participationDays: string[];
+  email: Email;
   guests: Guest[];
   unableToAttendName: string;
 };
@@ -342,6 +345,7 @@ function FamilyRSVPForm({
     attendance: '',
     accommodation: '',
     participationDays: [],
+    email: '',
     guests: [
       {
         name: '',
@@ -413,6 +417,15 @@ function FamilyRSVPForm({
         attendance === 'no'
           ? initialFormData.guests
           : previous.guests,
+    }));
+  };
+
+  const handleEmailChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setFormData((previous) => ({
+      ...previous,
+      email: event.target.value,
     }));
   };
 
@@ -493,6 +506,7 @@ function FamilyRSVPForm({
         attendance: 'no',
         accommodation: null,
         participationDays: [],
+        email: null,
         guests: [
           {
             name: formData.unableToAttendName.trim(),
@@ -529,6 +543,7 @@ function FamilyRSVPForm({
           : 'other',
       participationDays:
         formData.participationDays,
+      email: formData.email,
       guests: formData.guests.map((guest) => ({
         name: guest.name.trim(),
         dietaryRestrictions:
@@ -671,7 +686,7 @@ function FamilyRSVPForm({
                     }
                     required
                   />
-                  Yes, at Häringe Castle
+                  Yes
                 </Option>
 
                 <Option htmlFor="accommodation-other">
@@ -688,7 +703,7 @@ function FamilyRSVPForm({
                     }
                     required
                   />
-                  No, I will arrange other accommodation
+                  No
                 </Option>
               </OptionList>
             </Section>
@@ -721,6 +736,18 @@ function FamilyRSVPForm({
                   </Option>
                 ))}
               </OptionList>
+            </Section>
+
+            <Section>
+              <Input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleEmailChange}
+                autoComplete="email"
+                required
+              />
             </Section>
 
             <Section>

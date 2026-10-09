@@ -9,7 +9,7 @@ import LoginPage from './LoginPage';
 import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
 import DashboardView from '../navigation/views/DashboardView';
 import UploadView from '../navigation/views/UploadView';
-import ImagesView from '../navigation/views/ImagesView';
+// import ImagesView from '../navigation/views/ImagesView';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -77,8 +77,8 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<DashboardView />} />
           <Route path="/home" element={<UploadView />} />
-          <Route path="/upload/:eventId" element={<Navigate replace to="/home" />} />
-          <Route path="/images" element={<ImagesView />} />
+          {/* <Route path="/upload/:eventId" element={<Navigate replace to="/home" />} /> */}
+          {/* <Route path="/images" element={<ImagesView />} /> */}
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       ) : loggedIn ? (

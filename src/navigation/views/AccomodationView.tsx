@@ -143,6 +143,10 @@ function AccommodationView() {
               </CardText>
 
               <CardText>
+                <Emphasis>Booking Link</Emphasis>{' '}will be shared later!
+              </CardText>
+
+              <CardText>
                 Check-in time:{' '}
                 <Emphasis>15:00</Emphasis>
               </CardText>
