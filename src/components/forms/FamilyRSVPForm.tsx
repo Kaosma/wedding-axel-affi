@@ -263,20 +263,24 @@ const SubmitButton = styled.button`
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 1rem;
-  background-color: ${() => useTheme().colors.red.secondary};
-  color: #fff;
+  background-color: ${() => useTheme().colors.red.pink};
+  color: ${() => useTheme().colors.red.dark};
   cursor: pointer;
   font-family: 'linnea-bold', 'PP Cirka', sans-serif;
   font-size: 1rem;
   font-weight: 800;
+  border: 1px solid ${() => useTheme().colors.red.dark};
 
   &:hover {
     opacity: 0.9;
+    text-decoration: underline;
   }
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;
+    color: #fff;
+    border: 1px solid ${() => useTheme().colors.red.pink};
   }
 `;
 

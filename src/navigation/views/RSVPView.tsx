@@ -80,6 +80,19 @@ const ArrowButton = styled.button`
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: 600;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${() => useTheme().colors.red.primary};
+    outline-offset: 3px;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -102,6 +115,24 @@ const BackButton = styled.button`
   color: ${() => useTheme().colors.red.primary};
   cursor: pointer;
   font-weight: bold;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+
+  &:hover{
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${() => useTheme().colors.red.primary};
+    outline-offset: 3px;
+  }
 `;
 
 const ThankYouContainer = styled.div`
