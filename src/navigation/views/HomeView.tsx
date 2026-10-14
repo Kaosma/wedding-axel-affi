@@ -23,8 +23,12 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   gap: 6em;
+
+  @media (max-width: 750px) {
+    min-height: 50vh;
+  }
 
   @media (max-width: 350px) {
     gap: 3em;

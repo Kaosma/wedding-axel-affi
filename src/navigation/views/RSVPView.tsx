@@ -225,7 +225,7 @@ function RSVPView({ viewRole }: { viewRole: string | null }) {
               <br />
               <br />
               Please take a moment to let us know if you&apos;ll be joining us
-              for our wedding celebration. RSVP before April 28th 2027 helps us
+              for our wedding celebration. RSVP to helps us
               plan the perfect weekend and ensures we have everything ready for
               your arrival.
               <br />
