@@ -37,6 +37,7 @@ const DefaultTheme = {
   colors: {
     mix: {
       lightest: '#fff4ea',
+      light: '#edb18f',
       darkest: '#75714e',
     },
     red: {
