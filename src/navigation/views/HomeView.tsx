@@ -10,10 +10,17 @@ const RootContainer = styled.div`
   width: 100%;
   height: fit-content;
   padding: 3em 0;
+  gap: 8rem;
   background: ${() =>
     rgba(useTheme().colors.red.secondary, 0.95)};
   color: black;
   text-align: center;
+  @media (max-width: 750px) {
+    gap: 3rem;
+  }
+  @media (min-width: 501px) and (max-width: 650px) {
+    gap: 0rem;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -23,11 +30,10 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 80vh;
   gap: 6em;
 
   @media (max-width: 750px) {
-    min-height: 50vh;
+    min-height: 35vh;
   }
 
   @media (max-width: 350px) {
@@ -41,18 +47,17 @@ const HeaderWrapper = styled.div`
   justify-content: center;
   width: 100%;
   gap: 6rem;
-  margin-top: 10rem;
+  margin-top: 4rem;
   color: ${() => useTheme().colors.red.primary};
 
   @media (max-width: 500px) {
     flex-direction: column;
     gap: 2rem;
-    margin-top: 8rem;
   }
   @media (max-width: 400px) {
     flex-direction: column;
     gap: 2rem;
-    margin-top: 5rem;
+    margin-top: 2rem;
   }
 `;
 
