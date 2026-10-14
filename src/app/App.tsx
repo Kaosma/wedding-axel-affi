@@ -14,7 +14,7 @@ import UploadView from '../navigation/views/UploadView';
 const AppContainer = styled.div`
   min-height: 100vh;
   margin: auto;
-  background-color: ${() => useTheme().colors.mix.dark};
+  background-color: ${() => useTheme().colors.red.secondary};
   overflow-x: hidden;
 `;
 const ContentContainer = styled.div`

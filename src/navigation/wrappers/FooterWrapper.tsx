@@ -23,7 +23,7 @@ const BottomSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${() => useTheme().colors.mix.light};
+  color: ${() => useTheme().colors.red.secondary};
 `;
 const Branding = styled.div`
 `;

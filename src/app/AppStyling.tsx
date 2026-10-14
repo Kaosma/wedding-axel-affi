@@ -37,10 +37,6 @@ const DefaultTheme = {
   colors: {
     mix: {
       lightest: '#fff4ea',
-      lighter: '#f2ccb7',
-      light: '#edb18f',
-      dark: '#ff864e',
-      darker: '#f47149',
       darkest: '#75714e',
     },
     red: {
