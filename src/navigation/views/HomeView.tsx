@@ -49,6 +49,11 @@ const HeaderWrapper = styled.div`
     gap: 2rem;
     margin-top: 8rem;
   }
+  @media (max-width: 400px) {
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 5rem;
+  }
 `;
 
 const InfoWrapper = styled.div`
