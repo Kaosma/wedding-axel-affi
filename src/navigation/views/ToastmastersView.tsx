@@ -71,7 +71,7 @@ function ToastmastersView() {
         <ContentText>The powerful trio: Stefanie, Aleksandra and Jaqueline will guide you through the wedding weekend. If you want to give a speech or have any questions these are the girls to reach out to.</ContentText>
 
         <ToastmasterCard>
-          <ToastmasterImage src="/images/toastmasters.jpeg" alt="Toastmasters" />
+          <ToastmasterImage src="/images/toastmasters.png" alt="Toastmasters" />
         </ToastmasterCard>
 
         <Subtitle>Want to Give a Speech?</Subtitle>

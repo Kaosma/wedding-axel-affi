@@ -191,7 +191,7 @@ function RSVPView({ viewRole }: { viewRole: string | null }) {
       accommodation: rsvp.accommodation,
       participationDays: rsvp.participationDays,
     };
-    const sendEmail = httpsCallable(functions, "sendConfirmationEmail")(confirmationData);
+    const sendEmail = httpsCallable(functions, "sendAfsoonAxelConfirmationEmail")(confirmationData);
 
     setSubmittedRSVP(rsvp);
     setSubmitted(true);

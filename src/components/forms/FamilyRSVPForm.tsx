@@ -1,12 +1,9 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  useState,
-} from 'react';
+import { useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 import { db, push, ref } from '../../firebase/firebase';
 import styled from 'styled-components';
 import { useTheme } from '../../app/AppStyling';
-import { RSVP, RSVPFormProps } from '../../helpers/classes';
+import type { RSVP, RSVPFormProps } from '../../helpers/classes';
 import { Heart } from 'lucide-react';
 
 const FormContainer = styled.div`
@@ -39,7 +36,7 @@ const Section = styled.section`
 
 const Question = styled.h3`
   margin: 0;
-  color: ${() => useTheme().colors.red.primary};
+  color: var(--rsvp-primary);
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
@@ -61,7 +58,7 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${() => useTheme().colors.red.secondary};
+    border-color: var(--rsvp-secondary);
   }
 
   &:-webkit-autofill {
@@ -88,7 +85,7 @@ const Textarea = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: ${() => useTheme().colors.red.secondary};
+    border-color: var(--rsvp-secondary);
   }
 `;
 
@@ -102,7 +99,7 @@ const Option = styled.label`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: ${() => useTheme().colors.red.primary};
+  color: var(--rsvp-primary);
   cursor: pointer;
   font-family:
     'Gill Sans',
@@ -120,7 +117,7 @@ const Radio = styled.input`
   margin: 0;
   appearance: none;
   -webkit-appearance: none;
-  border: 2px solid ${() => useTheme().colors.red.primary};
+  border: 2px solid var(--rsvp-primary);
   border-radius: 50%;
   background-color: #fff;
   cursor: pointer;
@@ -141,8 +138,8 @@ const Radio = styled.input`
   }
 
   &:checked {
-    background-color: ${() => useTheme().colors.red.secondary};
-    border-color: ${() => useTheme().colors.red.secondary};
+    background-color: var(--rsvp-secondary);
+    border-color: var(--rsvp-secondary);
   }
 
   &:checked::before {
@@ -150,7 +147,7 @@ const Radio = styled.input`
   }
 
   &:focus-visible {
-    outline: 2px solid ${() => useTheme().colors.red.secondary};
+    outline: 2px solid var(--rsvp-secondary);
     outline-offset: 2px;
   }
 
@@ -169,7 +166,7 @@ const Checkbox = styled.input`
   margin: 0;
   appearance: none;
   -webkit-appearance: none;
-  border: 2px solid ${() => useTheme().colors.red.primary};
+  border: 2px solid var(--rsvp-primary);
   border-radius: 0.25rem;
   background-color: #fff;
   cursor: pointer;
@@ -190,8 +187,8 @@ const Checkbox = styled.input`
   }
 
   &:checked {
-    background-color: ${() => useTheme().colors.red.secondary};
-    border-color: ${() => useTheme().colors.red.secondary};
+    background-color: var(--rsvp-secondary);
+    border-color: var(--rsvp-secondary);
   }
 
   &:checked::before {
@@ -199,7 +196,7 @@ const Checkbox = styled.input`
   }
 
   &:focus-visible {
-    outline: 2px solid ${() => useTheme().colors.red.secondary};
+    outline: 2px solid var(--rsvp-secondary);
     outline-offset: 2px;
   }
 
@@ -228,7 +225,7 @@ const GuestHeader = styled.div`
 
 const GuestTitle = styled.h4`
   margin: 0;
-  color: ${() => useTheme().colors.red.primary};
+  color: var(--rsvp-primary);
   font-size: 0.95rem;
 `;
 
@@ -250,7 +247,7 @@ const AddGuestButton = styled.button`
   padding: 0;
   border: none;
   background: none;
-  color: ${() => useTheme().colors.red.primary};
+  color: var(--rsvp-primary);
   cursor: pointer;
   font-size: 0.85rem;
 
@@ -261,15 +258,14 @@ const AddGuestButton = styled.button`
 
 const SubmitButton = styled.button`
   padding: 0.75rem 1.5rem;
-  border: none;
+  border: 1px solid var(--rsvp-dark);
   border-radius: 1rem;
-  background-color: ${() => useTheme().colors.red.pink};
-  color: ${() => useTheme().colors.red.dark};
+  background-color: var(--rsvp-pink);
+  color: var(--rsvp-dark);
   cursor: pointer;
   font-family: 'linnea-bold', 'PP Cirka', sans-serif;
   font-size: 1rem;
   font-weight: 800;
-  border: 1px solid ${() => useTheme().colors.red.dark};
 
   &:hover {
     opacity: 0.9;
@@ -280,16 +276,17 @@ const SubmitButton = styled.button`
     cursor: not-allowed;
     opacity: 0.6;
     color: #fff;
-    border: 1px solid ${() => useTheme().colors.red.pink};
+    border-color: var(--rsvp-pink);
   }
 `;
 
 const HeartOption = styled.label`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  color: ${() => useTheme().colors.red.primary};
+  color: var(--rsvp-primary);
   cursor: pointer;
   font-family:
     'Gill Sans',
@@ -304,6 +301,12 @@ const HiddenRadio = styled.input`
   position: absolute;
   opacity: 0;
   pointer-events: none;
+
+  &:focus-visible + svg {
+    outline: 2px solid var(--rsvp-secondary);
+    outline-offset: 4px;
+    border-radius: 0.25rem;
+  }
 `;
 
 const HeartRow = styled.div`
@@ -318,10 +321,7 @@ const HeartRow = styled.div`
 `;
 
 type Attendance = 'yes' | 'no' | '';
-
 type Accommodation = 'castle' | 'other' | '';
-
-type Email = string | '';
 
 type Guest = {
   name: string;
@@ -332,7 +332,7 @@ type FormData = {
   attendance: Attendance;
   accommodation: Accommodation;
   participationDays: string[];
-  email: Email;
+  email: string;
   guests: Guest[];
   unableToAttendName: string;
 };
@@ -341,63 +341,62 @@ interface FamilyRSVPFormProps extends RSVPFormProps {
   role: string | null;
 }
 
+const createInitialFormData = (): FormData => ({
+  attendance: '',
+  accommodation: '',
+  participationDays: [],
+  email: '',
+  guests: [
+    {
+      name: '',
+      dietaryRestrictions: '',
+    },
+  ],
+  unableToAttendName: '',
+});
+
 function FamilyRSVPForm({
   submitCallback,
   role,
 }: FamilyRSVPFormProps) {
-  const initialFormData: FormData = {
-    attendance: '',
-    accommodation: '',
-    participationDays: [],
-    email: '',
-    guests: [
-      {
-        name: '',
-        dietaryRestrictions: '',
-      },
-    ],
-    unableToAttendName: '',
-  };
+  const theme = useTheme();
 
-  const [formData, setFormData] =
-    useState<FormData>(initialFormData);
+  const [formData, setFormData] = useState<FormData>(
+    createInitialFormData
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [isSubmitting, setIsSubmitting] =
-    useState(false);
-
-  const availableDays =
-    role === 'family'
-      ? [
-        {
-          value: 'Saturday',
-          label: 'Saturday - Wedding Ceremony and Dinner',
-        },
-        {
-          value: 'Sunday',
-          label: 'Sunday - Goodbye Breakfast',
-        },
-      ]
+  const availableDays = [
+    ...(role === 'family'
+      ? []
       : [
         {
           value: 'Friday',
           label: 'Friday - Welcome Dinner for Friends',
         },
-        {
-          value: 'Saturday',
-          label: 'Saturday - Wedding Ceremony and Dinner',
-        },
-        {
-          value: 'Sunday',
-          label: 'Sunday - Goodbye Breakfast',
-        },
-      ];
+      ]),
+    {
+      value: 'SaturdayLunch',
+      label: 'Saturday - Lunch',
+    },
+    {
+      value: 'Saturday',
+      label: 'Saturday - Wedding Ceremony and Dinner',
+    },
+    {
+      value: 'Sunday',
+      label: 'Sunday - Goodbye Breakfast',
+    },
+  ];
 
   const handleUnableToAttendNameChange = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
+    const value = event.target.value;
+
     setFormData((previous) => ({
       ...previous,
-      unableToAttendName: event.target.value,
+      unableToAttendName: value,
     }));
   };
 
@@ -410,16 +409,12 @@ function FamilyRSVPForm({
       ...previous,
       attendance,
       participationDays:
-        attendance === 'no'
-          ? []
-          : previous.participationDays,
+        attendance === 'no' ? [] : previous.participationDays,
       accommodation:
-        attendance === 'no'
-          ? ''
-          : previous.accommodation,
+        attendance === 'no' ? '' : previous.accommodation,
       guests:
         attendance === 'no'
-          ? initialFormData.guests
+          ? createInitialFormData().guests
           : previous.guests,
     }));
   };
@@ -427,19 +422,22 @@ function FamilyRSVPForm({
   const handleEmailChange = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
+    const value = event.target.value;
+
     setFormData((previous) => ({
       ...previous,
-      email: event.target.value,
+      email: value,
     }));
   };
 
   const handleAccommodationChange = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
+    const accommodation = event.target.value as Accommodation;
+
     setFormData((previous) => ({
       ...previous,
-      accommodation:
-        event.target.value as Accommodation,
+      accommodation,
     }));
   };
 
@@ -463,19 +461,14 @@ function FamilyRSVPForm({
     field: keyof Guest,
     value: string
   ) => {
-    setFormData((previous) => {
-      const guests = [...previous.guests];
-
-      guests[index] = {
-        ...guests[index],
-        [field]: value,
-      };
-
-      return {
-        ...previous,
-        guests,
-      };
-    });
+    setFormData((previous) => ({
+      ...previous,
+      guests: previous.guests.map((guest, guestIndex) =>
+        guestIndex === index
+          ? { ...guest, [field]: value }
+          : guest
+      ),
+    }));
   };
 
   const addGuest = () => {
@@ -500,104 +493,85 @@ function FamilyRSVPForm({
     }));
   };
 
+  const canSubmit =
+    !isSubmitting &&
+    formData.attendance !== '' &&
+    (formData.attendance === 'no'
+      ? formData.unableToAttendName.trim().length > 0
+      : formData.accommodation !== '' &&
+      formData.email.trim().length > 0 &&
+      formData.participationDays.length > 0 &&
+      formData.guests.length > 0 &&
+      formData.guests.every(
+        (guest) => guest.name.trim().length > 0
+      ));
+
   const handleSubmit = async (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
 
-    if (formData.attendance === 'no') {
-      const response: RSVP = {
-        attendance: 'no',
-        accommodation: null,
-        participationDays: [],
-        email: null,
-        guests: [
-          {
-            name: formData.unableToAttendName.trim(),
-            dietaryRestrictions: '',
-          },
-        ],
-      };
-
-      try {
-        setIsSubmitting(true);
-
-        await push(
-          ref(db, 'affiAxelRsvp'),
-          response
-        );
-
-        submitCallback(response);
-        setFormData(initialFormData);
-      } catch (error) {
-        console.error('Error submitting RSVP:', error);
-        alert('Error submitting RSVP.');
-      } finally {
-        setIsSubmitting(false);
-      }
-
+    if (!canSubmit) {
       return;
     }
 
-    const response: RSVP = {
-      attendance: 'yes',
-      accommodation:
-        formData.accommodation === 'castle'
-          ? 'castle'
-          : 'other',
-      participationDays:
-        formData.participationDays,
-      email: formData.email,
-      guests: formData.guests.map((guest) => ({
-        name: guest.name.trim(),
-        dietaryRestrictions:
-          guest.dietaryRestrictions.trim(),
-      })),
-    };
+    const response: RSVP =
+      formData.attendance === 'no'
+        ? {
+          attendance: 'no',
+          accommodation: null,
+          participationDays: [],
+          email: null,
+          guests: [
+            {
+              name: formData.unableToAttendName.trim(),
+              dietaryRestrictions: '',
+            },
+          ],
+        }
+        : {
+          attendance: 'yes',
+          accommodation:
+            formData.accommodation === 'castle'
+              ? 'castle'
+              : 'other',
+          participationDays: formData.participationDays,
+          email: formData.email.trim(),
+          guests: formData.guests.map((guest) => ({
+            name: guest.name.trim(),
+            dietaryRestrictions:
+              guest.dietaryRestrictions.trim(),
+          })),
+        };
+
+    setIsSubmitting(true);
 
     try {
-      setIsSubmitting(true);
-
-      await push(
-        ref(db, 'affiAxelRsvp'),
-        response
-      );
-
-      submitCallback(response);
-      setFormData(initialFormData);
+      await push(ref(db, 'affiAxelRsvp'), response);
     } catch (error) {
-      console.log(response);
-      console.log(formData);
       console.error('Error submitting RSVP:', error);
-      alert('Error submitting RSVP.');
+      alert('Error submitting RSVP. Please try again.');
+      return;
     } finally {
       setIsSubmitting(false);
     }
+
+    setFormData(createInitialFormData());
+    submitCallback(response);
   };
 
-  const canSubmit =
-    !isSubmitting &&
-    formData.attendance !== '' &&
-    (
-      formData.attendance === 'no'
-        ? formData.unableToAttendName.trim().length > 0
-        : (
-          formData.accommodation !== '' &&
-          formData.participationDays.length > 0 &&
-          formData.guests.length > 0 &&
-          formData.guests.every(
-            (guest) => guest.name.trim().length > 0
-          )
-        )
-    );
-
   return (
-    <FormContainer>
+    <FormContainer
+      style={{
+        '--rsvp-primary': theme.colors.red.primary,
+        '--rsvp-secondary': theme.colors.red.secondary,
+        '--rsvp-pink': theme.colors.red.pink,
+        '--rsvp-dark': theme.colors.red.dark,
+      } as import('react').CSSProperties}
+    >
       <Form onSubmit={handleSubmit}>
         <Section>
-          <Question>
-            Will you be joining us?
-          </Question>
+          <Question>Will you be joining us?</Question>
 
           <HeartRow>
             <HeartOption htmlFor="attendance-yes">
@@ -606,9 +580,7 @@ function FamilyRSVPForm({
                 type="radio"
                 name="attendance"
                 value="yes"
-                checked={
-                  formData.attendance === 'yes'
-                }
+                checked={formData.attendance === 'yes'}
                 onChange={handleAttendanceChange}
                 required
               />
@@ -617,12 +589,11 @@ function FamilyRSVPForm({
                 size={54}
                 fill={
                   formData.attendance === 'yes'
-                    ? useTheme().colors.red.primary
+                    ? theme.colors.red.primary
                     : 'none'
                 }
-                color={
-                  useTheme().colors.red.primary
-                }
+                color={theme.colors.red.primary}
+                aria-hidden="true"
               />
 
               <span>Yes, we’ll be there!</span>
@@ -634,9 +605,7 @@ function FamilyRSVPForm({
                 type="radio"
                 name="attendance"
                 value="no"
-                checked={
-                  formData.attendance === 'no'
-                }
+                checked={formData.attendance === 'no'}
                 onChange={handleAttendanceChange}
                 required
               />
@@ -645,22 +614,23 @@ function FamilyRSVPForm({
                 size={54}
                 fill={
                   formData.attendance === 'no'
-                    ? useTheme().colors.red.primary
+                    ? theme.colors.red.primary
                     : 'none'
                 }
-                color={
-                  useTheme().colors.red.primary
-                }
+                color={theme.colors.red.primary}
+                aria-hidden="true"
               />
 
               <span>Sadly, we can’t make it</span>
             </HeartOption>
           </HeartRow>
+
           {formData.attendance === 'no' && (
             <Input
               type="text"
               name="unableToAttendName"
               placeholder="Name"
+              aria-label="Name"
               value={formData.unableToAttendName}
               onChange={handleUnableToAttendNameChange}
               required
@@ -685,9 +655,7 @@ function FamilyRSVPForm({
                     checked={
                       formData.accommodation === 'castle'
                     }
-                    onChange={
-                      handleAccommodationChange
-                    }
+                    onChange={handleAccommodationChange}
                     required
                   />
                   Yes
@@ -702,9 +670,7 @@ function FamilyRSVPForm({
                     checked={
                       formData.accommodation === 'other'
                     }
-                    onChange={
-                      handleAccommodationChange
-                    }
+                    onChange={handleAccommodationChange}
                     required
                   />
                   No
@@ -713,9 +679,7 @@ function FamilyRSVPForm({
             </Section>
 
             <Section>
-              <Question>
-                Participation days
-              </Question>
+              <Question>Participation days and meals</Question>
 
               <OptionList>
                 {availableDays.map((day) => (
@@ -731,11 +695,8 @@ function FamilyRSVPForm({
                       checked={formData.participationDays.includes(
                         day.value
                       )}
-                      onChange={
-                        handleParticipationDaysChange
-                      }
+                      onChange={handleParticipationDaysChange}
                     />
-
                     {day.label}
                   </Option>
                 ))}
@@ -747,6 +708,7 @@ function FamilyRSVPForm({
                 type="email"
                 name="email"
                 placeholder="Email"
+                aria-label="Email"
                 value={formData.email}
                 onChange={handleEmailChange}
                 autoComplete="email"
@@ -755,25 +717,18 @@ function FamilyRSVPForm({
             </Section>
 
             <Section>
-              <Question>
-                Guest information
-              </Question>
+              <Question>Guest information</Question>
 
               {formData.guests.map((guest, index) => (
                 <GuestContainer key={index}>
                   <GuestHeader>
-                    <GuestTitle>
-                      Guest {index + 1}
-                    </GuestTitle>
+                    <GuestTitle>Guest {index + 1}</GuestTitle>
 
                     {formData.guests.length > 1 && (
                       <RemoveButton
                         type="button"
-                        onClick={() =>
-                          removeGuest(index)
-                        }
-                        aria-label={`Remove guest ${index + 1
-                          }`}
+                        onClick={() => removeGuest(index)}
+                        aria-label={`Remove guest ${index + 1}`}
                       >
                         ×
                       </RemoveButton>
@@ -783,6 +738,7 @@ function FamilyRSVPForm({
                   <Input
                     type="text"
                     placeholder="Name"
+                    aria-label={`Guest ${index + 1} name`}
                     value={guest.name}
                     onChange={(event) =>
                       handleGuestChange(
@@ -796,9 +752,8 @@ function FamilyRSVPForm({
 
                   <Textarea
                     placeholder="Dietary restrictions or special requests"
-                    value={
-                      guest.dietaryRestrictions
-                    }
+                    aria-label={`Guest ${index + 1} dietary restrictions or special requests`}
+                    value={guest.dietaryRestrictions}
                     onChange={(event) =>
                       handleGuestChange(
                         index,
@@ -810,23 +765,15 @@ function FamilyRSVPForm({
                 </GuestContainer>
               ))}
 
-              <AddGuestButton
-                type="button"
-                onClick={addGuest}
-              >
+              <AddGuestButton type="button" onClick={addGuest}>
                 Add guest +
               </AddGuestButton>
             </Section>
           </>
         )}
 
-        <SubmitButton
-          type="submit"
-          disabled={!canSubmit}
-        >
-          {isSubmitting
-            ? 'Submitting...'
-            : 'Submit RSVP'}
+        <SubmitButton type="submit" disabled={!canSubmit}>
+          {isSubmitting ? 'Submitting...' : 'Submit RSVP'}
         </SubmitButton>
       </Form>
     </FormContainer>

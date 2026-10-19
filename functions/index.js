@@ -19,41 +19,54 @@ admin.initializeApp();
 const bucket = admin.storage().bucket();
 
 // --- Funktion ---
-exports.sendConfirmationEmail = onCall(async (request) => {
+exports.sendAfsoonAxelConfirmationEmail = onCall(async (request) => {
   try {
-    const { email, arrival, departure, guests, accommodation, role, brunch } = request.data;
+    const {
+      email,
+      attendance,
+      participationDays = [],
+      guests,
+      accommodation,
+    } = request.data;
 
     // Validera input
     if (!email) throw new Error("Email saknas");
     if (!Array.isArray(guests)) throw new Error("Guests måste vara en array");
+    if (!Array.isArray(participationDays)) {
+      throw new Error("Participation days måste vara en array");
+    }
 
-    // Beräkna pris
-    const isHerrgard = !role?.startsWith('hotel') && accommodation === 'herrgarden';
-    const includesBrunch = brunch === 'brunch';
-    const pricePerGuest = isHerrgard ? 2000 : 0;
-    const totalGuests = guests.length;
-    const totalPriceAllGuests = pricePerGuest * totalGuests;
+    const isAttending = attendance === "yes";
+    const staysAtCastle = accommodation === "castle";
 
-    // Skicka e-post
-    await resend.emails.send({
-      from: `"Wedding RSVP" <no-reply@euawedding.com>`,
+    const escapeHtml = (value) =>
+      String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    // Skicka e-post med din befintliga Resend-klient
+    const { error } = await resend.emails.send({
+      from: `"Afsoon & Axel" <no-reply@afsoonaxelwedding.com>`,
       to: email,
       subject: "💍 Your Wedding RSVP Confirmation",
       html: `
         <div style="
           font-family: 'Georgia', serif;
-          background-color: #fcf6f3;
+          background-color: #fcf5eb;
           padding: 35px 20px;
           border-radius: 12px;
-          color: #5a4634;
+          color: #ed1215;
           max-width: 640px;
           margin: auto;
-          border: 1px solid #f2e3d7;
-          box-shadow: 0 4px 10px rgba(214, 169, 142, 0.15);
+          border: 1px solid #f8dfdb;
+          box-shadow: 0 4px 10px rgba(252, 34, 17, 0.08);
         ">
           <h1 style="
             text-align: center;
-            color: #b05a3c;
+            color: #fc2211;
             margin-bottom: 20px;
             font-size: 26px;
           ">
@@ -61,80 +74,122 @@ exports.sendConfirmationEmail = onCall(async (request) => {
           </h1>
 
           <p style="font-size: 16px; line-height: 1.6; text-align: center;">
-            We’re so excited to have you join us on our special day!
+            ${isAttending
+          ? "We’re so excited to have you join us on our special day!"
+          : "We’re sorry you can’t make it, but thank you for letting us know."
+        }
             Here are your RSVP details:
           </p>
 
           <div style="
-            background-color: #fff;
-            padding: 20px 20px;
+            background-color: #fce4de;
+            padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
-            border: 1px solid #eed9c5;
+            border: 1px solid #f8dfdb;
           ">
-            <p><strong style="color: #a15236;">Days:</strong> ${arrival} - ${departure}</p>
-            <p><strong style="color: #a15236;">Saturday Brunch:</strong> ${includesBrunch ? 'Yes' : 'No'}</p>
-            <p><strong style="color: #a15236;">Accommodation:</strong> ${isHerrgard ? 'We welcome you to stay at Schenströmska with us!' : 'Do not forget to book your accomodation nearby!'}</p>
-            ${isHerrgard ? `
-            <p><strong style="color: #a15236;">Price per guest:</strong> ${pricePerGuest} SEK</p>
-            <p><strong style="color: #a15236;">Total for ${totalGuests} guest(s):</strong> ${totalPriceAllGuests} SEK</p>
-            <p style="margin-top: 15px; margin-bottom: 10px; font-size: 15px; line-height: 1.6;">
-              <strong style="color: #a15236;">Payment:</strong> You can pay via Swish to <strong>+46762731333</strong> or by bank transfer to SEB account <strong>56990401761</strong>. Mark the payment with your name.
+            <p>
+              <strong style="color: #ed1215;">Will you be joining us?</strong>
+              ${isAttending ? "Yes, we’ll be there!" : "Sadly, we can’t make it"}
             </p>
-            <p style="margin-bottom: 10px; font-size: 15px; line-height: 1.6;">
-              <strong style="color: #a15236;">Last payment date:</strong> March 31st
-            </p>` : ''}
-            <p style="margin-bottom: 10px;"><strong style="color: #a15236;">Guests:</strong></p>
+
+            ${isAttending
+          ? `
+                  <p>
+                    <strong style="color: #ed1215;">Staying at Häringe Castle:</strong>
+                    ${staysAtCastle ? "Yes" : "No"}
+                  </p>
+
+                  <p>
+                    <strong style="color: #ed1215;">Friday — Welcome Dinner for Friends:</strong>
+                    ${participationDays.includes("Friday") ? "Yes" : "Not selected"}
+                  </p>
+
+                  <p>
+                    <strong style="color: #ed1215;">Saturday — Lunch:</strong>
+                    ${participationDays.includes("SaturdayLunch") ? "Yes" : "Not selected"}
+                  </p>
+
+                  <p>
+                    <strong style="color: #ed1215;">Saturday — Wedding Ceremony and Dinner:</strong>
+                    ${participationDays.includes("Saturday") ? "Yes" : "Not selected"}
+                  </p>
+
+                  <p>
+                    <strong style="color: #ed1215;">Sunday — Goodbye Breakfast:</strong>
+                    ${participationDays.includes("Sunday") ? "Yes" : "Not selected"}
+                  </p>
+                `
+          : ""
+        }
+
+            <p style="margin-bottom: 10px;">
+              <strong style="color: #ed1215;">Guests:</strong>
+            </p>
 
             ${guests.map(g => `
               <div style="
                 margin-bottom: 15px;
-                background: #fff8f5;
+                background: #fcf5eb;
                 padding: 12px 15px;
                 border-radius: 8px;
-                border: 1px solid #f1d4c6;
+                border: 1px solid #f9d6f1;
               ">
                 <strong style="
                   display: block;
                   font-size: 16px;
-                  color: #b05a3c;
+                  color: #fc2211;
                   margin-bottom: 6px;
                 ">
-                  ${g.firstName} ${g.lastName}
+                  ${escapeHtml(g.name)}
                 </strong>
-                <div style="font-size: 14px; line-height: 1.5;">
-                  <p>🍽 <strong style="color: #a15236;">Food Preference:</strong> ${g.food}</p>
-                  <p>🎵 <strong style="color: #a15236;">Music Preference:</strong> ${g.music}</p>
-                  <p>🍷 <strong style="color: #a15236;">Alcohol Preference:</strong> ${g.alcohol}</p>
-                </div>
+
+                ${isAttending
+            ? `
+                      <div style="font-size: 14px; line-height: 1.5;">
+                        <p>
+                          🍽 <strong style="color: #ed1215;">
+                            Dietary Restrictions / Special Requests:
+                          </strong>
+                          ${escapeHtml(g.dietaryRestrictions || "None specified")}
+                        </p>
+                      </div>
+                    `
+            : ""
+          }
               </div>
-            `).join('')}
+            `).join("")}
           </div>
 
           <p style="margin-top: 25px; font-size: 16px; text-align: center;">
-            We can’t wait to celebrate with you! 🧡
+            ${isAttending
+          ? "We can’t wait to celebrate with you! ❤️"
+          : "You’ll be missed! ❤️"
+        }
           </p>
 
           <p style="
             text-align: center;
             margin-top: 30px;
             font-size: 14px;
-            color: #a1866f;
+            color: #ed1215;
           ">
             With love,<br>
-            <em>The Wedding Couple</em>
+            <em>Afsoon & Axel</em>
           </p>
-          <img src="https://euawedding.com/favicon.png" alt="Wedding Logo" width="120" style="display:block;margin:auto;margin-top: 20px;">
         </div>
       `,
     });
 
+    if (error) throw new Error(error.message);
+
     console.log(`✅ Email sent to ${email}`);
     return { success: true };
-
   } catch (error) {
     console.error("❌ Error sending email:", error?.response || error);
-    throw new Error(error.message || "Unable to send email. Kontrollera API key och input.");
+    throw new Error(
+      error.message || "Unable to send email. Kontrollera API key och input."
+    );
   }
 });
 
