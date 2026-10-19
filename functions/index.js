@@ -23,7 +23,6 @@ exports.sendAfsoonAxelConfirmationEmail = onCall(async (request) => {
   try {
     const {
       email,
-      attendance,
       participationDays = [],
       guests,
       accommodation,
@@ -36,8 +35,29 @@ exports.sendAfsoonAxelConfirmationEmail = onCall(async (request) => {
       throw new Error("Participation days måste vara en array");
     }
 
-    const isAttending = attendance === "yes";
     const staysAtCastle = accommodation === "castle";
+    const includesFriday = participationDays.includes("Friday");
+    const includesSaturday = participationDays.includes("Saturday");
+    const includesSunday = participationDays.includes("Sunday");
+    const includesSaturdayLunch = participationDays.includes("SaturdayLunch");
+
+    let daysText = "";
+
+    if (includesFriday && includesSaturday && includesSunday) {
+      daysText = "Friday to Sunday (2 - 4 July 2027)";
+    } else if (!includesFriday && includesSaturday && includesSunday) {
+      daysText = "Saturday to Sunday (3 - 4 July 2027)";
+    } else if (!includesFriday && includesSaturday && !includesSunday) {
+      daysText = "Saturday (3 July 2027)";
+    } else if (includesFriday && includesSaturday && !includesSunday) {
+      daysText = "Friday to Saturday (2 - 3 July 2027)";
+    } else if (includesFriday && !includesSaturday && includesSunday) {
+      daysText = "Friday and Sunday (2 and 4 July 2027)";
+    } else if (includesFriday) {
+      daysText = "Friday (2 July 2027)";
+    } else if (includesSunday) {
+      daysText = "Sunday (4 July 2027)";
+    }
 
     const escapeHtml = (value) =>
       String(value ?? "")
@@ -73,11 +93,8 @@ exports.sendAfsoonAxelConfirmationEmail = onCall(async (request) => {
             💌 Thank You for Your RSVP!
           </h1>
 
-          <p style="font-size: 16px; line-height: 1.6; text-align: center;">
-            ${isAttending
-          ? "We’re so excited to have you join us on our special day!"
-          : "We’re sorry you can’t make it, but thank you for letting us know."
-        }
+          <p style="font-size: 16px; line-height: 1.6; text-align: center; color: #000000;">
+            We’re so excited to have you join us on our special day!
             Here are your RSVP details:
           </p>
 
@@ -88,49 +105,47 @@ exports.sendAfsoonAxelConfirmationEmail = onCall(async (request) => {
             margin-top: 20px;
             border: 1px solid #f8dfdb;
           ">
-            <p>
-              <strong style="color: #ed1215;">Will you be joining us?</strong>
-              ${isAttending ? "Yes, we’ll be there!" : "Sadly, we can’t make it"}
-            </p>
-
-            ${isAttending
+            ${daysText
           ? `
-                  <p>
-                    <strong style="color: #ed1215;">Staying at Häringe Castle:</strong>
-                    ${staysAtCastle ? "Yes" : "No"}
-                  </p>
-
-                  <p>
-                    <strong style="color: #ed1215;">Friday — Welcome Dinner for Friends:</strong>
-                    ${participationDays.includes("Friday") ? "Yes" : "Not selected"}
-                  </p>
-
-                  <p>
-                    <strong style="color: #ed1215;">Saturday — Lunch:</strong>
-                    ${participationDays.includes("SaturdayLunch") ? "Yes" : "Not selected"}
-                  </p>
-
-                  <p>
-                    <strong style="color: #ed1215;">Saturday — Wedding Ceremony and Dinner:</strong>
-                    ${participationDays.includes("Saturday") ? "Yes" : "Not selected"}
-                  </p>
-
-                  <p>
-                    <strong style="color: #ed1215;">Sunday — Goodbye Breakfast:</strong>
-                    ${participationDays.includes("Sunday") ? "Yes" : "Not selected"}
+                  <p style="color: #000000;">
+                    <strong style="color: #ed1215;">Days:</strong>
+                    ${daysText}
                   </p>
                 `
           : ""
         }
 
-            <p style="margin-bottom: 10px;">
+            ${staysAtCastle
+          ? `
+                  <p style="color: #000000;">
+                    We welcome you to stay at Häringe Castle with us!
+                  </p>
+                  <p style="color: #000000;">
+                    Please book your rooms using the link and booking code
+                    provided in the Accommodation tab on our wedding website.
+                  </p>
+                `
+          : ""
+        }
+
+            ${includesSaturdayLunch
+          ? `
+                  <p style="color: #000000;">
+                    <strong style="color: #ed1215;">Saturday Lunch:</strong>
+                    Yes
+                  </p>
+                `
+          : ""
+        }
+
+            <p style="margin-bottom: 10px; color: #000000;">
               <strong style="color: #ed1215;">Guests:</strong>
             </p>
 
             ${guests.map(g => `
               <div style="
                 margin-bottom: 15px;
-                background: #fcf5eb;
+                background: #fce4de;
                 padding: 12px 15px;
                 border-radius: 8px;
                 border: 1px solid #f9d6f1;
@@ -144,28 +159,20 @@ exports.sendAfsoonAxelConfirmationEmail = onCall(async (request) => {
                   ${escapeHtml(g.name)}
                 </strong>
 
-                ${isAttending
-            ? `
-                      <div style="font-size: 14px; line-height: 1.5;">
-                        <p>
-                          🍽 <strong style="color: #ed1215;">
-                            Dietary Restrictions / Special Requests:
-                          </strong>
-                          ${escapeHtml(g.dietaryRestrictions || "None specified")}
-                        </p>
-                      </div>
-                    `
-            : ""
-          }
+                <div style="font-size: 14px; line-height: 1.5;">
+                  <p style="color: #ed1215;">
+                    🍽 <strong style="color: #000000;">
+                      Food Preference:
+                    </strong>
+                    ${escapeHtml(g.dietaryRestrictions || "None specified")}
+                  </p>
+                </div>
               </div>
             `).join("")}
           </div>
 
-          <p style="margin-top: 25px; font-size: 16px; text-align: center;">
-            ${isAttending
-          ? "We can’t wait to celebrate with you! ❤️"
-          : "You’ll be missed! ❤️"
-        }
+          <p style="margin-top: 25px; font-size: 16px; text-align: center; color: #000000;">
+            We can’t wait to celebrate with you! ❤️
           </p>
 
           <p style="

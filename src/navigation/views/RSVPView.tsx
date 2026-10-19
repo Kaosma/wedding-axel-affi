@@ -183,25 +183,35 @@ function RSVPView({ viewRole }: { viewRole: string | null }) {
     scrollToTop();
   };
 
-  const handleConfirmation = (rsvp: RSVP) => {
+  const handleConfirmation = async (rsvp: RSVP) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    const functions = getFunctions(undefined, "europe-west1");
-    const confirmationData = {
-      email: rsvp.email,
-      accommodation: rsvp.accommodation,
-      participationDays: rsvp.participationDays,
-    };
-    const sendEmail = httpsCallable(functions, "sendAfsoonAxelConfirmationEmail")(confirmationData);
 
     setSubmittedRSVP(rsvp);
     setSubmitted(true);
-    sendEmail
-      .then(() => {
-        console.log("Email sent to", rsvp.email);
-      })
-      .catch((err: unknown) => {
-        console.error("Email failed", err);
+
+    if (rsvp.attendance !== 'yes' || !rsvp.email) {
+      return;
+    }
+
+    try {
+      const functions = getFunctions(undefined, 'europe-west1');
+
+      const sendEmail = httpsCallable(
+        functions,
+        'sendAfsoonAxelConfirmationEmail'
+      );
+
+      await sendEmail({
+        email: rsvp.email,
+        accommodation: rsvp.accommodation,
+        participationDays: rsvp.participationDays,
+        guests: rsvp.guests,
       });
+
+      console.log('Email sent to', rsvp.email);
+    } catch (error: unknown) {
+      console.error('RSVP saved, but confirmation email failed:', error);
+    }
   };
 
   const isAttending = submittedRSVP?.attendance === 'yes';
