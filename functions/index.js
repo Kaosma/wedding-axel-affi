@@ -107,38 +107,34 @@ exports.sendAfsoonAxelConfirmationEmail = onCall(async (request) => {
           ">
             ${daysText
           ? `
-                  <p style="color: #000000;">
-                    <strong style="color: #ed1215;">Days:</strong>
-                    ${daysText}
-                  </p>
-                `
-          : ""
+                <p style="color: #000000;">
+                  <strong style="color: #ed1215;">Days:</strong>
+                  ${daysText}
+                </p>
+              ` : ""
         }
 
             ${staysAtCastle
           ? `
-                  <p style="color: #000000;">
-                    We welcome you to stay at Häringe Castle with us!
-                  </p>
-                  <p style="color: #000000;">
-                    Please book your rooms using the link and booking code
-                    provided in the Accommodation tab on our wedding website.
-                  </p>
-                `
-          : ""
+                <p style="color: #000000;">
+                  We welcome you to stay at Häringe Castle with us!
+                </p>
+                <p style="color: #000000;">
+                  Please book your rooms using the link and booking code
+                  provided in the Accommodation tab on our wedding website.
+                </p>
+              ` : ""
         }
+            <p style="margin-top: 15px;">
+              <strong style="color: #ed1215;">Participation days and meals</strong>
+            </p>
 
-            ${includesSaturdayLunch
-          ? `
-                  <p style="color: #000000;">
-                    <strong style="color: #ed1215;">Saturday Lunch:</strong>
-                    Yes
-                  </p>
-                `
-          : ""
-        }
+            ${includesFriday ? ` <p style="color: #000000;">Friday - Welcome Dinner</p>` : ""}
+            ${includesSaturdayLunch ? ` <p style="color: #000000;">Saturday - Lunch</p>` : ""}
+            ${includesSaturday ? ` <p style="color: #000000;">Saturday - Wedding Ceremony and Dinner</p>` : ""}
+            ${includesSunday ? ` <p style="color: #000000;">Sunday - Goodbye Breakfast</p>` : ""}
 
-            <p style="margin-bottom: 10px; color: #000000;">
+            <p style="margin-bottom: 10px; color: #000000; margin-top: 15px;">
               <strong style="color: #ed1215;">Guests:</strong>
             </p>
 
@@ -153,15 +149,15 @@ exports.sendAfsoonAxelConfirmationEmail = onCall(async (request) => {
                 <strong style="
                   display: block;
                   font-size: 16px;
-                  color: #fc2211;
+                  color: #000000;
                   margin-bottom: 6px;
                 ">
                   ${escapeHtml(g.name)}
                 </strong>
 
                 <div style="font-size: 14px; line-height: 1.5;">
-                  <p style="color: #ed1215;">
-                    🍽 <strong style="color: #000000;">
+                  <p style="color: #000000;">
+                    🍽 <strong style="color:  #ed1215;">
                       Food Preference:
                     </strong>
                     ${escapeHtml(g.dietaryRestrictions || "None specified")}

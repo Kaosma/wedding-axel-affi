@@ -374,11 +374,11 @@ function FamilyRSVPForm({
           value: 'Friday',
           label: 'Friday - Welcome Dinner for Friends',
         },
+        {
+          value: 'SaturdayLunch',
+          label: 'Saturday - Lunch',
+        },
       ]),
-    {
-      value: 'SaturdayLunch',
-      label: 'Saturday - Lunch',
-    },
     {
       value: 'Saturday',
       label: 'Saturday - Wedding Ceremony and Dinner',
