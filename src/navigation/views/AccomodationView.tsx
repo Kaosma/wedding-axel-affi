@@ -79,17 +79,16 @@ const CardText = styled.p`
   line-height: 1.6;
   text-align: start;
 `;
-
-const Emphasis = styled.span`
-  color: ${() => useTheme().colors.red.primary};
-  font-weight: bold;
-`;
+// const Emphasis = styled.span`
+//   color: ${() => useTheme().colors.red.primary};
+//   font-weight: bold;
+// `;
 
 const ContentContainer = styled.div`
   margin: 1rem 0;
 `;
 
-function AccommodationView() {
+function AccommodationView({ role }: { role: string | null }) {
   return (
     <RootContainer>
       <BackgroundVideo
@@ -122,47 +121,34 @@ function AccommodationView() {
               </CardTitle>
 
               <CardText>
-                For our wedding weekend, Häringe Castle has
-                been exclusively reserved for us and our
-                guests, and we would love for everyone to
-                stay with us at the castle for the weekend.
+                For our wedding {role === 'family' ? '' : 'weekend'}, Häringe Castle has been exclusively reserved for us and our guests, and we would love for everyone to stay with us at the castle {role === 'family' ? '' : 'for the weekend'}.
               </CardText>
 
               <CardText>
-                The castle offers hotel rooms for our wedding
-                guests, and we strongly encourage you to
-                book a room as part of your stay.
+                The castle offers hotel rooms for our wedding guests, and we strongly encourage you to book a room as part of your stay.
               </CardText>
 
               <CardText>
-                Staying at the castle means you can fully
-                enjoy the celebrations, without having to
-                worry about getting home late, and join us
-                for a relaxed morning together the following
-                day. We can&apos;t wait to celebrate together!
+                Staying at the castle means you can fully enjoy the celebrations, without having to worry about getting home late, and join us for a relaxed morning together the following day. We can&apos;t wait to celebrate together!
               </CardText>
 
               <CardText>
-                <Emphasis>Booking Link</Emphasis>{' '}will be shared later!
+                💸 ${role === 'family' ? '1400' : '2600'} SEK per person
               </CardText>
-
               <CardText>
-                Check-in time:{' '}
-                <Emphasis>15:00</Emphasis>
+                ✨ Includes {role === 'family' ? 'a one night' : 'the full wedding experience with two nights'} stay at the castle
               </CardText>
-
               <CardText>
-                Check-out time:{' '}
-                <Emphasis>12:00</Emphasis>
+                🛎️ Check-in: {role === 'family' ? 'Saturday, 3' : 'Friday, 2'} July - 15:00
               </CardText>
-
               <CardText>
-                <Emphasis>Breakfast</Emphasis> is included.
+                🛎️ Check-out: Sunday, 4 July - 12:00
               </CardText>
-
               <CardText>
-                The castle provides free{' '}
-                <Emphasis>parking.</Emphasis>
+                🚗 Free parking
+              </CardText>
+              <CardText>
+                🥞 Breakfast is included
               </CardText>
             </Card>
           </ContentContainer>
