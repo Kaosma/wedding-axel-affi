@@ -31,7 +31,7 @@ function Router({ role }: { role: string | null }) {
       <Route path={homeUrl} element={<HomeView role={role} />} />
       <Route path={toastmastersUrl} element={<ToastmastersView />} />
       <Route path={infoUrl} element={<InfoView role={role} />} />
-      <Route path={accomodationUrl} element={<AccomodationView />} />
+      <Route path={accomodationUrl} element={<AccomodationView role={role} />} />
       <Route path={rsvpUrl} element={<RSVPView viewRole={role} />} />
       <Route path={scheduleUrl} element={<ScheduleView />} />
       <Route path={travelUrl} element={<TravelView />} />
