@@ -107,7 +107,7 @@ const Card = styled.article`
   padding: 1.5rem;
   border: 1px solid ${() => useTheme().colors.red.secondary};
   border-radius: 12px;
-  background: ${() => useTheme().colors.red.tertiary};
+  background: white;
   box-shadow: 0 4px 20px ${() => useTheme().shadow.secondary};
   color: #4a2314;
   transition: box-shadow 0.2s ease;
@@ -620,7 +620,7 @@ function useRsvpStats(): RsvpStats {
   });
 
   useEffect(() => {
-    const rsvpRef = ref(db, 'rsvpResponses');
+    const rsvpRef = ref(db, 'affiAxelRsvp');
 
     const unsubscribe = onValue(
       rsvpRef,

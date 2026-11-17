@@ -3,7 +3,7 @@ export const passcodes: Record<string, string> = {
   aawedding: 'friends',
 };
 
-export const TOTAL_GUESTS = 211;
+export const TOTAL_GUESTS = 120;
 
 /** Wedding day date for countdown and "The Big Day" (July 25, 2026 2:00 PM local) */
 export const weddingDate = new Date(
