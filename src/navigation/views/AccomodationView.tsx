@@ -78,11 +78,15 @@ const CardText = styled.p`
   font-size: 1rem;
   line-height: 1.6;
   text-align: start;
+  a {
+    color: ${() => useTheme().colors.red.primary};
+    text-decoration: underline;
+  }
 `;
-// const Emphasis = styled.span`
-//   color: ${() => useTheme().colors.red.primary};
-//   font-weight: bold;
-// `;
+const Emphasis = styled.span`
+  color: ${() => useTheme().colors.red.primary};
+  font-weight: bold;
+`;
 
 const ContentContainer = styled.div`
   margin: 1rem 0;
@@ -133,10 +137,16 @@ function AccommodationView({ role }: { role: string | null }) {
               </CardText>
 
               <CardText>
-                💸 ${role === 'family' ? '1400' : '2600'} SEK per person
+                Please book your accommodation directly through Häringe Slott’s <a href="https://boka.haringeslott.se/accommodation" target="_blank" rel="noopener noreferrer">booking page</a>.
               </CardText>
               <CardText>
-                ✨ Includes {role === 'family' ? 'a one night' : 'the full wedding experience with two nights'} stay at the castle
+                When making your reservation, make sure to enter the correct dates and booking code <Emphasis>AAweekend</Emphasis> to access our wedding accommodation booking.
+              </CardText>
+              <CardText>
+                The accommodation price is SEK {role === 'family' ? '1400 per person for the wedding' : '2600 per person for the entire wedding weekend'}.
+              </CardText>
+              <CardText>
+                We’ve also put together a step-by-step guide to help you through the booking process, which you can find <a href="https://www.canva.com/design/DAGdeRENWec/ruR4duO6x_1Li1HuVG8J8Q/view?utm_content=DAGdeRENWec&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h872aa350ab#1" target="_blank" rel="noopener noreferrer">here</a>.
               </CardText>
               <CardText>
                 🛎️ Check-in: {role === 'family' ? 'Saturday, 3' : 'Friday, 2'} July - 15:00
