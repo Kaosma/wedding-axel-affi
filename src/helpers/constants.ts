@@ -1,6 +1,6 @@
 export const passcodes: Record<string, string> = {
   july2027: 'family',
-  aawedding: 'friends',
+  stockholm2027: 'friends',
 };
 
 export const TOTAL_GUESTS = 140;
